@@ -20,10 +20,12 @@
       "cordova-plugin-whitelist": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   },
   "dependencies": {
-    "cordova-android": "9.0.0"
+    "cordova-android": "9.0.0",
+    "cordova-ios": "6.1.1"
   }
 }
