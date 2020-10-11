@@ -29,23 +29,67 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta http-equiv="Content-Security-Policy" content="default-src &apos;self&apos; data: gap: https://ssl.gstatic.com &apos;unsafe-eval&apos;; style-src &apos;self&apos; &apos;unsafe-inline&apos;; media-src *; img-src &apos;self&apos; data: content:;">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
         <meta name="color-scheme" content="light dark">
+        
+        <link rel="stylesheet" type="text/css" href="js/jquery-1.5.0.mobile.min.css">
         <link rel="stylesheet" href="css/index.css">
         <title>Hello World</title>
     </head>
     <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
-        <script src="cordova.js"></script>
-        <script src="js/index.js"></script>
-    </body>
+		<!-- jquery mobile page 1 -->
+		<div data-role="page" id="page1">
+			<div class="header" data-role="header">
+                
+                <input id="searchbar" type="text" placeholder="Search..">
+                <div id="nav-icon3"> <!--Bless whoever created this burger button with animation-->
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+			</div>
+
+			<div role="main" class="ui-content">
+				<p>Page 1 content goes here</p>
+					<a href="#main">Goto page2</a>
+			
+		</div>
+			<!-- end of page 1 content -->
+
+			<div data-role="footer" data-position="fixed">
+				<h4>Page 1 Footer</h4>
+			</div>
+			<!-- end page 1 footer -->
+		</div>
+		<!-- end page 1 -->
+
+		<!-- jquery mobile page 2 -->
+		<div data-role="page" id="page2">
+			<div data-role="header">
+				<h1>Page 2</h1>
+			</div>
+
+			<div role="main" class="ui-content">
+				<h4>Page 2 content goes here</h4>
+				<a href="#page1">Goto page1</a>
+			</div>
+			<!-- end of page 2 content -->
+
+			<div data-role="footer" data-position="fixed">
+				<h4>Page 2 Footer</h4>
+			</div>
+			<!-- end page 2 footer -->
+		</div>
+		<!-- end page 2 -->
+<script src="cordova.js"></script><script type="text/javascript" src="js/jquery-1.11.1.min.js" id="cordova-jquery"></script><script type="text/javascript" id="jqm-trans-disable">
+		/* For having a faster transition */
+		$(document).on("mobileinit", function() {
+				$.mobile.defaultPageTransition = "none";
+				$.mobile.defaultDialogTransition = "none";
+		});
+		</script><script type="text/javascript" src="js/jquery-1.5.0.mobile.min.js"></script><script src="js/index.js"></script></body>
 </html>
