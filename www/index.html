@@ -29,23 +29,128 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta http-equiv="Content-Security-Policy" content="default-src &apos;self&apos; data: gap: https://ssl.gstatic.com &apos;unsafe-eval&apos;; style-src &apos;self&apos; &apos;unsafe-inline&apos;; media-src *; img-src &apos;self&apos; data: content:;">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
         <meta name="color-scheme" content="light dark">
         <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="js/jquery-1.5.0.mobile.min.css">
+        
         <title>Hello World</title>
     </head>
     <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
+        <script src="cordova.js"></script><script type="text/javascript" src="js/jquery-1.11.1.min.js" id="cordova-jquery"></script><script type="text/javascript" id="jqm-trans-disable">
+            /* For having a faster transition */
+            $(document).on("mobileinit", function() {
+                    $.mobile.defaultPageTransition = "none";
+                    $.mobile.defaultDialogTransition = "none";
+            });
+            </script><script type="text/javascript" src="js/jquery-1.5.0.mobile.min.js"></script><script src="js/index.js"></script></body>
+		<!-- jquery mobile page 1 -->
+		<div data-role="page" id="signup_login">
+			
+
+			<div role="main" class="ui-content">
+                <div class="ui-grid-b">
+                    <div class="ui-block-a"></div>
+                    <div class="ui-block-b">
+                        <p>Sign-up/login</p>
+                    </div>
+                    <div class="ui-block-c"></div>
+                  </div><!-- /grid-b -->
+                
+                <label for="Uname">User name:</label>
+                <input type="text" id="uname" name="uname">
+                
+					<a href="#homePage" class="ui-btn ui-corner-all">Log In</a>
+                
+		    </div>
+			<!-- end of page 1 content -->
+
+			<!-- <div data-role="footer" data-position="fixed">
+				<h4>Page 1 Footer</h4>
+			</div> -->
+			<!-- end page 1 footer -->
+		</div>
+		<!-- end page 1 -->
+        <!-- jquery mobile page 2 -->
+		<div data-role="page" id="homePage" class="page">
+			
+
+			<div data-role="main" class="ui-content">
+                <!-- Content should go in here-->
+				<h4>Home page content goes here</h4>
+                
+                <a href="#scanPage" class="button">Scan Vinyl</a>
+                <!-- THis bellow will be in burger menu in future-->
+                <a href="#searchPage" class="button">Temp button to search page</a>
+                <a href="#settingsPage" class="button">Settings temp button</a>
+			</div>
+			<!-- end of page 2 content -->
+
+		</div>
+        <!-- end page 2 -->
+
+        <!--Start page 3-->
+        <div data-role="page" id="scanPage" class="page">
+            
+            <div role="content" class="ui-content">
+                <!-- Content should go in here-->
+				<h4>Scan page content goes here</h4>
+				<a href="#resultsPage" class="button">Tap to scan</a><!-- this goes to results-->
             </div>
+            
         </div>
-        <script src="cordova.js"></script>
-        <script src="js/index.js"></script>
-    </body>
+        <!-- end page 3 -->
+
+        <!--Start page 4-->
+        <div data-role="page" id="searchPage" class="page">
+            
+            <div role="content" class="ui-content">
+                <!-- Content should go in here-->
+				<h4>Search page content goes here</h4>
+				<a href="#resultsPage" class="button">Tap to got to search page temp</a><!-- this goes to results-->
+            </div>
+            
+        </div>
+        <!-- end page 4 -->
+
+        <!--Start page 5-->
+        <div data-role="page" id="resultsPage" class="page">
+            
+            <div role="content" class="ui-content">
+                <!-- Content should go in here-->
+				<h4>Results page content goes here</h4>
+				<a href="#albumPage" class="button">Tap on album</a><!-- this goes to album page-->
+            </div>
+            
+        </div>
+        <!-- end page 5 -->
+
+        <!--Start page 6-->
+        <div data-role="page" id="settingsPage" class="page">
+            
+            <div role="content" class="ui-content">
+                <!-- Content should go in here-->
+				<h4>Settings page content goes here</h4>
+				<a href="#homePage" class="button">Go back</a><!-- this goes to album page-->
+            </div>
+            
+        </div>
+        <!-- end page 6 -->
+
+        <!--Start page 7-->
+        <div data-role="page" id="albumPage" class="page">
+            
+            <div role="content" class="ui-content">
+                <!-- Content should go in here-->
+				<h4>Album page content goes here</h4>
+				<a href="#homePage" class="button">Go back home</a><!-- this goes to album page-->
+            </div>
+            
+        </div>
+        <!-- end page 7 -->
+
+        
 </html>
