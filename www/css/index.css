@@ -137,12 +137,10 @@ body {
   }
   
 /* Mainly for theme of the app will go here so all pages have same theme */
-#signup_login, #homePage, #scanPage, #resultsPage   {
+#signup_login, #homePage, #scanPage, #resultsPage, #searchPage, #settingsPage, #albumPage   {
   background-color: #9AC7BF;
 }
 /* I will setup the same grid on each page. 
 There is a drawing of the grid lines in our draw.io.
 If you want to customize it take your page out of this and create a seperate one for it */
-#Login_Sign-up, #HomePage, #ScanPage, #Results {
-  display: grid;
-}
+
