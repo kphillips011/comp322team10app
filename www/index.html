@@ -40,20 +40,25 @@
         <title>Hello World</title>
     </head>
     <body>
+        <script src="cordova.js"></script><script type="text/javascript" src="js/jquery-1.11.1.min.js" id="cordova-jquery"></script><script type="text/javascript" id="jqm-trans-disable">
+            /* For having a faster transition */
+            $(document).on("mobileinit", function() {
+                    $.mobile.defaultPageTransition = "none";
+                    $.mobile.defaultDialogTransition = "none";
+            });
+            </script><script type="text/javascript" src="js/jquery-1.5.0.mobile.min.js"></script><script src="js/index.js"></script></body>
 		<!-- jquery mobile page 1 -->
-		<div data-role="page" id="page1">
-			<!-- <div data-role="header">
-				<h1>Page 1</h1>
-			</div> -->
+		<div data-role="page" id="signup_login">
+			
 
 			<div role="main" class="ui-content">
                 <p>Sign-up/login</p>
-                <label for="fname">First name:</label>
-                <input type="text" id="fname" name="fname">
+                <label for="Uname">User name:</label>
+                <input type="text" id="uname" name="uname">
                 
-					<a href="#page2">Goto main page</a>
+					<a href="#homePage">Log In</a>
                 
-		</div>
+		    </div>
 			<!-- end of page 1 content -->
 
 			<!-- <div data-role="footer" data-position="fixed">
@@ -62,30 +67,71 @@
 			<!-- end page 1 footer -->
 		</div>
 		<!-- end page 1 -->
+        <!-- jquery mobile page 2 -->
+		<div data-role="page" id="homePage" class="page">
+			
 
-		<!-- jquery mobile page 2 -->
-		<div data-role="page" id="page2" class="page">
-			<!-- <div data-role="header">
-				<h1>Page 2</h1>
-			</div> -->
-
-			<div role="main" class="ui-content">
+			<div role="content" class="ui-content">
+                <!-- Content should go in here-->
 				<h4>Home page content goes here</h4>
-				<a href="#page1">Goto page1</a>
+                
+                <a href="#scanPage" class="button">Scan Vinyl</a>
+                <!-- THis bellow will be in burger menu in future-->
+                <button><a href="#searchPage">Temp button to search page</a></button> 
+                <button><a href="#settingsPage">Settings temp button</a></button>
 			</div>
 			<!-- end of page 2 content -->
 
-			<!-- <div data-role="footer" data-position="fixed">
-				<h4>Page 2 Footer</h4>
-			</div> -->
-			<!-- end page 2 footer -->
 		</div>
-		<!-- end page 2 -->
-<script src="cordova.js"></script><script type="text/javascript" src="js/jquery-1.11.1.min.js" id="cordova-jquery"></script><script type="text/javascript" id="jqm-trans-disable">
-		/* For having a faster transition */
-		$(document).on("mobileinit", function() {
-				$.mobile.defaultPageTransition = "none";
-				$.mobile.defaultDialogTransition = "none";
-		});
-		</script><script type="text/javascript" src="js/jquery-1.5.0.mobile.min.js"></script><script src="js/index.js"></script></body>
+        <!-- end page 2 -->
+
+        <!--Start page 3-->
+        <div data-role="page" id="scanPage" class="page">
+            
+            <div role="content" class="ui-content">
+                <!-- Content should go in here-->
+				<h4>Scan page content goes here</h4>
+				<button><a href="#resultsPage">Tap to scan</a></button><!-- this goes to results-->
+            </div>
+            
+        </div>
+        <!-- end page 3 -->
+
+        <!--Start page 4-->
+        <div data-role="page" id="searchPage" class="page">
+            
+            <div role="content" class="ui-content">
+                <!-- Content should go in here-->
+				<h4>Search page content goes here</h4>
+				<button><a href="#resultsPage">Tap to got to search page temp</a></button><!-- this goes to results-->
+            </div>
+            
+        </div>
+        <!-- end page 4 -->
+
+        <!--Start page 5-->
+        <div data-role="page" id="resultsPage" class="page">
+            
+            <div role="content" class="ui-content">
+                <!-- Content should go in here-->
+				<h4>Results page content goes here</h4>
+				<button><a href="#albumPage">Tap on album</a></button><!-- this goes to album page-->
+            </div>
+            
+        </div>
+        <!-- end page 5 -->
+
+        <!--Start page 6-->
+        <div data-role="page" id="settingsPage" class="page">
+            
+            <div role="content" class="ui-content">
+                <!-- Content should go in here-->
+				<h4>Settings page content goes here</h4>
+				<button><a href="#homePage">Go back</a></button><!-- this goes to album page-->
+            </div>
+            
+        </div>
+        <!-- end page 6 -->
+
+        
 </html>
