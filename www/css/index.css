@@ -123,15 +123,26 @@ body {
     left: 50%;
   }
   
-
-  
-.button {
+  .button {
+    display: inline-block;
+    outline: none;
     background-color: #FA6800;
-    color: black;
-    padding: 5px;
-    border-radius: 9px;
+    text-align: center;
+    text-decoration: none;
+    font: 14px/100% Arial, Helvetica, sans-serif;
+    padding: .5em 2em .55em;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    border-radius: .3em;
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
   }
-
- #page1,#page2 {
+  
+/* Mainly for theme of the app will go here so all pages have same theme */
+#signup_login, #homePage, #scanPage, #resultsPage   {
   background-color: #9AC7BF;
+}
+/* I will setup the same grid on each page. 
+There is a drawing of the grid lines in our draw.io.
+If you want to customize it take your page out of this and create a seperate one for it */
+#Login_Sign-up, #HomePage, #ScanPage, #Results {
+  display: grid;
 }
