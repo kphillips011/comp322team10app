@@ -56,7 +56,7 @@
                 <label for="Uname">User name:</label>
                 <input type="text" id="uname" name="uname">
                 
-					<a href="#homePage">Log In</a>
+					<a href="#homePage" class="button">Log In</a>
                 
 		    </div>
 			<!-- end of page 1 content -->
@@ -71,14 +71,14 @@
 		<div data-role="page" id="homePage" class="page">
 			
 
-			<div role="content" class="ui-content">
+			<div data-role="main" class="ui-content">
                 <!-- Content should go in here-->
 				<h4>Home page content goes here</h4>
                 
                 <a href="#scanPage" class="button">Scan Vinyl</a>
                 <!-- THis bellow will be in burger menu in future-->
-                <button><a href="#searchPage">Temp button to search page</a></button> 
-                <button><a href="#settingsPage">Settings temp button</a></button>
+                <a href="#searchPage" class="button">Temp button to search page</a>
+                <a href="#settingsPage" class="button">Settings temp button</a>
 			</div>
 			<!-- end of page 2 content -->
 
@@ -91,7 +91,7 @@
             <div role="content" class="ui-content">
                 <!-- Content should go in here-->
 				<h4>Scan page content goes here</h4>
-				<button><a href="#resultsPage">Tap to scan</a></button><!-- this goes to results-->
+				<a href="#resultsPage" class="button">Tap to scan</a><!-- this goes to results-->
             </div>
             
         </div>
@@ -103,7 +103,7 @@
             <div role="content" class="ui-content">
                 <!-- Content should go in here-->
 				<h4>Search page content goes here</h4>
-				<button><a href="#resultsPage">Tap to got to search page temp</a></button><!-- this goes to results-->
+				<a href="#resultsPage" class="button">Tap to got to search page temp</a><!-- this goes to results-->
             </div>
             
         </div>
@@ -115,7 +115,7 @@
             <div role="content" class="ui-content">
                 <!-- Content should go in here-->
 				<h4>Results page content goes here</h4>
-				<button><a href="#albumPage">Tap on album</a></button><!-- this goes to album page-->
+				<a href="#albumPage" class="button">Tap on album</a><!-- this goes to album page-->
             </div>
             
         </div>
@@ -127,11 +127,23 @@
             <div role="content" class="ui-content">
                 <!-- Content should go in here-->
 				<h4>Settings page content goes here</h4>
-				<button><a href="#homePage">Go back</a></button><!-- this goes to album page-->
+				<a href="#homePage" class="button">Go back</a><!-- this goes to album page-->
             </div>
             
         </div>
         <!-- end page 6 -->
+
+        <!--Start page 7-->
+        <div data-role="page" id="albumPage" class="page">
+            
+            <div role="content" class="ui-content">
+                <!-- Content should go in here-->
+				<h4>Album page content goes here</h4>
+				<a href="#homePage" class="button">Go back home</a><!-- this goes to album page-->
+            </div>
+            
+        </div>
+        <!-- end page 7 -->
 
         
 </html>
