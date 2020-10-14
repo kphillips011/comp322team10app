@@ -138,22 +138,24 @@ body {
   /* type for buttons that are on images */
   .imagebutton {
     /* makes transparent image background for buttons */
-    mix-blend-mode: multiply;
-    /* background:transparent url("img/scan.png"); */
+    /* mix-blend-mode: multiply; */
 
     /* to center image on page */
-    display: block;
+    display: inline-block;
+    background:transparent url("img/scan.png");
+    text-align: center;
+    text-decoration: none;
     margin-top: auto;
     margin-bottom: auto;
     margin-left: auto;
     margin-right: auto;
     width: 50%;
 
-    /* padding 
+    /* padding */
     padding-top: 100px;
     padding-right: 50px;
     padding-bottom: 100px;
-    padding-left: 50px; */
+    padding-left: 50px; 
   }
   
 /* Mainly for theme of the app will go here so all pages have same theme */
