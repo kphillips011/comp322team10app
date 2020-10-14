@@ -136,11 +136,25 @@ body {
   }
 
   /* type for buttons that are on images */
-  .imagebutton {
+  #scanready {
     /* makes transparent image background for buttons */
     /* mix-blend-mode: multiply; */
-    background:transparent url("img/scan.png");
     /* to center image on page */
+    /* background:transparent url("img/scan.png"); */
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    display: block;
+    outline: none;
+    margin-left: auto;
+    margin-right: auto;
+    width: 250px;
+    height: 250px;
+    border: none;
+    cursor: pointer;
+    overflow: hidden; 
+  }
+
+  .middle {
     position:absolute;
     top:0;
     bottom:0;
