@@ -144,3 +144,75 @@ body {
 There is a drawing of the grid lines in our draw.io.
 If you want to customize it take your page out of this and create a seperate one for it */
 
+p   {
+  text-align: center;
+}
+
+.title {
+  font-size:24px;
+  font-weight:normal;
+  overflow:visible;
+  text-align:center;
+}
+
+/* .results    {} */
+
+.result-container {
+  border: black 1px solid;
+  width: 100%;
+  height: 25vw;
+  display: table;
+  margin-top: 5vw;
+  margin-bottom: 5vw;
+}
+
+#result {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#result-photo   {
+  border: blue 1px solid;
+  width: 20vw;
+  height: 20vw;
+  display: inline-block;
+}
+
+#result-text    {
+  float: right;
+}
+
+#result-title   {
+  width: 70vw;
+  height: 10vw;
+  border: red 1px solid;
+}
+
+#result-title-info  {
+  width: 70vw;
+  height: 10vw;
+  border: grey 1px solid;
+}
+
+.imagebutton {
+  /* makes transparent image background for buttons */
+  /* mix-blend-mode: multiply; */
+
+  /* to center image on page */
+  display: inline-block;
+  background:transparent url("img/scan.png");
+  text-align: center;
+  text-decoration: none;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  height: auto;
+
+  /* padding */
+  padding-top: 100px;
+  padding-right: 50px;
+  padding-bottom: 100px;
+  padding-left: 50px; 
+}
