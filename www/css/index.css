@@ -141,6 +141,7 @@ body {
     /* mix-blend-mode: multiply; */
     /* to center image on page */
     /* background:transparent url("img/scan.png"); */
+    
     background-color: Transparent;
     background-repeat:no-repeat;
     display: block;

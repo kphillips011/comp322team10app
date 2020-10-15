@@ -34,7 +34,7 @@ $(document).ready(function(){
 	});
 });
 
-document.addEventListener("scanready", onScanReady, false);
+document.addEventListener('scanready', onScanReady, false);
 
 function onScanReady() {
     console.log(scan);
