@@ -48,31 +48,54 @@
             });
             </script><script type="text/javascript" src="js/jquery-1.5.0.mobile.min.js"></script><script src="js/index.js"></script></body>
 		<!-- jquery mobile page 1 -->
-		<div data-role="page" id="signup_login">
-			
+    <div data-role="page" id="login_page">
 
-			<div role="main" class="ui-content">
-                <div class="ui-grid-b">
-                    <div class="ui-block-a"></div>
-                    <div class="ui-block-b">
-                        <p>Sign-up/login</p>
-                    </div>
-                    <div class="ui-block-c"></div>
-                  </div><!-- /grid-b -->
-                
-                <label for="Uname">User name:</label>
-                <input type="text" id="uname" name="uname">
-                
-					<a href="#homePage" class="ui-btn ui-corner-all">Log In</a>
-                
-		    </div>
-			<!-- end of page 1 content -->
+        <div role="main" class="ui-content">
+            <div class="ui-grid-b">
+                <div class="ui-block-a"></div>
+                <div class="ui-block-b">
+                    <p>Log-in</p>
+                </div>
+                <div class="ui-block-c"></div>
+            </div><!-- /grid-b -->
+            <label for="Uname">User name:</label>
+            <input type="text" id="Loguname" name= "username" class="signup-form-field">
+            <label for="Pword">Password:</label>
+            <input type="password" id="Logpword" name="password" class="signup-form-field">
+            <a href="#homePage" id="testCred" class="button">Log In</a>
+            <a href="#signup_login" class="button">No account? Sign Up</a>
 
-			<!-- <div data-role="footer" data-position="fixed">
-				<h4>Page 1 Footer</h4>
-			</div> -->
-			<!-- end page 1 footer -->
-		</div>
+        </div>
+    </div>
+    <!-- jquery log in page -->
+    <div data-role="page" id="signup_login">
+
+        <div role="main" class="ui-content">
+            <div class="ui-grid-b">
+                <div class="ui-block-a"></div>
+                <div class="ui-block-b">
+                    <p>Sign-up</p>
+                </div>
+                <div class="ui-block-c"></div>
+            </div><!-- /grid-b -->
+            <label for="Uname">User name:</label>
+            <input type="text" id="uname" name= "username" class="signup-form-field">
+            <label for="Email">Email:</label>
+            <input type="text" id="email" name="email" class="signup-form-field">
+            <label for="Pword">Password:</label>
+            <input type="password" id="pword" name="password" class="signup-form-field">
+            <label for="ConPword">Confirm Password:</label>
+            <input type="password" id="confirmpassword" class="signup-form-field">
+
+            <a href="#homePage" id="testSignUp" class="button">Sign-Up</a>
+        </div>
+        <!-- end of page 1 content -->
+
+        <!-- <div data-role="footer" data-position="fixed">
+            <h4>Page 1 Footer</h4>
+        </div> -->
+        <!-- end page 1 footer -->
+        </div>
 		<!-- end page 1 -->
         <!-- jquery mobile page 2 -->
 		<div data-role="page" id="homePage" class="page">
