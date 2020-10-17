@@ -138,7 +138,7 @@ body {
   }
   
 /* Mainly for theme of the app will go here so all pages have same theme */
-#login_page, #signup_login, #homePage, #scanPage, #resultsPage, #searchPage, #settingsPage, #albumPage   {
+#login_page, #signup_login, #homePage, #scanPage, #resultsPage, #searchPage, #settingsPage, #albumPage, #songResultsPage, #artistResultsPage   {
   background-color: #9AC7BF;
 }
 /* I will setup the same grid on each page. 
