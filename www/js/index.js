@@ -40,7 +40,7 @@ function populateAlbumInfo(data) {
 $(document).ready(
   function() {
     $("#scanButton").on("click", function() {
-        alert('WOrk')
+        
         scan.scanDoc(successCallback, errorCallback, {sourceType : 1, fileName : "myfilename", quality : 1.0, returnBase64 : false}); 
     });
   }  
