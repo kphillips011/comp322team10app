@@ -123,7 +123,7 @@ body {
     left: 50%;
   }
   
-  .button {
+  .ui-page-theme-a a:visited, .ui-page-theme-a  .button {
     display: inline-block;
     outline: none;
     background-color: #FA6800;
@@ -134,10 +134,11 @@ body {
     text-shadow: 0 1px 1px rgba(0,0,0,.3);
     border-radius: .3em;
     box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    color: black;
   }
   
 /* Mainly for theme of the app will go here so all pages have same theme */
-#signup_login, #homePage, #scanPage, #resultsPage, #searchPage, #settingsPage, #albumPage   {
+#login_page, #signup_login, #homePage, #scanPage, #resultsPage, #searchPage, #settingsPage, #albumPage   {
   background-color: #9AC7BF;
 }
 /* I will setup the same grid on each page. 
@@ -235,14 +236,13 @@ p   {
   height: 250px;
   border: none;
   overflow: hidden; 
+  box-shadow: none;
 }
+#scanready:focus {outline-width: 0px; }
 
 .middle {
   position:absolute;
-  top:0;
-  bottom:0;
-  right: 0;
-  left: 0;
+  
   max-width: 100%;
   max-height: 100%;
 }
@@ -295,3 +295,23 @@ p   {
 .clearfix{
   clear:both
 }
+
+#scanButtonContainer {
+  border: #9AC7BF ;
+  border-width: 2px;
+}
+
+#scanButton {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+}
+
+
+.my-breakpoint .ui-block-a {width: 10%;} 
+.my-breakpoint .ui-block-b {width: 80%;}
+.my-breakpoint .ui-block-c {width: 10%;}
+
