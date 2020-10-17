@@ -20,7 +20,6 @@
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
 
-
 body {
     background-color:#9AC7BF ;
 }
@@ -122,9 +121,9 @@ body {
     width: 0%;
     left: 50%;
   }
-  
+
   .button {
-    display: inline-block;
+    display: block;
     outline: none;
     background-color: #FA6800;
     text-align: center;
@@ -135,7 +134,38 @@ body {
     border-radius: .3em;
     box-shadow: 0 1px 2px rgba(0,0,0,.2);
   }
-  
+
+  /* type for buttons that are on images */
+  #scanready {
+    /* makes transparent image background for buttons */
+    /* mix-blend-mode: multiply; */
+    /* to center image on page */
+    /* background:transparent url("img/scan.png"); */
+
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    display: block;
+    outline: none;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 250px;
+    height: 250px;
+    border: none;
+    overflow: hidden; 
+  }
+
+  .middle {
+    position:absolute;
+    top:0;
+    bottom:0;
+    right: 0;
+    left: 0;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
 /* Mainly for theme of the app will go here so all pages have same theme */
 #signup_login, #homePage, #scanPage, #resultsPage, #searchPage, #settingsPage, #albumPage   {
   background-color: #9AC7BF;

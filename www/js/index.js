@@ -34,3 +34,21 @@ $(document).ready(function(){
 	});
 });
 
+$(document).ready(
+    function() {
+    console.log(scan);
+    $("#scanready").on("click", function() {
+        scan.scanDoc(successCallback, errorCallback, {sourceType : 1, fileName : "myfilename", quality : 1.0, returnBase64 : false}); 
+    });
+});
+function successCallback(imageData) {
+    alert(imageData);
+    console.log(imageData);
+    var image = document.getElementById('myImage');
+    image.src = imageData; // Image URL rendering. 
+    //image.src = imageData + '?' + Date.now(); // For iOS, use this to solve issue 10 if unique fileName is not set.
+    //image.src = "data:image/jpeg;base64," + imageData; // Base64 rendering
+}
+function errorCallback(message) {
+    alert('Failed because: ' + message);
+}
