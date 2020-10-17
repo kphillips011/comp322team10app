@@ -20,7 +20,10 @@
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {},
-      "cordova-plugin-document-scanner": {}
+      "cordova-plugin-document-scanner": {
+        "CAMERA_USAGE_DESCRIPTION": "This app needs camera access",
+        "PHOTOLIBRARY_USAGE_DESCRIPTION": "This app needs read/write-access photo library access"
+      }
     },
     "platforms": [
       "android",

@@ -20,6 +20,7 @@
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
 
+
 body {
     background-color:#9AC7BF ;
 }
@@ -121,9 +122,9 @@ body {
     width: 0%;
     left: 50%;
   }
-
-  .button {
-    display: block;
+  
+  .ui-page-theme-a a:visited, .ui-page-theme-a  .button {
+    display: inline-block;
     outline: none;
     background-color: #FA6800;
     text-align: center;
@@ -133,44 +134,184 @@ body {
     text-shadow: 0 1px 1px rgba(0,0,0,.3);
     border-radius: .3em;
     box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    color: black;
   }
-
-  /* type for buttons that are on images */
-  #scanready {
-    /* makes transparent image background for buttons */
-    /* mix-blend-mode: multiply; */
-    /* to center image on page */
-    /* background:transparent url("img/scan.png"); */
-
-    background-color: Transparent;
-    background-repeat:no-repeat;
-    display: block;
-    outline: none;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: auto;
-    margin-bottom: auto;
-    width: 250px;
-    height: 250px;
-    border: none;
-    overflow: hidden; 
-  }
-
-  .middle {
-    position:absolute;
-    top:0;
-    bottom:0;
-    right: 0;
-    left: 0;
-    max-width: 100%;
-    max-height: 100%;
-  }
-
+  
 /* Mainly for theme of the app will go here so all pages have same theme */
-#signup_login, #homePage, #scanPage, #resultsPage, #searchPage, #settingsPage, #albumPage   {
+#login_page, #signup_login, #homePage, #scanPage, #resultsPage, #searchPage, #settingsPage, #albumPage   {
   background-color: #9AC7BF;
 }
 /* I will setup the same grid on each page. 
 There is a drawing of the grid lines in our draw.io.
 If you want to customize it take your page out of this and create a seperate one for it */
+
+p   {
+  text-align: center;
+}
+
+.title {
+  font-size:24px;
+  font-weight:normal;
+  overflow:visible;
+  text-align:center;
+}
+
+/* .results    {} */
+
+.result-container {
+  border: black 1px solid;
+  width: 100%;
+  height: 25vw;
+  display: table;
+  margin-top: 5vw;
+  margin-bottom: 5vw;
+}
+
+#result {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#result-photo   {
+  border: blue 1px solid;
+  width: 20vw;
+  height: 20vw;
+  display: inline-block;
+}
+
+#result-text    {
+  float: right;
+}
+
+#result-title   {
+  width: 70vw;
+  height: 10vw;
+  border: red 1px solid;
+}
+
+#result-title-info  {
+  width: 70vw;
+  height: 10vw;
+  border: grey 1px solid;
+}
+
+.imagebutton {
+  /* makes transparent image background for buttons */
+  /* mix-blend-mode: multiply; */
+
+  /* to center image on page */
+  display: inline-block;
+  background:transparent url("img/scan.png");
+  text-align: center;
+  text-decoration: none;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  height: auto;
+
+  /* padding */
+  padding-top: 100px;
+  padding-right: 50px;
+  padding-bottom: 100px;
+  padding-left: 50px; 
+}
+
+#scanready {
+  /* makes transparent image background for buttons */
+  /* mix-blend-mode: multiply; */
+  /* to center image on page */
+  /* background:transparent url("img/scan.png"); */
+
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  display: block;
+  outline: none;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 250px;
+  height: 250px;
+  border: none;
+  overflow: hidden; 
+  box-shadow: none;
+}
+#scanready:focus {outline-width: 0px; }
+
+.middle {
+  position:absolute;
+  
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.playlists-container{
+  background-color: whitesmoke;
+  width:48%;
+  height: 350px;
+  margin-right:1%;
+  float: left;
+}
+
+.home-container{
+  margin-right:0%;
+  margin-top:10%;
+  margin-bottom:10%;
+}
+
+.albums-container{
+  background-color: lightgrey;
+  width:48%;
+  height: 200px;
+  margin-right:1%;
+  float: right;
+}
+
+.albumpopup-container{
+  background-color: whitesmoke;
+  width:48%;
+  height: 150px;
+  margin-right:1%;
+  margin-top:0%;
+  float: right;
+  }
+
+.textbutton{
+  display: inline-block;
+  outline: none;
+  align-self: center;
+  text-align: center;
+  text-decoration: none;
+  text-decoration-color: black;
+  min-width: fit-content;
+  font: 14px/100% Arial, Helvetica, sans-serif;
+  padding: .5em 2em .55em;
+  text-shadow: 0 1px 1px rgba(0,0,0,.3);
+  border-radius: .3em;
+  }
+
+.clearfix{
+  clear:both
+}
+
+#scanButtonContainer {
+  border: #9AC7BF ;
+  border-width: 2px;
+}
+
+#scanButton {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+}
+
+
+.my-breakpoint .ui-block-a {width: 10%;} 
+.my-breakpoint .ui-block-b {width: 80%;}
+.my-breakpoint .ui-block-c {width: 10%;}
 
