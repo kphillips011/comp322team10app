@@ -135,6 +135,57 @@ body {
     border-radius: .3em;
     box-shadow: 0 1px 2px rgba(0,0,0,.2);
   }
+
+  .playlists-container{
+    background-color: whitesmoke;
+    width:48%;
+    height: 350px;
+    margin-right:1%;
+    float: left;
+  }
+
+  .home-container{
+    margin-right:0%;
+    margin-top:10%;
+    margin-bottom:10%;
+  }
+
+  .albums-container{
+    background-color: lightgrey;
+    width:48%;
+    height: 200px;
+    margin-right:1%;
+    float: right;
+  }
+
+  .albumpopup-container{
+    background-color: whitesmoke;
+    width:48%;
+    height: 150px;
+    margin-right:1%;
+    margin-top:0%;
+    float: right;
+    }
+
+  .textbutton{
+    display: inline-block;
+    outline: none;
+    align-self: center;
+    text-align: center;
+    text-decoration: none;
+    text-decoration-color: black;
+    min-width: fit-content;
+    font: 14px/100% Arial, Helvetica, sans-serif;
+    padding: .5em 2em .55em;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    border-radius: .3em;
+    }
+
+  .clearfix{
+    clear:both
+  }
+
+ 
   
 /* Mainly for theme of the app will go here so all pages have same theme */
 #signup_login, #homePage, #scanPage, #resultsPage, #searchPage, #settingsPage, #albumPage   {

@@ -80,12 +80,50 @@
 
 			<div data-role="main" class="ui-content">
                 <!-- Content should go in here-->
-				<h4>Home page content goes here</h4>
+                <!-- Search(users albums in Home) -->
+                <input type="text" id="uname" name="uname" placeholder="Search">
+
+                <div class="home-container" style="height:max-content;">
+                    <!-- Playlist content -->
+                    <div class="playlists-container">
+                        <a class="textbutton">Playlists</a>
+                        <a class="textbutton">All Content</a>
+                        <a class="textbutton">+ New Playlist</a>
+                    </div>
+                    <div class="paragraph">
+                        <p></p>
+                    </div>
+                    
+                    <!-- Album content -->
+                    <div class="album-container">
+                        <div class="albums-container">
+                            <a class="textbutton">Album Name</a>
+                            <a class="textbutton">Album Name</a>
+                        </div>
+                            <!-- Album menu -->
+                            <div class="albumpopup-container">
+                                <a class="textbutton">+ Add to Playlist</a>
+                                <a class="textbutton">- Remove</a>
+                                <a class="textbutton">View Album</a>
+                                <a class="textbutton">Play in Spotify</a>
+                            </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                </div>
+
+
+                <!-- Scan Vinyl at bottom -->
+                <a href="#scanPage" class="ui-btn ui-corner-all" 
+                    style="background-color: #FA6800; color: whitesmoke; font-size: large;">Scan Vinyl</a>
                 
+                <!-- This bellow will be in burger menu in future-->
+                <a href="#searchPage" class="button">Search</a>
+                <a href="#settingsPage" class="button">Settings</a>
+
                 <a href="#scanPage" class="button">Scan Vinyl</a>
-                <!-- THis bellow will be in burger menu in future-->
-                <a href="#searchPage" class="button">Temp button to search page</a>
-                <a href="#settingsPage" class="button">Settings temp button</a>
+                
 			</div>
 			<!-- end of page 2 content -->
 
