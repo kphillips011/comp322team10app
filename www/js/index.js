@@ -34,3 +34,31 @@ $(document).ready(function(){
 	});
 });
 
+function populateAlbumInfo(data) {
+    var data = JSON.parse(data);
+}
+$(document).ready(
+  function() {
+    $("#scanButton").on("click", function() {
+        alert('WOrk')
+        scan.scanDoc(successCallback, errorCallback, {sourceType : 1, fileName : "myfilename", quality : 1.0, returnBase64 : false}); 
+    });
+  }  
+);
+
+
+function successCallback(imageData) {
+
+    alert(imageData)
+    var divImage = $("#image");
+    var image = $("#img")
+    var im = new image();
+    im.src = imageData;
+    image.src = imageData;
+    divImage.append(im);
+}
+
+function errorCallback(message) {
+    alert('Failed because: ' + message);
+}
+
