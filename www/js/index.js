@@ -23,21 +23,77 @@ document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady() {
     // Cordova is now initialized. Have fun!
-
+    
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
     document.getElementById('deviceready').classList.add('ready');
+    
 }
+// $(document).ready(function() {
+    
+//     var firebaseConfig = {
+//         apiKey: "AIzaSyAn4mnjUdV95nmOJ_7C6HnORmMhUFw27xM",
+//         authDomain: "vinylbase-7fe10.firebaseapp.com",
+//         databaseURL: "https://vinylbase-7fe10.firebaseio.com",
+//         projectId: "vinylbase-7fe10",
+//         storageBucket: "vinylbase-7fe10.appspot.com",
+//         messagingSenderId: "928999002977",
+//         appId: "1:928999002977:web:477940107bc0169196eb20",
+//         measurementId: "G-NZBN9PVLQX"
+//       };
+//       // Initialize Firebase
+//       firebase.initializeApp(firebaseConfig);
+//       firebase.analytics();
+//       alert("firebase loaded");
+// })
 
-$(document).ready(function(){
-    $("#testSignUp").on("click", function(){
-        if ($("#pword").val().trim() === $("#confirmpassword").val().trim()) {
-            window.localStorage.setItem("key1", $("#uname").val().trim())
-            window.localStorage.setItem("key2", $("#pword").val().trim())
-            window.localStorage.setItem("key3", $("#email").val().trim())
-            alert("Sign Up sucessful.")
-        }
-    });
-});
+// $(document).ready(function(){
+//     $("#testSignUp").on("click", function(){
+//         if ($("#Pword").val().trim() === $("#confirmpassword").val().trim()) {
+//             window.localStorage.setItem("key1", $("#uname").val().trim())
+//             window.localStorage.setItem("key2", $("#Pword").val().trim())
+//             window.localStorage.setItem("key3", $("#email").val().trim())
+//             var email = $("#email").val().trim();
+//             var password = $("#Pword").val().trim();
+            
+//             firebase.auth().createUserWithEmailAndPassword(email, password)
+//             .then((user) => {
+//                 alert("Sign Up sucessful.")
+//             })
+//             .catch((error) => {
+//                 var errorCode = error.code;
+//                 var errorMessage = error.message;
+//                 alert(errorMessage);
+//             })
+            
+//         }
+//         else {
+//             alert("Passowrds dont match");
+//         }
+//     });
+// });
+// $(document).ready(function() {
+//     $("#Signup").submit(function() {
+        
+//         if ($("#Pword").val().trim() === $("#confirmpassword").val().trim()) {
+//             var email = $("#email").val().trim();
+//                 var password = $("#Pword").val().trim();
+                
+//                 firebase.auth().createUserWithEmailAndPassword(email, password)
+//                 .then((user) => {
+//                     alert("Sign Up sucessful.")
+//                 })
+//                 .catch((error) => {
+//                     var errorCode = error.code;
+//                     var errorMessage = error.message;
+//                     alert(errorMessage);
+//                 })
+//         }
+//         else {
+//             alert("Passowrds dont match");
+//         }
+//     })
+// });
+
 
 $(document).ready(function(){
     $("#testCred").on("click", function(){
