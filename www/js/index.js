@@ -71,43 +71,84 @@ function onDeviceReady() {
 //         }
 //     });
 // });
-// $(document).ready(function() {
-//     $("#Signup").submit(function() {
+$(document).ready(function() {
+    $("#Signup").submit(function() {
         
-//         if ($("#Pword").val().trim() === $("#confirmpassword").val().trim()) {
-//             var email = $("#email").val().trim();
-//                 var password = $("#Pword").val().trim();
+        if ($("#Pword").val().trim() === $("#confirmpassword").val().trim()) {
+            var email = $("#email").val().trim();
+                var password = $("#Pword").val().trim();
                 
-//                 firebase.auth().createUserWithEmailAndPassword(email, password)
-//                 .then((user) => {
-//                     alert("Sign Up sucessful.")
-//                 })
-//                 .catch((error) => {
-//                     var errorCode = error.code;
-//                     var errorMessage = error.message;
-//                     alert(errorMessage);
-//                 })
-//         }
-//         else {
-//             alert("Passowrds dont match");
-//         }
-//     })
-// });
-
-
-$(document).ready(function(){
-    $("#testCred").on("click", function(){
-        if ($("#Loguname").val().trim() === "testUser" && $("#Logpword").val().trim() === "testPassword") {
-            alert("You have sucessfully logged in!");
+                firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then((user) => {
+                    alert("Sign Up sucessful.")
+                })
+                .catch((error) => {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    alert(errorMessage);
+                })
         }
         else {
-            alert("Log in failed, try again.");
-            location.reload;
+            alert("Passowrds dont match");
         }
-    });
+    })
 });
 
 
+// $(document).ready(function(){
+//     $("#testCred").on("click", function(){
+//         if ($("#Loguname").val().trim() === "testUser" && $("#Logpword").val().trim() === "testPassword") {
+//             alert("You have sucessfully logged in!");
+//         }
+//         else {
+//             alert("Log in failed, try again.");
+//             location.reload;
+//         }
+//     });
+// });
+
+$(document).ready( function() {
+    
+    var firebaseConfig = {
+    apiKey: "AIzaSyAn4mnjUdV95nmOJ_7C6HnORmMhUFw27xM",
+    authDomain: "vinylbase-7fe10.firebaseapp.com",
+    databaseURL: "https://vinylbase-7fe10.firebaseio.com",
+    projectId: "vinylbase-7fe10",
+    storageBucket: "vinylbase-7fe10.appspot.com",
+    messagingSenderId: "928999002977",
+    appId: "1:928999002977:web:477940107bc0169196eb20",
+    measurementId: "G-NZBN9PVLQX"
+};
+// Initialize Firebase
+if (firebase) {
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    alert("Firebase loaded");
+}
+
+
+  });
+
+$(document).ready(function() {
+    $("#login").submit(function() {
+        var email = $("#Logemail").val().trim();
+        var password = $("#Logpword").val().trim();
+        
+        firebase.auth().signInWithEmailAndPassword(email,password)
+        .then((user)=> {
+            alert("signed In");
+            //location.hash ="#homePage";
+            // $(":mobile-pagecontainer").pagecontainer("change", "#homePage");
+            $.mobile.changePage($("#homePage"));
+            //$.mobile.pageContainer.pagecontainer("change", "#homePage");
+        })
+        .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            alert(errorMessage);
+        })
+    })
+})
 
 $(document).ready(function(){
 	$('#nav-icon1,#nav-icon2,#nav-icon3,#nav-icon4').click(function(){
@@ -143,4 +184,21 @@ function errorCallback(message) {
     alert('Failed because: ' + message);
 }
 
+//this code will only run when the homePage is being loaded it still needs an if, so it doesnt regrab albums every time
+$(document).on("pagebeforeshow", "#homePage", function() {
+    alert('This page was just hidden: ');
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+              // User is signed in, see docs for a list of available properties
+              // https://firebase.google.com/docs/reference/js/firebase.User
+              var uid = user.uid;
+              alert("loaded user" + uid);
+              // ...
+            } else {
+              // User is signed out
+              // ...
+            }
+            
+          });
+})
 
