@@ -65,26 +65,98 @@ function populateAlbumInfo(data) {
 $(document).ready(
   function() {
     $("#scanready").on("click", function() {
-        
-        scan.scanDoc(successCallback, errorCallback, {sourceType : 1, fileName : "myfilename", quality : 1.0, returnBase64 : false}); 
+        //scan.scanDoc(successCallback, errorCallback, {sourceType : 1, fileName : 'image', quality : 1.0, returnBase64 : false});
+        // navigator.camera.getPicture(onSuccess, onFail, { quality: 20,
+        //     destinationType: Camera.DestinationType.FILE_URL
+        navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50 });
     });
   }  
 );
 
+// REFERENCE
+// https://stackoverflow.com/questions/10335563/capturing-and-storing-a-picture-taken-with-the-camera-into-a-local-database-ph
 
-function successCallback(imageData) {
+// function onSuccess(imageData) {
+//     alert('Image successfully scanned');
+//     var image = document.getElementById('img');
+//     image.src = imageData + '?' + Math.random();;
+// }
 
-    alert(imageData)
-    var divImage = $("#image");
-    var image = $("#img")
-    var im = new image();
-    im.src = imageData;
-    image.src = imageData;
-    divImage.append(im);
+// function successCallback(imageData) {
+
+//     alert(imageData)
+//     //console.log(imageData);
+//     //var scannedImage = document.getElementById('scannedImage');
+//     //scannedImage.src = imageData;
+//     //var image = $("#image")
+//     //image.src = imageData;
+//     //window.localStorage.setItem("scannedImage", image);
+//     //var image = document.getElementById('image')
+//     //var divImage = $("#image");
+//     //var image = $("#img")
+//     //var im = new image();
+//     //im.src = imageData;
+// }
+
+// function errorCallback(message) {
+//     alert('Failed because: ' + message);
+// }
+
+//Callback function when the picture has been successfully taken
+function onPhotoDataSuccess(imageData) {                
+    alert(imageData);
+    // Get image handle
+    var scannedImage = document.getElementById('scannedImage');
+
+    // Unhide image elements
+    scannedImage.style.display = 'block';
+    scannedImage.src = imageData;
 }
 
-function errorCallback(message) {
-    alert('Failed because: ' + message);
+//Callback function when the picture has not been successfully taken
+function onFail(message) {
+    alert('Failed to load picture because: ' + message);
+}
+
+function movePic(imageData){ 
+    console.log("move pic");
+    console.log(imageData);
+    window.resolveLocalFileSystemURL(imageData, resolveOnSuccess, resOnError);
+}
+
+//Callback function when the file system uri has been resolved
+function resolveOnSuccess(entry){ 
+    console.log("resolvetosuccess");
+
+        //new file name
+        var newFileName = itemID + ".jpg";
+        var myFolderApp = "ImgFolder";
+
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSys) {
+            console.log("folder create");
+
+            //The folder is created if doesn't exist
+            fileSys.root.getDirectory( myFolderApp,
+                {create:true, exclusive: false},
+                function(directory) {
+                    console.log("move to file..");
+                    entry.moveTo(directory, newFileName,  successMove, resOnError);
+                    console.log("release");
+
+                },
+                resOnError);
+        },
+        resOnError);
+}
+
+//Callback function when the file has been moved successfully - inserting the complete path
+function successMove(entry) {
+    console.log("success");
+    console.log(entry);
+}
+
+function resOnError(error) {
+    console.log("failed");
 }
 
 
