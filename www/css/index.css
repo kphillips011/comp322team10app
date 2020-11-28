@@ -230,8 +230,8 @@ p   {
   outline: none;
   margin-left: auto;
   margin-right: auto;
-  margin-top: auto;
-  margin-bottom: auto;
+  /* margin-top: auto; 
+  margin-bottom: auto; */
   width: 250px;
   height: 250px;
   border: none;
@@ -298,14 +298,10 @@ p   {
 
 .imageCenter {
   position:absolute;
-  top:0;
-  bottom:0;
   right: 0;
   left: 0;
   margin: auto; 
   max-width: 100%;
-  max-height: 100%;
-  height: auto;
   width: auto;
 }
 
