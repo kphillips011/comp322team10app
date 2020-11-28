@@ -68,7 +68,10 @@ $(document).ready(
         //scan.scanDoc(successCallback, errorCallback, {sourceType : 1, fileName : 'image', quality : 1.0, returnBase64 : false});
         // navigator.camera.getPicture(onSuccess, onFail, { quality: 20,
         //     destinationType: Camera.DestinationType.FILE_URL
-        navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50 });
+        navigator.camera.getPicture(onPhotoDataSuccess, onFail, { 
+            quality: 50, 
+            encodingType: Camera.EncodingType.JPG,
+            correctOrientation: true });
     });
   }  
 );
