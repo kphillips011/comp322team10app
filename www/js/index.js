@@ -27,7 +27,9 @@ function onDeviceReady() {
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
     document.getElementById('deviceready').classList.add('ready');
     
+    
 }
+
 // $(document).ready(function() {
     
 //     var firebaseConfig = {
@@ -123,7 +125,7 @@ $(document).ready( function() {
 if (firebase) {
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
-    alert("Firebase loaded");
+    //alert("Firebase loaded");
 }
 
 
@@ -162,11 +164,12 @@ function populateAlbumInfo(data) {
 $(document).ready(
   function() {
     $("#scanready").on("click", function() {
-        
+        //alert("test");
         scan.scanDoc(successCallback, errorCallback, {sourceType : 1, fileName : "myfilename", quality : 1.0, returnBase64 : false}); 
     });
   }  
 );
+
 
 
 function successCallback(imageData) {
@@ -185,20 +188,66 @@ function errorCallback(message) {
 }
 
 //this code will only run when the homePage is being loaded it still needs an if, so it doesnt regrab albums every time
-$(document).on("pagebeforeshow", "#homePage", function() {
-    alert('This page was just hidden: ');
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-              // User is signed in, see docs for a list of available properties
-              // https://firebase.google.com/docs/reference/js/firebase.User
-              var uid = user.uid;
-              alert("loaded user" + uid);
-              // ...
-            } else {
-              // User is signed out
-              // ...
-            }
-            
-          });
-})
 
+
+// $(document).on("pagebeforeshow", "#homePage", function() {
+//     alert('This page was just hidden: ');
+//         firebase.auth().onAuthStateChanged((user) => {
+//             if (user) {
+//               // User is signed in, see docs for a list of available properties
+//               // https://firebase.google.com/docs/reference/js/firebase.User
+//               var uid = user.uid;
+//               //alert("loaded user" + uid);
+//               var platlistsRef = db.collection("Playlist");
+//               var query = platlistsRef.where("UserID", "==", uid);
+//               alert(query)
+//               // ...
+//             } else {
+//               // User is signed out
+//               // ...
+//             }
+            
+//           });
+// });
+
+
+
+$(document).on("pagebeforeshow","#albumPage", function(e, data) {
+    // varaible to check if page was reached by back button
+    var backButton = false;
+    $(window).on("navigate", function (event, data) {
+        var direction = data.state.direction;
+        if (direction == 'back') {
+        
+            backButton = true;
+        }
+    });      
+    // if not reached by back button clear data
+    if (!backButton) {
+        var id = document.getElementById("tester");
+        if (id) {
+            id.remove();
+        }
+    }
+    //grab data being sent from previous page
+    var test = window.localStorage.getItem("uid");
+    window.localStorage.removeItem("uid");
+    //var query = $(this).data("url");
+    //console.log(test);
+    // query = query.replace("id=","");
+    //var query = $.urlParam('id');
+
+    //creating elemt with the id for testing
+    var p = document.createElement("p");
+    p.id = "tester";
+    p.innerHTML = test;
+    document.getElementById("test2").appendChild(p);
+    //alert(test);
+});
+
+$(document).on("pagehide", "#albumPage", function() {
+    var id = document.getElementById("tester");
+    //id.remove();
+    window.localStorage.removeItem("uid");
+    //alert("removed item");
+})
