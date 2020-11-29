@@ -161,14 +161,17 @@ $(document).ready(function(){
 function populateAlbumInfo(data) {
     var data = JSON.parse(data);
 }
-$(document).ready(
-  function() {
-    $("#scanready").on("click", function() {
-        //alert("test");
-        scan.scanDoc(successCallback, errorCallback, {sourceType : 1, fileName : "myfilename", quality : 1.0, returnBase64 : false}); 
-    });
-  }  
-);
+// $(document).ready(
+//   function() {
+//     $("#scanready").on("click", function() {
+//         //alert("test");
+//         scan.scanDoc(successCallback, errorCallback, {sourceType : 1, fileName : "myfilename", quality : 1.0, returnBase64 : false}); 
+//     });
+//   }  
+// );
+function scanDoc() {
+    scan.scanDoc(successCallback, errorCallback, {sourceType : 1, fileName : "myfilename", quality : 1.0, returnBase64 : false}); 
+}
 
 
 
@@ -209,29 +212,54 @@ function errorCallback(message) {
             
 //           });
 // });
-
-
-
-$(document).on("pagebeforeshow","#albumPage", function(e, data) {
-    // varaible to check if page was reached by back button
-    var backButton = false;
-    $(window).on("navigate", function (event, data) {
-        var direction = data.state.direction;
-        if (direction == 'back') {
+$(window).on("navigate", function (event, data) {
+    direction = data.state.direction;
+    //event.preventDefault();
+    if (direction == "back") {
         
-            backButton = true;
-        }
-    });      
+        backButton = true;
+        
+    }
+    console.log(backButton, direction);
+});      
+
+var backButton = false;
+$(document).on("pageshow","#albumPage", function(e, data) {
+    // varaible to check if page was reached by back button
+    
+    
+   
+    console.log(backButton);
     // if not reached by back button clear data
     if (!backButton) {
-        var id = document.getElementById("tester");
-        if (id) {
+        var id = $(".tester")
+        if (id != undefined) {
             id.remove();
         }
+        var songResults = $("#SongResults");
+        songResults.empty();
     }
     //grab data being sent from previous page
-    var test = window.localStorage.getItem("uid");
+    var uid = window.localStorage.getItem("uid");
     window.localStorage.removeItem("uid");
+    var isPlaylist = window.localStorage.getItem("isPlaylist");
+    
+    if (isPlaylist == "true") {
+        userPlaylists.forEach((playlist) => {
+            if (playlist.id == uid) {
+                loadSongs(playlist.data().Songs);
+            }
+        });
+            
+    }
+    else { //album
+        userAlbums.forEach((album)=> {
+            
+            if (album.id == uid) {
+                loadSongs(album.data().Songs);
+            }
+        });
+    }
     //var query = $(this).data("url");
     //console.log(test);
     // query = query.replace("id=","");
@@ -239,8 +267,8 @@ $(document).on("pagebeforeshow","#albumPage", function(e, data) {
 
     //creating elemt with the id for testing
     var p = document.createElement("p");
-    p.id = "tester";
-    p.innerHTML = test;
+    p.className = "tester";
+    p.innerHTML = uid;
     document.getElementById("test2").appendChild(p);
     //alert(test);
 });
@@ -249,5 +277,6 @@ $(document).on("pagehide", "#albumPage", function() {
     var id = document.getElementById("tester");
     //id.remove();
     window.localStorage.removeItem("uid");
+    backButton = false;
     //alert("removed item");
 })
