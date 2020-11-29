@@ -75,6 +75,7 @@
     <script defer src="https://www.gstatic.com/firebasejs/8.1.1/firebase-firestore.js"></script>
     <script src="js/index.js"></script>
     <script src="js/accountFunctions.js"></script>
+    <script src="js/albumPage.js"></script>
     
     
     <script>
@@ -161,7 +162,7 @@
         <div class="home-container" style="height:max-content;">
             <!-- Playlist content -->
             <div class="playlists-container" id="Playlists">
-                <a class="textbutton">Playlists</a>
+                <a class="textbutton playlistButton">Playlists</a>
                 <a class="textbutton">All Content</a>
                 <a class="textbutton">+ New Playlist</a>
             </div>
@@ -170,10 +171,11 @@
             </div>
             
             <!-- Album content -->
-            <div class="album-container">
-                <div class="albums-container">
+            <div class="album-container" >
+                <div class="albums-container" id="Albums">
                     <a class="textbutton">Album Name</a>
                     <a class="textbutton">Album Name</a>
+                    
                 </div>
                     <!-- Album menu -->
                     <div class="albumpopup-container">
@@ -227,7 +229,7 @@
         <div class="ui-grid-b my-breakpoint">
             <div class="ui-block-a" ></div>
             <div class="ui-block-b"  >
-                <button id="scanready" >
+                <button id="scanready" onclick="scanDoc()" >
                     <img src="img/scan.png">
                 </button>
             </div>
@@ -380,13 +382,14 @@
         <!-- Content should go in here-->
         <h4>Settings page content goes here</h4>
         <a href="#homePage" class="button">Go back</a>
+        <a href="#" class="button" id="logout" onclick="logout()">logout</a>
     </div>
 
 </div>
 <!-- end page 6 -->
 
 <!--Start page 7-->
-<div data-role="page" id="albumPage" class="page" data-dom-cache="false">
+<div data-role="page" id="albumPage" class="page">
 
     <div role="content" class="ui-content">
         <!-- This part of the application essentially is what will show when the user selects an album -->
@@ -395,7 +398,7 @@
             style="height: 50vw; width: 50vw; border: black 1px solid; margin: auto;">
             <p>Photo</p>
         </div>
-        <div class="results">
+        <div class="results" id="SongResults">
             <div class="result-container">
                 <div id="result">
                     <div id="result-photo">
