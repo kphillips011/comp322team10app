@@ -221,7 +221,7 @@ $(window).on("navigate", function (event, data) {
         backButton = true;
         
     }
-    console.log(backButton, direction);
+    //console.log(backButton, direction);
 });      
 
 var backButton = false;
@@ -229,8 +229,9 @@ $(document).on("pageshow","#albumPage", function(e, data) {
     // varaible to check if page was reached by back button
     
     
-   
-    console.log(backButton);
+    var name = window.localStorage.getItem("name");
+    
+    //console.log(backButton);
     // if not reached by back button clear data
     if (!backButton) {
         var id = $(".tester")
@@ -239,13 +240,16 @@ $(document).on("pageshow","#albumPage", function(e, data) {
         }
         var songResults = $("#SongResults");
         songResults.empty();
+        $("#albumTitle").text(name);
     }
     //grab data being sent from previous page
     var uid = window.localStorage.getItem("uid");
-    window.localStorage.removeItem("uid");
+    //window.localStorage.removeItem("uid");
     var isPlaylist = window.localStorage.getItem("isPlaylist");
     
     if (isPlaylist == "true") {
+        $("#addtoPlaylist").show();
+        $("#songDeleteDiv").show();
         userPlaylists.forEach((playlist) => {
             if (playlist.id == uid) {
                 loadSongs(playlist.data().Songs);
@@ -254,6 +258,8 @@ $(document).on("pageshow","#albumPage", function(e, data) {
             
     }
     else { //album
+        $("#addtoPlaylist").hide();
+        $("#songDeleteDiv").hide();
         userAlbums.forEach((album)=> {
             
             if (album.id == uid) {
@@ -278,6 +284,8 @@ $(document).on("pagehide", "#albumPage", function() {
     var id = document.getElementById("tester");
     //id.remove();
     window.localStorage.removeItem("uid");
+    window.localStorage.removeItem("name");
+    window.localStorage.removeItem("isPlaylist");
     backButton = false;
     //alert("removed item");
 })
