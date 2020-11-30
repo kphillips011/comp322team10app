@@ -75,10 +75,11 @@ function onDeviceReady() {
 // });
 $(document).ready(function() {
     $("#Signup").submit(function() {
-        
-        if ($("#Pword").val().trim() === $("#confirmpassword").val().trim()) {
-            var email = $("#email").val().trim();
-                var password = $("#Pword").val().trim();
+        var email = $("#email").val().trim();
+        var password = $("#Pword").val().trim();
+        var confrimPassword = $("#confirmpassword").val().trim();
+        if (password === confrimPassword) {
+            
                 
                 firebase.auth().createUserWithEmailAndPassword(email, password)
                 .then((user) => {
