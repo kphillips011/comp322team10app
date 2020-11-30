@@ -144,3 +144,40 @@ function test() {
     $.mobile.changePage($("#albumPage"));
     
 }
+$(document).ready(function() {
+    $("#resetPassword").submit(function(e) {
+        e.preventDefault();
+        var newPass = $("#newPass").val().trim();
+        var confrimPass = $("#conPass").val().trim();
+        if(newPass == confrimPass) {
+            var user = firebase.auth().currentUser;
+            user.updatePassword(newPass).then(function() {
+                alert("password reset");
+                $("#popupPassword").popup("close");
+            }).catch(function(error) {
+                alert(error);
+                if (error.code == 'auth/requires-recent-login') {
+                    $("#reAuthPopup").popup( "option", "positionTo", "window" );
+                    $("#reAuthPopup").popup("open");
+                    //todo sumbit code for reauth
+                }
+                $("#newPass").val("");
+                $("#conPass").val("");
+            })
+        }
+        else {
+            $("#newPass").val("");
+            $("#conPass").val("");
+            alert("Passwords dont match");
+        }
+        
+        
+        //$.mobile.changePage($("#settingsPage"));
+        
+        return true;
+    });
+});
+
+$(document).on("pageshow","#settingsPage", function() {
+
+});
