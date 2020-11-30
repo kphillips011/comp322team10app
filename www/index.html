@@ -164,7 +164,8 @@
             <div class="playlists-container" id="Playlists">
                 <a class="textbutton playlistButton">Playlists</a>
                 <a class="textbutton">All Content</a>
-                <a class="textbutton">+ New Playlist</a>
+                <!-- <a class="textbutton">+ New Playlist</a> -->
+                <a href="#createPlaylistPopup" class="textbutton" data-rel="popup" data-position-to="window">+ New Playlist</a>
             </div>
             <div class="paragraph">
                 <p></p>
@@ -178,14 +179,41 @@
                     
                 </div>
                     <!-- Album menu -->
-                    <div class="albumpopup-container">
+                    <!-- <div class="albumpopup-container">
                         <a class="textbutton">+ Add to Playlist</a>
                         <a class="textbutton">- Remove</a>
                         <a class="textbutton">View Album</a>
                         <a class="textbutton">Play in Spotify</a>
-                    </div>
+                    </div> -->
             </div>
-
+            <div id="PopContainer" class="ui-popup-container">
+                <div data-role="popup" id="optionsPopup" data-theme="a" class="ui-corner-all ui-popup ui-overlay-shadow ui-body-a">
+                    <div style="padding: 10px 20px;">
+                        <h3 id="optionsTitle"></h3>
+                        <div class="ui-grid-solo"> 
+                            <button type="button" data-theme="a" id="deleteItem">Delete</button>
+                        </div>
+                        <div class="ui-grid-solo">
+                            <button type="button" data-theme="a" id="viewItem">View</button>
+                        </div>
+                        <div class="ui-grid-solo">
+                            <button type="button" data-theme="a" id="playSpotify">Play In Spotify</button>
+                        </div>        
+                    </div>
+                </div>
+            </div>
+            <div id="PopContainer" class="ui-popup-container">
+                <div data-role="popup" id="createPlaylistPopup" data-theme="a" class="ui-corner-all ui-popup ui-overlay-shadow ui-body-a">
+                    <form id="createPlaylist">
+                        <div style="padding: 10px 20px;">
+                            <div class="ui-textinput ui-corner-all ui-shadow-inset ui-textinput-text ui-body-a" style="border: 0px;">
+                                <input type="text" name="playlistName" id="playlistName" placeholder="Playlist Name" data-theme="a" required>
+                            </div>
+                            <button type="submit" data-theme="b" class="ui-button ui-shadow ui-corner-all">Create Playlist</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <div class="clearfix"></div>
 
         </div>
@@ -381,10 +409,36 @@
     <div role="content" class="ui-content">
         <!-- Content should go in here-->
         <h4>Settings page content goes here</h4>
-        <a href="#homePage" class="button">Go back</a>
-        <a href="#" class="button" id="logout" onclick="logout()">logout</a>
-        <a href="#deletePopup" class="button" data-rel="popup" data-position-to="window">Delete Account</a>
-        <a href="#popupPassword" class="button" data-rel="popup" data-position-to="window">Set New Password</a>
+        <div class="ui-grid-solo">
+            <div class="ui-block-a">
+                <p style="text-align: left;" id="emailLine"></p>
+            </div>
+        </div>
+        
+        
+        
+        <div class="ui-grid-b">
+            <div class="ui-block-a">
+                <a href="#homePage" class="button">Go back</a>
+            </div>
+            <div class="ui-block-b">
+                <a href="#" class="button" id="logout" onclick="logout()">logout</a>
+            </div>
+            <div class="ui-block-c">
+                <a href="#deletePopup" class="button" data-rel="popup" data-position-to="window">Delete Account</a>
+            </div>
+        </div>
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <a href="#popupPassword" class="button" data-rel="popup" data-position-to="window">Set New Password</a>
+            </div>
+            <div class="ui-block-b">
+                <a href="#deleteAccountDataPopup" class="button" data-rel="popup" data-position-to="window">Delete Account Data</a>
+            </div>
+            <div class="ui-block-c">
+                <a href="#newEmailPopup" class="button" data-rel="popup" data-position-to="window">Set new Email</a>
+            </div>
+        </div>
         <div id="passwordPopup" class="ui-popup-container">
             <div data-role="popup" id="popupPassword" data-theme="a" class="ui-corner-all ui-popup ui-overlay-shadow ui-body-a">
                 <form id="resetPassword">
@@ -392,11 +446,11 @@
                         <h3>New Password</h3>
                         <label for="newPass" class="ui-hidden-accessible">New Password:</label>
                         <div class="ui-textinput ui-corner-all ui-shadow-inset ui-textinput-text ui-body-a" style="border: 0px;">
-                            <input type="text" name="newPass" id="newPass" placeholder="new Password" data-theme="a">
+                            <input type="text" name="newPass" id="newPass" placeholder="New Password" data-theme="a">
                         </div>
                         <label for="conPass" class="ui-hidden-accessible">Confrim Password:</label>
                         <div class="ui-textinput ui-corner-all ui-shadow-insert ui-textinput-text ui-body-a" style="border: 0px;">
-                            <input type="text" name="conPass" id="conPass" placeholder="confirm Password" data-theme="a">
+                            <input type="text" name="conPass" id="conPass" placeholder="Confirm Password" data-theme="a">
                         </div>
                         <button type="submit" data-theme="b" class="ui-button ui-shadow ui-corner-all">Set New Password</button>
                     </div>
@@ -405,7 +459,7 @@
         </div>
         <div id="authPopup" class="ui-popup-container">
             <div data-role="popup" id="reAuthPopup" data-theme="a" class="ui-corner-all ui-popup ui-overlay-shadow ui-body-a">
-                <form id="resetPassword">
+                <form id="reLogin">
                     <div style="padding: 10px 20px;">
                         <h3>ReLogin</h3>
                         <label for="reun" class="ui-hidden-accessible">Email:</label>
@@ -421,8 +475,38 @@
                 </form>
             </div>
         </div>
+        <div id="emailPopup" class="ui-popup-container">
+            <div data-role="popup" id="newEmailPopup" data-theme="a" class="ui-corner-all ui-popup ui-overlay-shadow ui-body-a">
+                <form id="setNewEmail">
+                    <div style="padding: 10px 20px;">
+                        <h3>Set New Email</h3>
+                        <label for="newEmail" class="ui-hidden-accessible">Email:</label>
+                        <div class="ui-textinput ui-corner-all ui-shadow-inset ui-textinput-text ui-body-a" style="border: 0px;">
+                            <input type="text" name="newEmail" id="newEmail" placeholder="New Email" data-theme="a">
+                        </div>
+                        <label for="confirmEmail" class="ui-hidden-accessible">Confrim Email:</label>
+                        <div class="ui-textinput ui-corner-all ui-shadow-insert ui-textinput-text ui-body-a" style="border: 0px;">
+                            <input type="text" name="confrimEmail" id="confirmEmail" placeholder="Confirm Email" data-theme="a">
+                        </div>
+                        <button type="submit" data-theme="b" class="ui-button ui-shadow ui-corner-all">Set New Email</button>
+                    </div>
+                </form>
+            </div>
+        </div>
         <div id="deletePopContainer" class="ui-popup-container">
-            <div data-role="popup" id="deletePopup"
+            <div data-role="popup" id="deletePopup" data-theme="a" class="ui-corner-all ui-popup ui-overlay-shadow ui-body-a">
+                <div style="padding: 10px 20px;">
+                    <h3>Are you Sure?</h3>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <button type="button" data-theme="a" onclick="deleteUser()">Yes</button>
+                        </div>
+                        <div class="ui-block-b">
+                            <button type="button" data-theme="a" onclick="cancleDelete()">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -434,7 +518,7 @@
 
     <div role="content" class="ui-content">
         <!-- This part of the application essentially is what will show when the user selects an album -->
-        <h1 class="title">album Results Page</h1>
+        <h1 class="title" id="albumTitle">album Results Page</h1>
         <div class="album-photo" id="test2"
             style="height: 50vw; width: 50vw; border: black 1px solid; margin: auto;">
             <p>Photo</p>
@@ -488,6 +572,38 @@
         </div>
         <a href="#homePage" class="button">Go back home</a>
         <a href="#resultsPage" class="button">Go back to results</a>
+        <a href="#addSongPopup" id="addtoPlaylist" class="button" data-rel="popup" data-position-to="window">Add Song</a>
+        <div id="addSongPopContainer" class="ui-popup-container">
+            <div data-role="popup" id="addSongPopup" data-theme="a" class="ui-corner-all ui-popup ui-overlay-shadow ui-body-a">
+                <form id="addSong">
+                    <div style="padding: 10px 20px;">
+                        <div class="ui-textinput ui-corner-all ui-shadow-inset ui-textinput-text ui-body-a" style="border: 0px;">
+                            <input type="text" name="songTitle" id="songTitle" placeholder="Song Title" data-theme="a" required>
+                        </div>
+                        <div class="ui-textinput ui-corner-all ui-shadow-inset ui-textinput-text ui-body-a" style="border: 0px;">
+                            <input type="text" name="ArtistName" id="artistName" placeholder="Artist Name" data-theme="a" required>
+                        </div>
+                        <button type="submit" data-theme="b" class="ui-button ui-shadow ui-corner-all">Add Song</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="songPopContainer" class="ui-popup-container">
+            <div data-role="popup" id="songOptionsPopup" data-theme="a" class="ui-corner-all ui-popup ui-overlay-shadow ui-body-a">
+                <div style="padding: 10px 20px;">
+                    <h3 id="songOptionsTitle"></h3>
+                    <div class="ui-grid-solo" id= "songDeleteDiv"> 
+                        <button type="button" data-theme="a" id="deleteSong">Delete</button>
+                    </div>
+                    <div class="ui-grid-solo">
+                        <button type="button" data-theme="a" id="viewSong">View</button>
+                    </div>
+                    <div class="ui-grid-solo">
+                        <button type="button" data-theme="a" id="playSongInSpotify">Play In Spotify</button>
+                    </div>        
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
