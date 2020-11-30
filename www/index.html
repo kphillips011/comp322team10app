@@ -383,6 +383,47 @@
         <h4>Settings page content goes here</h4>
         <a href="#homePage" class="button">Go back</a>
         <a href="#" class="button" id="logout" onclick="logout()">logout</a>
+        <a href="#deletePopup" class="button" data-rel="popup" data-position-to="window">Delete Account</a>
+        <a href="#popupPassword" class="button" data-rel="popup" data-position-to="window">Set New Password</a>
+        <div id="passwordPopup" class="ui-popup-container">
+            <div data-role="popup" id="popupPassword" data-theme="a" class="ui-corner-all ui-popup ui-overlay-shadow ui-body-a">
+                <form id="resetPassword">
+                    <div style="padding: 10px 20px;">
+                        <h3>New Password</h3>
+                        <label for="newPass" class="ui-hidden-accessible">New Password:</label>
+                        <div class="ui-textinput ui-corner-all ui-shadow-inset ui-textinput-text ui-body-a" style="border: 0px;">
+                            <input type="text" name="newPass" id="newPass" placeholder="new Password" data-theme="a">
+                        </div>
+                        <label for="conPass" class="ui-hidden-accessible">Confrim Password:</label>
+                        <div class="ui-textinput ui-corner-all ui-shadow-insert ui-textinput-text ui-body-a" style="border: 0px;">
+                            <input type="text" name="conPass" id="conPass" placeholder="confirm Password" data-theme="a">
+                        </div>
+                        <button type="submit" data-theme="b" class="ui-button ui-shadow ui-corner-all">Set New Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="authPopup" class="ui-popup-container">
+            <div data-role="popup" id="reAuthPopup" data-theme="a" class="ui-corner-all ui-popup ui-overlay-shadow ui-body-a">
+                <form id="resetPassword">
+                    <div style="padding: 10px 20px;">
+                        <h3>ReLogin</h3>
+                        <label for="reun" class="ui-hidden-accessible">Email:</label>
+                        <div class="ui-textinput ui-corner-all ui-shadow-inset ui-textinput-text ui-body-a" style="border: 0px;">
+                            <input type="text" name="un" id="reun" placeholder="new Password" data-theme="a">
+                        </div>
+                        <label for="repw" class="ui-hidden-accessible">Password:</label>
+                        <div class="ui-textinput ui-corner-all ui-shadow-insert ui-textinput-text ui-body-a" style="border: 0px;">
+                            <input type="text" name="pw" id="repw" placeholder="confirm Password" data-theme="a">
+                        </div>
+                        <button type="submit" data-theme="b" class="ui-button ui-shadow ui-corner-all">Set New Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="deletePopContainer" class="ui-popup-container">
+            <div data-role="popup" id="deletePopup"
+        </div>
     </div>
 
 </div>
