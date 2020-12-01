@@ -8,7 +8,7 @@
 //     $(".name").attr("src, name");
 // });
 
-const api_url = "https://api.discogs.com/artists/1?callback=callbackname";
+const api_url = "https://api.discogs.com/artists/1?callback=callbackname&per_page=100";
 async function getAlbum() {
     const response = await fetch(api_url);
     const data = await resonse.json();
