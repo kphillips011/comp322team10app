@@ -1,36 +1,36 @@
 {
-  "name": "com.loyola.vinylbase",
-  "displayName": "VinylBase",
-  "version": "1.0.0",
-  "description": "A sample Apache Cordova application that responds to the deviceready event.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "ecosystem:cordova"
-  ],
-  "author": "Apache Cordova Team",
-  "license": "Apache-2.0",
-  "devDependencies": {
-    "cordova-android": "^9.0.0",
-    "cordova-plugin-document-scanner": "^4.2.5",
-    "cordova-plugin-whitelist": "^1.3.4"
-  },
-  "cordova": {
-    "plugins": {
-      "cordova-plugin-whitelist": {},
-      "cordova-plugin-document-scanner": {
-        "CAMERA_USAGE_DESCRIPTION": "This app needs camera access",
-        "PHOTOLIBRARY_USAGE_DESCRIPTION": "This app needs read/write-access photo library access"
-      }
+    "name": "com.loyola.vinylbase",
+    "displayName": "VinylBase",
+    "version": "1.0.0",
+    "description": "A sample Apache Cordova application that responds to the deviceready event.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "platforms": [
-      "android",
-      "ios"
-    ]
-  },
-  "dependencies": {
-    "cordova-ios": "6.1.1"
-  }
+    "keywords": [
+        "ecosystem:cordova"
+    ],
+    "author": "Apache Cordova Team",
+    "license": "Apache-2.0",
+    "devDependencies": {
+        "cordova-android": "^9.0.0",
+        "cordova-plugin-document-scanner": "^4.2.5",
+        "cordova-plugin-whitelist": "^1.3.4"
+    },
+    "cordova": {
+        "plugins": {
+            "cordova-plugin-whitelist": {},
+            "cordova-plugin-document-scanner": {
+                "CAMERA_USAGE_DESCRIPTION": "This app needs camera access",
+                "PHOTOLIBRARY_USAGE_DESCRIPTION": "This app needs read/write-access photo library access"
+            }
+        },
+        "platforms": [
+            "android",
+            "ios"
+        ]
+    },
+    "dependencies": {
+        "cordova-ios": "6.1.1"
+    }
 }
