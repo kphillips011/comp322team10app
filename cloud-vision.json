@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "comp-333-vinylbase",
+  "private_key_id": "5502b240dd32e03c6a067c378fec0093450fb39a",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDUj2+2354uNiTy\nkOGP7hVzLN1ineo3iLjIGIWBf6bz0rkjLxB9aYicph52K0r73UE0MsBITg9b3kCI\n/Kk6pKZWtDYiWommRFVcd4KzITjSqqYNtZC8v7YJFgomDZApSv8QlFd60I77lnYC\nQ3mSYz77iGW+bssDYfxPzLw5dEzJUjGQ83B7VRw5SfeywVM18XTKHgr1aXAniBFH\nWAMWfRxgfUroUmbNrce8g+qso98IeX+DRzRl8BTwlBFXNmIzYDoaoKw+BrX1zvJK\nMATRxmk/CX7FmsMeUvdcpxgZCyrpfHwFFE+ZjzHfJMnXDJ0gnNXY1aNPJh0mrFIM\nDx2+7R5RAgMBAAECggEACsKGB65TLgisnyDJYkVNjaqAPG08/XmszOg83dzN4TrS\nB19rCMYuVautEBNJ9Ozyz4cgJ6jX6zEZeDW+BUtvZiUyNlP58tIztf4QviuY2kUs\nKbZ+sKdNujEE6381RHnY5ohz0zI6gq7Po3ax8UCX4Bi7+cNXAIFVyd5VytzBxFEO\nnbUpZb0uy7uf0o3AkGQ8rUKkiBBnkQ+BIxu7lYedyjebi6Dgj9mkn5Lmh6OywSeA\ndWH9RWSjVGpU2tnjeHs6XoZsOjXkPVwjjlWfT8lf2TY6dFcCiq/KvRDvbZ605U2a\nXfu6zUdRSlBBQwmE/Woji96xy4Pzkf6BmWJl7MAKXwKBgQD/TrkykuZJM+3Ag4HW\nAOL621/ld1YSB1W+z0H5Uy/39ib9beEv3+NuPvY0kWVbkmpSJW73vbGGnjf2EcnY\n92yGPejPlovaFCm/Gzo7UjqMx1CCxQpvZY3rWd7whUDxndeDkLDSlC2OWcmHAcQG\nPrQrmifFHnbeHhAXbwbig0SBYwKBgQDVIwfh7t7AbiiWPXDd2OV+3xeFeMGPoXvO\n2lRCEv+4M7/sYnMNR6xzF87BNx9Ozm8MRWMMNKfo316ENB6wVD59De2M5G6rogfn\nBamJCFknAP72K72/qZ6L7ORIQMlzcJGWrY/CjCS/wPbSsAdrjvvESbIFruj1zola\nwv+QmztpuwKBgQDCUk8PuVPiP84ki3PVSRN6UGMrKquuSTrwYpwag0CtgQOoPWv6\nnnRiwzVuSYRWMJkQMUHG+vEWP3LkriFuLNTDUHfVGQcVU+d6d+TYpfu+jy4uen84\nzpk4m0ze0O3feX5Bu216uiH6iUiko6lp/2vvDARdOpTK9yLUU0NwQO1xdQKBgGRO\nbzhCTezsKwfB9KtDl4YlAhHbqeSpz/WixMKv5E9Rc4KRNqpKT/t+edxuz7or5xE0\nWo/0/AzZisbXLJY5n4sFEgYbv4Xg5K0x+f62whZcHqHGJi/caPRbUXg7nVNJ6Aqs\nthqOEAF6k+7Fz0gsa4qOUEzia1q7j+L6IIJyu/xfAoGBALShXspmFOnIDhjAJgP2\nfxq/JrbWAdRZ6i+IYWeTjqCIDkmbM2Xp/pgF4h+cgFm2TYNaiQmlwElZSMnTsspo\njbYkGFpEqdFiwv/HQHSxQO3VvlFoWiG/NRNrFBuyvKASFXjW/m+4zns2CE+/10yZ\nG/47OP7qtYcb8aMevg5xV4Fl\n-----END PRIVATE KEY-----\n",
+  "client_email": "vinylbase@comp-333-vinylbase.iam.gserviceaccount.com",
+  "client_id": "113275997572584467433",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/vinylbase%40comp-333-vinylbase.iam.gserviceaccount.com"
+}
