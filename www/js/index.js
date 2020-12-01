@@ -69,9 +69,14 @@ $(document).ready(
         // navigator.camera.getPicture(onSuccess, onFail, { quality: 20,
         //     destinationType: Camera.DestinationType.FILE_URL
         navigator.camera.getPicture(onPhotoDataSuccess, onFail, { 
-            quality: 50, 
+            quality: 50,
+            allowEdit: false,
             encodingType: Camera.EncodingType.JPG,
-            correctOrientation: true });
+            correctOrientation: true,
+            sourceType: navigator.camera.PictureSourceType.CAMERA,
+            targetWidth: 600,
+            targetHeight: 600 
+        });
     });
   }  
 );
