@@ -142,14 +142,14 @@ $(document).on("pageshow", "#homePage", function () {
 //     $.mobile.changePage($("#albumPage"));
 // })
 
-function test() {
-    //adding uid from element to local storage so the loaded page can grab it
-    //alert("test")
-    window.localStorage.setItem("uid", this.getAttribute("uid"));
-    window.localStorage.setItem("isPlaylist", this.getAttribute("isplaylist"));
-    $.mobile.changePage($("#albumPage"));
+// function test() {
+//     //adding uid from element to local storage so the loaded page can grab it
+//     //alert("test")
+//     window.localStorage.setItem("uid", this.getAttribute("uid"));
+//     window.localStorage.setItem("isPlaylist", this.getAttribute("isplaylist"));
+//     $.mobile.changePage($("#albumPage"));
     
-}
+// }
 $(document).ready(function() {
     $("#resetPassword").submit(function(e) {
         e.preventDefault();
