@@ -23,35 +23,135 @@ document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady() {
     // Cordova is now initialized. Have fun!
-
+    
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
     document.getElementById('deviceready').classList.add('ready');
+    
+    
 }
 
-$(document).ready(function(){
-    $("#testSignUp").on("click", function(){
-        if ($("#pword").val().trim() === $("#confirmpassword").val().trim()) {
-            window.localStorage.setItem("key1", $("#uname").val().trim())
-            window.localStorage.setItem("key2", $("#pword").val().trim())
-            window.localStorage.setItem("key3", $("#email").val().trim())
-            alert("Sign Up sucessful.")
-        }
-    });
-});
+// $(document).ready(function() {
+    
+//     var firebaseConfig = {
+//         apiKey: "AIzaSyAn4mnjUdV95nmOJ_7C6HnORmMhUFw27xM",
+//         authDomain: "vinylbase-7fe10.firebaseapp.com",
+//         databaseURL: "https://vinylbase-7fe10.firebaseio.com",
+//         projectId: "vinylbase-7fe10",
+//         storageBucket: "vinylbase-7fe10.appspot.com",
+//         messagingSenderId: "928999002977",
+//         appId: "1:928999002977:web:477940107bc0169196eb20",
+//         measurementId: "G-NZBN9PVLQX"
+//       };
+//       // Initialize Firebase
+//       firebase.initializeApp(firebaseConfig);
+//       firebase.analytics();
+//       alert("firebase loaded");
+// })
 
-$(document).ready(function(){
-    $("#testCred").on("click", function(){
-        if ($("#Loguname").val().trim() === "testUser" && $("#Logpword").val().trim() === "testPassword") {
-            alert("You have sucessfully logged in!");
+// $(document).ready(function(){
+//     $("#testSignUp").on("click", function(){
+//         if ($("#Pword").val().trim() === $("#confirmpassword").val().trim()) {
+//             window.localStorage.setItem("key1", $("#uname").val().trim())
+//             window.localStorage.setItem("key2", $("#Pword").val().trim())
+//             window.localStorage.setItem("key3", $("#email").val().trim())
+//             var email = $("#email").val().trim();
+//             var password = $("#Pword").val().trim();
+            
+//             firebase.auth().createUserWithEmailAndPassword(email, password)
+//             .then((user) => {
+//                 alert("Sign Up sucessful.")
+//             })
+//             .catch((error) => {
+//                 var errorCode = error.code;
+//                 var errorMessage = error.message;
+//                 alert(errorMessage);
+//             })
+            
+//         }
+//         else {
+//             alert("Passowrds dont match");
+//         }
+//     });
+// });
+$(document).ready(function() {
+    $("#Signup").submit(function() {
+        var email = $("#email").val().trim();
+        var password = $("#Pword").val().trim();
+        var confrimPassword = $("#confirmpassword").val().trim();
+        if (password === confrimPassword) {
+            
+                
+                firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then((user) => {
+                    alert("Sign Up sucessful.")
+                })
+                .catch((error) => {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    alert(errorMessage);
+                })
         }
         else {
-            alert("Log in failed, try again.");
-            location.reload;
+            alert("Passowrds dont match");
         }
-    });
+    })
 });
 
 
+// $(document).ready(function(){
+//     $("#testCred").on("click", function(){
+//         if ($("#Loguname").val().trim() === "testUser" && $("#Logpword").val().trim() === "testPassword") {
+//             alert("You have sucessfully logged in!");
+//         }
+//         else {
+//             alert("Log in failed, try again.");
+//             location.reload;
+//         }
+//     });
+// });
+
+$(document).ready( function() {
+    
+    var firebaseConfig = {
+    apiKey: "AIzaSyAn4mnjUdV95nmOJ_7C6HnORmMhUFw27xM",
+    authDomain: "vinylbase-7fe10.firebaseapp.com",
+    databaseURL: "https://vinylbase-7fe10.firebaseio.com",
+    projectId: "vinylbase-7fe10",
+    storageBucket: "vinylbase-7fe10.appspot.com",
+    messagingSenderId: "928999002977",
+    appId: "1:928999002977:web:477940107bc0169196eb20",
+    measurementId: "G-NZBN9PVLQX"
+};
+// Initialize Firebase
+if (firebase) {
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    //alert("Firebase loaded");
+}
+
+
+  });
+
+$(document).ready(function() {
+    $("#login").submit(function() {
+        var email = $("#Logemail").val().trim();
+        var password = $("#Logpword").val().trim();
+        
+        firebase.auth().signInWithEmailAndPassword(email,password)
+        .then((user)=> {
+            alert("signed In");
+            //location.hash ="#homePage";
+            // $(":mobile-pagecontainer").pagecontainer("change", "#homePage");
+            $.mobile.changePage($("#homePage"));
+            //$.mobile.pageContainer.pagecontainer("change", "#homePage");
+        })
+        .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            alert(errorMessage);
+        })
+    })
+})
 
 $(document).ready(function(){
 	$('#nav-icon1,#nav-icon2,#nav-icon3,#nav-icon4').click(function(){
@@ -80,6 +180,7 @@ $(document).ready(
     });
   }  
 );
+
 
 // REFERENCE
 // https://stackoverflow.com/questions/10335563/capturing-and-storing-a-picture-taken-with-the-camera-into-a-local-database-ph
@@ -167,6 +268,7 @@ function resOnError(error) {
     console.log("failed");
 }
 
+/*
 async function googleVision() {
     const vision = require('@google-cloud/vision');
     // Creates a client
@@ -195,5 +297,102 @@ async function googleVision() {
     }
 }
 googleVision();
+*/
 
 
+//this code will only run when the homePage is being loaded it still needs an if, so it doesnt regrab albums every time
+// $(document).on("pagebeforeshow", "#homePage", function() {
+//     alert('This page was just hidden: ');
+//         firebase.auth().onAuthStateChanged((user) => {
+//             if (user) {
+//               // User is signed in, see docs for a list of available properties
+//               // https://firebase.google.com/docs/reference/js/firebase.User
+//               var uid = user.uid;
+//               //alert("loaded user" + uid);
+//               var platlistsRef = db.collection("Playlist");
+//               var query = platlistsRef.where("UserID", "==", uid);
+//               alert(query)
+//               // ...
+//             } else {
+//               // User is signed out
+//               // ...
+//             }
+            
+//           });
+// });
+$(window).on("navigate", function (event, data) {
+    direction = data.state.direction;
+    //event.preventDefault();
+    if (direction == "back") {
+        
+        backButton = true;
+        
+    }
+    //console.log(backButton, direction);
+});      
+
+var backButton = false;
+$(document).on("pageshow","#albumPage", function(e, data) {
+    // varaible to check if page was reached by back button
+    
+    
+    var name = window.localStorage.getItem("name");
+    
+    //console.log(backButton);
+    // if not reached by back button clear data
+    if (!backButton) {
+        var id = $(".tester")
+        if (id != undefined) {
+            id.remove();
+        }
+        var songResults = $("#SongResults");
+        songResults.empty();
+        $("#albumTitle").text(name);
+    }
+    //grab data being sent from previous page
+    var uid = window.localStorage.getItem("uid");
+    //window.localStorage.removeItem("uid");
+    var isPlaylist = window.localStorage.getItem("isPlaylist");
+    
+    if (isPlaylist == "true") {
+        $("#addtoPlaylist").show();
+        $("#songDeleteDiv").show();
+        userPlaylists.forEach((playlist) => {
+            if (playlist.id == uid) {
+                loadSongs(playlist.data().Songs);
+            }
+        });
+            
+    }
+    else { //album
+        $("#addtoPlaylist").hide();
+        $("#songDeleteDiv").hide();
+        userAlbums.forEach((album)=> {
+            
+            if (album.id == uid) {
+                loadSongs(album.data().Songs);
+            }
+        });
+    }
+    //var query = $(this).data("url");
+    //console.log(test);
+    // query = query.replace("id=","");
+    //var query = $.urlParam('id');
+
+    //creating elemt with the id for testing
+    var p = document.createElement("p");
+    p.className = "tester";
+    p.innerHTML = uid;
+    document.getElementById("test2").appendChild(p);
+    //alert(test);
+});
+
+$(document).on("pagehide", "#albumPage", function() {
+    var id = document.getElementById("tester");
+    //id.remove();
+    window.localStorage.removeItem("uid");
+    window.localStorage.removeItem("name");
+    window.localStorage.removeItem("isPlaylist");
+    backButton = false;
+    //alert("removed item");
+})
