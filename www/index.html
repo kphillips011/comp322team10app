@@ -76,6 +76,7 @@
     <script src="js/index.js"></script>
     <script src="js/accountFunctions.js"></script>
     <script src="js/albumPage.js"></script>
+    <script src="js/results.js"></script>
     
     
     <script>
@@ -335,15 +336,15 @@
 
     <div role="content" class="ui-content">
         <h1 class="title">Search Results Page</h1>
-        <div class="results">
-            <div class="result-container">
+        <div class="results" id="resultsList">
+            <div class="result-container" onclick="resultsPopup();" resulttitle='Album' uid="xaqews31Ags" isplaylist="false">
                 <div id="result">
                     <div id="result-photo">
                         <p>Photo</p>
                     </div>
                     <div id="result-text">
                         <div id="result-title">
-                            <p>artist, album, or song title</p>
+                            <p>album</p>
                         </div>
                         <div id="result-title-info">
                             <p>Type 💠 Artist</p>
@@ -393,6 +394,20 @@
         <a href="#artistResultsPage" class="button">Tap on artist</a>
         <a href="#homePage" class="button">Go home</a>
         <a href="#searchPage" class="button">Go to search</a>
+
+        <div id="resultpopupContainer" class="ui-popup-container">
+            <div data-role="popup" id="resultOptionsPopup" data-theme="a" class="ui-corner-all ui-popup ui-overlay-shadow ui-body-a">
+                <div style="padding: 10px 20px;">
+                    <h3 id="resultsOptionsTitle"></h3>
+                    <div class="ui-grid-solo">
+                        <button type="button" data-theme="a" id="viewResults">View</button>
+                    </div>
+                    <div class="ui-grid-solo">
+                        <button type="button" data-theme="a" id="playResultInSpotify">Play In Spotify</button>
+                    </div>        
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
