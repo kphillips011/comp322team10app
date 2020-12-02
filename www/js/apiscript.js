@@ -8,11 +8,29 @@
 //     $(".name").attr("src, name");
 // });
 
-const api_url = "https://api.discogs.com/database/search?q={query}&{?title,release_title,artist}&per_page=100";
-async function getAlbum() {
-    const response = await fetch(api_url);
-    const data = await resonse.json();
-    console.log(data);
-}
+// const api_url = "https://api.discogs.com/database/search?q={query}&{?title,release_title,artist}&per_page=100";
 
-getAlbum();
+/*
+Needed information:
+
+User-Agent: "Comp322Project/1.0 +https://github.com/kphillips011/comp322team10app"
+
+Authorization: "Discogs key=JzKHUoDrREtQgpMdkEdu, secret=gQCBQrBCupEnpDwdAmLkxlJhOGZiwidY"
+
+Paginatation uri = &per_page=100
+*/
+
+var myHeaders = new Headers();
+myHeaders.append("User-Agent", " Comp322Project/1.0 +https://github.com/kphillips011/comp322team10app");
+myHeaders.append("Authorization", "Discogs key=JzKHUoDrREtQgpMdkEdu, secret=gQCBQrBCupEnpDwdAmLkxlJhOGZiwidY");
+
+var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+};
+
+fetch("https://api.discogs.com/database/search?q=Nirvana", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
