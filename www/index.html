@@ -73,6 +73,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-analytics.js"></script>
     <script defer src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
     <script defer src="https://www.gstatic.com/firebasejs/8.1.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-storage.js"></script>
     <script src="js/index.js"></script>
     <script src="js/accountFunctions.js"></script>
     <script src="js/albumPage.js"></script>
@@ -529,9 +530,10 @@
     <div role="content" class="ui-content">
         <!-- This part of the application essentially is what will show when the user selects an album -->
         <h1 class="title" id="albumTitle">album Results Page</h1>
-        <div class="album-photo" id="test2"
+        <H2 class="title" id="albumId"></H2>
+        <div class="album-photo" id="albumImageContainer"
             style="height: 50vw; width: 50vw; border: black 1px solid; margin: auto;">
-            <p>Photo</p>
+            <!-- <p>Photo</p> -->
         </div>
         <div class="results" id="SongResults">
             <div class="result-container">
