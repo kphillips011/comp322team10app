@@ -30,7 +30,7 @@ var requestOptions = {
     redirect: 'follow'
 };
 
-fetch("https://api.discogs.com/database/search?q=Nirvana", requestOptions)
+fetch("https://api.discogs.com/database/search?title=nirvana - nevermind&per_page=100", requestOptions)
     .then(response => response.text())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
