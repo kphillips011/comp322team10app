@@ -27,7 +27,9 @@
         "PHOTOLIBRARY_USAGE_DESCRIPTION": "This app needs read/write-access photo library access"
       },
       "cordova-plugin-file": {},
-      "cordova-plugin-camera": {}
+      "cordova-plugin-camera": {
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      }
     },
     "platforms": [
       "android",
@@ -35,6 +37,7 @@
     ]
   },
   "dependencies": {
+    "@google-cloud/vision": "^2.1.2",
     "cordova-ios": "6.1.1"
   }
 }

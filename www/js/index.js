@@ -69,7 +69,7 @@ $(document).ready(
         // navigator.camera.getPicture(onSuccess, onFail, { quality: 20,
         //     destinationType: Camera.DestinationType.FILE_URL
         navigator.camera.getPicture(onPhotoDataSuccess, onFail, { 
-            quality: 50,
+            quality: 100,
             allowEdit: false,
             encodingType: Camera.EncodingType.JPG,
             correctOrientation: true,
@@ -171,7 +171,8 @@ async function googleVision() {
     const vision = require('@google-cloud/vision');
     // Creates a client
     const client = new vision.ImageAnnotatorClient();
-    const fileName = 'example5.jpg';
+    //const fileName = 'example5.jpg';
+    const fileName = scannedImage.src;
 
     // Detect similar images on the web to a local file
     const [result] = await client.webDetection(fileName);
