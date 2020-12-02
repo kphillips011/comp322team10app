@@ -167,6 +167,7 @@ function resOnError(error) {
     console.log("failed");
 }
 
+/*
 async function googleVision() {
     const vision = require('@google-cloud/vision');
     // Creates a client
@@ -194,5 +195,5 @@ async function googleVision() {
     }
 }
 googleVision();
-
+*/
 
