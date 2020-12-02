@@ -165,51 +165,19 @@ function populateAlbumInfo(data) {
 $(document).ready(
   function() {
     $("#scanready").on("click", function() {
-        //scan.scanDoc(successCallback, errorCallback, {sourceType : 1, fileName : 'image', quality : 1.0, returnBase64 : false});
-        // navigator.camera.getPicture(onSuccess, onFail, { quality: 20,
-        //     destinationType: Camera.DestinationType.FILE_URL
+        console.log('taking picture');
         navigator.camera.getPicture(onPhotoDataSuccess, onFail, { 
             quality: 100,
-            allowEdit: false,
-            encodingType: Camera.EncodingType.JPG,
-            correctOrientation: true,
-            sourceType: navigator.camera.PictureSourceType.CAMERA,
             targetWidth: 600,
-            targetHeight: 600 
+            targetHeight: 600,
+            allowEdit: false,
+            sourceType: navigator.camera.PictureSourceType.CAMERA,
+            encodingType: Camera.EncodingType.JPG,
+            correctOrientation: true
         });
     });
   }  
 );
-
-
-// REFERENCE
-// https://stackoverflow.com/questions/10335563/capturing-and-storing-a-picture-taken-with-the-camera-into-a-local-database-ph
-
-// function onSuccess(imageData) {
-//     alert('Image successfully scanned');
-//     var image = document.getElementById('img');
-//     image.src = imageData + '?' + Math.random();;
-// }
-
-// function successCallback(imageData) {
-
-//     alert(imageData)
-//     //console.log(imageData);
-//     //var scannedImage = document.getElementById('scannedImage');
-//     //scannedImage.src = imageData;
-//     //var image = $("#image")
-//     //image.src = imageData;
-//     //window.localStorage.setItem("scannedImage", image);
-//     //var image = document.getElementById('image')
-//     //var divImage = $("#image");
-//     //var image = $("#img")
-//     //var im = new image();
-//     //im.src = imageData;
-// }
-
-// function errorCallback(message) {
-//     alert('Failed because: ' + message);
-// }
 
 //Callback function when the picture has been successfully taken
 function onPhotoDataSuccess(imageData) {                
