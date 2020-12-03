@@ -195,28 +195,27 @@ p   {
   border: grey 1px solid;
 }
 
-.imagebutton {
+.loginbutton {
   /* makes transparent image background for buttons */
   /* mix-blend-mode: multiply; */
 
   /* to center image on page */
   display: inline-block;
-  background:transparent url("img/scan.png");
+  background:url(img/login.png) transparent;
   text-align: center;
   text-decoration: none;
-  margin-top: auto;
-  margin-bottom: auto;
   margin-left: auto;
   margin-right: auto;
   width: auto;
   height: auto;
+  border: none;
 
   /* padding */
-  padding-top: 100px;
-  padding-right: 50px;
-  padding-bottom: 100px;
-  padding-left: 50px; 
-}
+  padding-top: 10px;
+  padding-right: 5px;
+  padding-bottom: 10px;
+  padding-left: 5px; 
+} 
 
 #scanready {
   /* makes transparent image background for buttons */
@@ -323,4 +322,12 @@ p   {
 .my-breakpoint .ui-block-a {width: 10%;} 
 .my-breakpoint .ui-block-b {width: 80%;}
 .my-breakpoint .ui-block-c {width: 10%;}
+
+#result-photo > img, .album-photo > img {
+  height: 100%;
+  box-sizing: border-box;
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+}
 

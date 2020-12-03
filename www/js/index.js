@@ -316,31 +316,72 @@ $(document).on("pageshow","#albumPage", function(e, data) {
         var songResults = $("#SongResults");
         songResults.empty();
         $("#albumTitle").text(name);
+        if($('#albumImageContainer').has("img")) {
+            $('#albumImageContainer').empty();
+        }
     }
     //grab data being sent from previous page
     var uid = window.localStorage.getItem("uid");
     //window.localStorage.removeItem("uid");
     var isPlaylist = window.localStorage.getItem("isPlaylist");
+    var isResult = window.localStorage.getItem("isresult");
     
     if (isPlaylist == "true") {
         $("#addtoPlaylist").show();
         $("#songDeleteDiv").show();
+        if (isResult == "true") {
+            playlists.forEach((playlist) => {
+                if (playlist.id == uid) {
+                    loadSongs(playlist.data().Songs);
+                    if("Image" in playlist.data()) {
+                        
+                        loadImage(playlist.data().Image);
+                    }
+                }
+            });
+        } else {
         userPlaylists.forEach((playlist) => {
             if (playlist.id == uid) {
                 loadSongs(playlist.data().Songs);
+                if("Image" in playlist.data()) {
+                        
+                    loadImage(playlist.data().Image);
+                }
+                // if("Image" in playlist.data()) {
+                //     console.log();
+                //     loadImage(playlist.data().Image);
+                // }
             }
         });
+        }
             
     }
     else { //album
         $("#addtoPlaylist").hide();
         $("#songDeleteDiv").hide();
-        userAlbums.forEach((album)=> {
+        if (isResult == "true") {
+            albums.forEach((album)=> {
+                if (album.id == uid) {
+                    loadSongs(album.data().Songs);
+                    if("Image" in album.data()) {
+                        
+                        loadImage(album.data().Image);
+                    }
+                }
+            })
+        } else {
+            userAlbums.forEach((album)=> {
             
-            if (album.id == uid) {
-                loadSongs(album.data().Songs);
-            }
-        });
+                if (album.id == uid) {
+                    loadSongs(album.data().Songs);
+                    if("Image" in album.data()) {
+                        
+                        loadImage(album.data().Image);
+                        
+                    }
+                }
+            });
+        }
     }
     //var query = $(this).data("url");
     //console.log(test);
@@ -348,10 +389,11 @@ $(document).on("pageshow","#albumPage", function(e, data) {
     //var query = $.urlParam('id');
 
     //creating elemt with the id for testing
-    var p = document.createElement("p");
-    p.className = "tester";
-    p.innerHTML = uid;
-    document.getElementById("test2").appendChild(p);
+    // var p = document.createElement("p");
+    // p.className = "tester";
+    // p.innerHTML = uid;
+    // document.getElementById("albumId")
+    $("#albumId").text(uid);
     //alert(test);
 });
 

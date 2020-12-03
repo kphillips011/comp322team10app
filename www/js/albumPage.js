@@ -23,11 +23,11 @@ function createSongHtml(song) {
     
     
     //image will be added later 
-    var resultPhoto = document.createElement("div");
-    resultPhoto.id = "result-photo";
+    // var resultPhoto = document.createElement("div");
+    // resultPhoto.id = "result-photo";
 
-    var photo = document.createElement("p");
-    photo.innerHTML = "Photo";
+    // var photo = document.createElement("p");
+    // photo.innerHTML = "Photo";
 
     var resultText = document.createElement("div");
     resultText.id = "result-text";
@@ -45,12 +45,12 @@ function createSongHtml(song) {
     info.innerHTML = song.Artist;
 
     //combine elements together
-    resultPhoto.appendChild(photo);
+    // resultPhoto.appendChild(photo);
     resultTitle.appendChild(title);
     infoDiv.appendChild(info);
     resultText.appendChild(resultTitle);
     resultText.appendChild(infoDiv);
-    result.appendChild(resultPhoto);
+    // result.appendChild(resultPhoto);
     result.appendChild(resultText);
     resultContainer.appendChild(result);
 
@@ -147,3 +147,23 @@ $(document).ready(function() {
         $("#songOptionsPopup").popup("close");
     });
 });
+
+function loadImage(img) {
+    var storage = firebase.storage();
+    var storageRef = storage.ref();
+    var albumArtRef = storageRef.child('albumArt');
+    var imageRef = albumArtRef.child(img);
+
+    var image = document.createElement("img");
+    
+
+    imageRef.getDownloadURL().then(function(url) {
+       image.src = url;
+       $("#albumImageContainer").append(image);
+       
+       
+    }).catch(function(error) {
+        console.log(error);
+    });
+
+}
