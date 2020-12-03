@@ -182,12 +182,14 @@ $(document).ready(
 //Callback function when the picture has been successfully taken
 function onPhotoDataSuccess(imageData) {                
     alert(imageData);
+    googleVision(imageData);
     // Get image handle
     var scannedImage = document.getElementById('scannedImage');
 
     // Unhide image elements
     scannedImage.style.display = 'block';
     scannedImage.src = imageData;
+    //movePic(imageData);
 }
 
 //Callback function when the picture has not been successfully taken
@@ -196,29 +198,32 @@ function onFail(message) {
 }
 
 function movePic(imageData){ 
-    console.log("move pic");
-    console.log(imageData);
+    alert("move pic");
+    alert(imageData);
     window.resolveLocalFileSystemURL(imageData, resolveOnSuccess, resOnError);
 }
 
 //Callback function when the file system uri has been resolved
 function resolveOnSuccess(entry){ 
-    console.log("resolvetosuccess");
+    alert("resolvetosuccess");
 
         //new file name
-        var newFileName = itemID + ".jpg";
+        var newFileName = entry + ".jpg";
+        alert(newFileName);
         var myFolderApp = "ImgFolder";
 
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSys) {
-            console.log("folder create");
+            alert("folder create");
+
+            googleVision(newFileName);
 
             //The folder is created if doesn't exist
             fileSys.root.getDirectory( myFolderApp,
                 {create:true, exclusive: false},
                 function(directory) {
-                    console.log("move to file..");
-                    entry.moveTo(directory, newFileName,  successMove, resOnError);
-                    console.log("release");
+                    alert("move to file..");
+                    entry.movePic(directory, newFileName, successMove(newFileName), resOnError);
+                    alert("release");
 
                 },
                 resOnError);
@@ -228,44 +233,52 @@ function resolveOnSuccess(entry){
 
 //Callback function when the file has been moved successfully - inserting the complete path
 function successMove(entry) {
-    console.log("success");
-    console.log(entry);
+    alert("success");
+    alert(entry);
+    //googleVision(entry);
 }
 
 function resOnError(error) {
-    console.log("failed");
+    alert("failed");
 }
 
-/*
-async function googleVision() {
+async function googleVision(file) {
+    alert("entered GV function");
     const vision = require('@google-cloud/vision');
+
+    alert('GV initalized vision');
     // Creates a client
     const client = new vision.ImageAnnotatorClient();
+
+    alert('GV created client');
+
     //const fileName = 'example5.jpg';
-    const fileName = scannedImage.src;
+    const fileName = file;
+
+    alert('GV saved file name');
 
     // Detect similar images on the web to a local file
     const [result] = await client.webDetection(fileName);
     const webDetection = result.webDetection;
 
+    alert('GV detected web entities');
+
     if (webDetection.webEntities.length) {
-        console.log(`Web entities found: ${webDetection.webEntities.length}`);
+        alert(`Web entities found: ${webDetection.webEntities.length}`);
         webDetection.webEntities.forEach(webEntity => {
-        console.log(`Description: ${webEntity.description}`); 
+        alert(`Description: ${webEntity.description}`); 
         });
     }
 
     if (webDetection.bestGuessLabels.length) {
-        console.log(
+        alert(
         `Best guess labels found: ${webDetection.bestGuessLabels.length}`
     );
         webDetection.bestGuessLabels.forEach(label => {
-        console.log(`  Label: ${label.label}`);
+        alert(`  Label: ${label.label}`);
         });
     }
 }
-googleVision();
-*/
 
 
 //this code will only run when the homePage is being loaded it still needs an if, so it doesnt regrab albums every time
