@@ -104,7 +104,6 @@ $(document).on("pageshow", "#homePage", function () {
     firebase.auth().onAuthStateChanged(function(user) {
         if (userPlaylists == undefined) {
             //var user = firebase.auth().currentUser;
-    
             var query = userPlaylistsQuery(user.uid);
             //alert(uid);
             //alert(userPlaylists);

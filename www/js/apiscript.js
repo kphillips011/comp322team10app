@@ -1,7 +1,7 @@
 var request = new XMLHttpRequest()
 
 function program(page) {
-    console.log("PENIS")
+    
 
     // Get the input from the search bar
     let input = document.getElementById('searchBar').value
@@ -31,7 +31,6 @@ function program(page) {
 
         // Creates  content from the response
         results.forEach(element => {
-
             // Create HTML if the data type is not a label
             if (element.type !== "label") {
                 // Build the elements
