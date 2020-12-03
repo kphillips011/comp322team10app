@@ -23,15 +23,15 @@ document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady() {
     // Cordova is now initialized. Have fun!
-    
+
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
     document.getElementById('deviceready').classList.add('ready');
-    
-    
+
+
 }
 
 // $(document).ready(function() {
-    
+
 //     var firebaseConfig = {
 //         apiKey: "AIzaSyAn4mnjUdV95nmOJ_7C6HnORmMhUFw27xM",
 //         authDomain: "vinylbase-7fe10.firebaseapp.com",
@@ -56,7 +56,7 @@ function onDeviceReady() {
 //             window.localStorage.setItem("key3", $("#email").val().trim())
 //             var email = $("#email").val().trim();
 //             var password = $("#Pword").val().trim();
-            
+
 //             firebase.auth().createUserWithEmailAndPassword(email, password)
 //             .then((user) => {
 //                 alert("Sign Up sucessful.")
@@ -66,22 +66,22 @@ function onDeviceReady() {
 //                 var errorMessage = error.message;
 //                 alert(errorMessage);
 //             })
-            
+
 //         }
 //         else {
 //             alert("Passowrds dont match");
 //         }
 //     });
 // });
-$(document).ready(function() {
-    $("#Signup").submit(function() {
+$(document).ready(function () {
+    $("#Signup").submit(function () {
         var email = $("#email").val().trim();
         var password = $("#Pword").val().trim();
         var confrimPassword = $("#confirmpassword").val().trim();
         if (password === confrimPassword) {
-            
-                
-                firebase.auth().createUserWithEmailAndPassword(email, password)
+
+
+            firebase.auth().createUserWithEmailAndPassword(email, password)
                 .then((user) => {
                     alert("Sign Up sucessful.")
                 })
@@ -110,79 +110,85 @@ $(document).ready(function() {
 //     });
 // });
 
-$(document).ready( function() {
-    
+$(document).ready(function () {
+
     var firebaseConfig = {
-    apiKey: "AIzaSyAn4mnjUdV95nmOJ_7C6HnORmMhUFw27xM",
-    authDomain: "vinylbase-7fe10.firebaseapp.com",
-    databaseURL: "https://vinylbase-7fe10.firebaseio.com",
-    projectId: "vinylbase-7fe10",
-    storageBucket: "vinylbase-7fe10.appspot.com",
-    messagingSenderId: "928999002977",
-    appId: "1:928999002977:web:477940107bc0169196eb20",
-    measurementId: "G-NZBN9PVLQX"
-};
-// Initialize Firebase
-if (firebase) {
-    firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
-    //alert("Firebase loaded");
-}
+        apiKey: "AIzaSyAn4mnjUdV95nmOJ_7C6HnORmMhUFw27xM",
+        authDomain: "vinylbase-7fe10.firebaseapp.com",
+        databaseURL: "https://vinylbase-7fe10.firebaseio.com",
+        projectId: "vinylbase-7fe10",
+        storageBucket: "vinylbase-7fe10.appspot.com",
+        messagingSenderId: "928999002977",
+        appId: "1:928999002977:web:477940107bc0169196eb20",
+        measurementId: "G-NZBN9PVLQX"
+    };
+    // Initialize Firebase
+    if (firebase) {
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+        //alert("Firebase loaded");
+    }
 
 
-  });
+});
 
-$(document).ready(function() {
-    $("#login").submit(function() {
+$(document).ready(function () {
+    $("#login").submit(function () {
         var email = $("#Logemail").val().trim();
         var password = $("#Logpword").val().trim();
-        
-        firebase.auth().signInWithEmailAndPassword(email,password)
-        .then((user)=> {
-            alert("signed In");
-            //location.hash ="#homePage";
-            // $(":mobile-pagecontainer").pagecontainer("change", "#homePage");
-            $.mobile.changePage($("#homePage"));
-            //$.mobile.pageContainer.pagecontainer("change", "#homePage");
-        })
-        .catch((error) => {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            alert(errorMessage);
-        })
+
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then((user) => {
+                alert("signed In");
+                //location.hash ="#homePage";
+                // $(":mobile-pagecontainer").pagecontainer("change", "#homePage");
+                $.mobile.changePage($("#homePage"));
+                //$.mobile.pageContainer.pagecontainer("change", "#homePage");
+            })
+            .catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                alert(errorMessage);
+            })
     })
 })
 
-$(document).ready(function(){
-	$('#nav-icon1,#nav-icon2,#nav-icon3,#nav-icon4').click(function(){
-		$(this).toggleClass('open');
-	});
+$(document).ready(function () {
+    $('#nav-icon1,#nav-icon2,#nav-icon3,#nav-icon4').click(function () {
+        $(this).toggleClass('open');
+    });
 });
 
 function populateAlbumInfo(data) {
     var data = JSON.parse(data);
 }
 $(document).ready(
-  function() {
-    $("#scanready").on("click", function() {
-        console.log('taking picture');
-        navigator.camera.getPicture(onPhotoDataSuccess, onFail, { 
-            quality: 100,
-            targetWidth: 600,
-            targetHeight: 600,
-            allowEdit: false,
-            sourceType: navigator.camera.PictureSourceType.CAMERA,
-            encodingType: Camera.EncodingType.JPG,
-            correctOrientation: true
+    function () {
+        $("#scanready").on("click", function () {
+            console.log('taking picture');
+            navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
+                quality: 100,
+                targetWidth: 600,
+                targetHeight: 600,
+                allowEdit: false,
+                sourceType: navigator.camera.PictureSourceType.CAMERA,
+                encodingType: Camera.EncodingType.JPG,
+                correctOrientation: true
+            });
         });
-    });
-  }  
+    }
 );
 
 //Callback function when the picture has been successfully taken
-function onPhotoDataSuccess(imageData) {                
+function onPhotoDataSuccess(imageData) {
     alert(imageData);
+    //encodedImage = encode(imageData);
+    //alert('image succcessfully encoded');
+    uploadToDB(imageData);
+    alert('uploaded to database');
+
     googleVision(imageData);
+
     // Get image handle
     var scannedImage = document.getElementById('scannedImage');
 
@@ -192,47 +198,112 @@ function onPhotoDataSuccess(imageData) {
     //movePic(imageData);
 }
 
+function uploadToDB(image) {
+    var storage = firebase.storage();
+    var storageRef = storage.ref();
+    var scannedImages = storageRef.child('scannedImages');
+
+    var metadata = {
+        contentType: 'image/jpg'
+    }
+
+    // Upload file and metadata to the object 'images/mountains.jpg'
+    alert('entering uploading to database function');
+    var uploadTask = scannedImages.child('picture').put(image, metadata);
+    alert('put image');
+
+    // Listen for state changes, errors, and completion of the upload.
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+        function (snapshot) {
+            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            alert('Upload is ' + progress + '% done');
+            switch (snapshot.state) {
+                case firebase.storage.TaskState.PAUSED: // or 'paused'
+                    alert('Upload is paused');
+                    break;
+                case firebase.storage.TaskState.RUNNING: // or 'running'
+                    alert('Upload is running');
+                    break;
+            }
+        }, function (error) {
+
+            // A full list of error codes is available at
+            // https://firebase.google.com/docs/storage/web/handle-errors
+            switch (error.code) {
+                case 'storage/unauthorized':
+                    alert('storage/unauthorized');
+                    // User doesn't have permission to access the object
+                    break;
+
+                case 'storage/canceled':
+                    alert('storage/canceled');
+                    // User canceled the upload
+                    break;
+
+                case 'storage/unknown':
+                    alert('storage/unknown');
+                    // Unknown error occurred, inspect error.serverResponse
+                    break;
+            }
+        })
+}
+
+function encode(imagePath) {
+    alert('entered encoding');
+    //var selectedFile = imagePath.files();
+    //var imageFile = selectedFile[0];
+    var fileReader = new FileReader();
+    fileReader.onload = function (fileLoadedEvent) {
+        var srcData = fileLoadedEvent.target.result;
+        return srcData;
+    }
+    alert('endcoded');
+    fileReader.readAsDataURL(imageFile);
+    alert('fildreader read wooo');
+}
+
 //Callback function when the picture has not been successfully taken
 function onFail(message) {
     alert('Failed to load picture because: ' + message);
 }
 
-function movePic(imageData){ 
+function movePic(imageData) {
     alert("move pic");
     alert(imageData);
     window.resolveLocalFileSystemURL(imageData, resolveOnSuccess, resOnError);
 }
 
 //Callback function when the file system uri has been resolved
-function resolveOnSuccess(entry){ 
+function resolveOnSuccess(entry) {
     alert("resolvetosuccess");
 
-        //new file name
-        var newFileName = entry + ".jpg";
-        alert(newFileName);
-        var myFolderApp = "ImgFolder";
+    //new file name
+    var newFileName = entry + ".jpg";
+    alert(newFileName);
+    var myFolderApp = "ImgFolder";
 
-        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSys) {
-            alert("folder create");
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fileSys) {
+        alert("folder create");
 
-            googleVision(newFileName);
+        googleVision(newFileName);
 
-            //The folder is created if doesn't exist
-            fileSys.root.getDirectory( myFolderApp,
-                {create:true, exclusive: false},
-                function(directory) {
-                    alert("move to file..");
-                    entry.movePic(directory, newFileName, successMove(newFileName), resOnError);
-                    alert("release");
+        //The folder is created if doesn't exist
+        fileSys.root.getDirectory(myFolderApp,
+            { create: true, exclusive: false },
+            function (directory) {
+                alert("move to file..");
+                entry.movePic(directory, newFileName, successMove(), resOnError);
+                alert("release");
 
-                },
-                resOnError);
-        },
+            },
+            resOnError);
+    },
         resOnError);
 }
 
 //Callback function when the file has been moved successfully - inserting the complete path
-function successMove(entry) {
+function successMove() {
     alert("success");
     alert(entry);
     //googleVision(entry);
@@ -243,10 +314,11 @@ function resOnError(error) {
 }
 
 async function googleVision(file) {
-    alert("entered GV function");
-    const vision = require('@google-cloud/vision');
+    alert('entered GV function');
+    const vision = import('@google-cloud/vision');
 
     alert('GV initalized vision');
+
     // Creates a client
     const client = new vision.ImageAnnotatorClient();
 
@@ -266,16 +338,16 @@ async function googleVision(file) {
     if (webDetection.webEntities.length) {
         alert(`Web entities found: ${webDetection.webEntities.length}`);
         webDetection.webEntities.forEach(webEntity => {
-        alert(`Description: ${webEntity.description}`); 
+            alert(`Description: ${webEntity.description}`);
         });
     }
 
     if (webDetection.bestGuessLabels.length) {
         alert(
-        `Best guess labels found: ${webDetection.bestGuessLabels.length}`
-    );
+            `Best guess labels found: ${webDetection.bestGuessLabels.length}`
+        );
         webDetection.bestGuessLabels.forEach(label => {
-        alert(`  Label: ${label.label}`);
+            alert(`  Label: ${label.label}`);
         });
     }
 }
@@ -298,27 +370,27 @@ async function googleVision(file) {
 //               // User is signed out
 //               // ...
 //             }
-            
+
 //           });
 // });
 $(window).on("navigate", function (event, data) {
     direction = data.state.direction;
     //event.preventDefault();
     if (direction == "back") {
-        
+
         backButton = true;
-        
+
     }
     //console.log(backButton, direction);
-});      
+});
 
 var backButton = false;
-$(document).on("pageshow","#albumPage", function(e, data) {
+$(document).on("pageshow", "#albumPage", function (e, data) {
     // varaible to check if page was reached by back button
-    
-    
+
+
     var name = window.localStorage.getItem("name");
-    
+
     //console.log(backButton);
     // if not reached by back button clear data
     if (!backButton) {
@@ -329,7 +401,7 @@ $(document).on("pageshow","#albumPage", function(e, data) {
         var songResults = $("#SongResults");
         songResults.empty();
         $("#albumTitle").text(name);
-        if($('#albumImageContainer').has("img")) {
+        if ($('#albumImageContainer').has("img")) {
             $('#albumImageContainer').empty();
         }
     }
@@ -338,7 +410,7 @@ $(document).on("pageshow","#albumPage", function(e, data) {
     //window.localStorage.removeItem("uid");
     var isPlaylist = window.localStorage.getItem("isPlaylist");
     var isResult = window.localStorage.getItem("isresult");
-    
+
     if (isPlaylist == "true") {
         $("#addtoPlaylist").show();
         $("#songDeleteDiv").show();
@@ -346,51 +418,51 @@ $(document).on("pageshow","#albumPage", function(e, data) {
             playlists.forEach((playlist) => {
                 if (playlist.id == uid) {
                     loadSongs(playlist.data().Songs);
-                    if("Image" in playlist.data()) {
-                        
+                    if ("Image" in playlist.data()) {
+
                         loadImage(playlist.data().Image);
                     }
                 }
             });
         } else {
-        userPlaylists.forEach((playlist) => {
-            if (playlist.id == uid) {
-                loadSongs(playlist.data().Songs);
-                if("Image" in playlist.data()) {
-                        
-                    loadImage(playlist.data().Image);
+            userPlaylists.forEach((playlist) => {
+                if (playlist.id == uid) {
+                    loadSongs(playlist.data().Songs);
+                    if ("Image" in playlist.data()) {
+
+                        loadImage(playlist.data().Image);
+                    }
+                    // if("Image" in playlist.data()) {
+                    //     console.log();
+                    //     loadImage(playlist.data().Image);
+                    // }
                 }
-                // if("Image" in playlist.data()) {
-                //     console.log();
-                //     loadImage(playlist.data().Image);
-                // }
-            }
-        });
+            });
         }
-            
+
     }
     else { //album
         $("#addtoPlaylist").hide();
         $("#songDeleteDiv").hide();
         if (isResult == "true") {
-            albums.forEach((album)=> {
+            albums.forEach((album) => {
                 if (album.id == uid) {
                     loadSongs(album.data().Songs);
-                    if("Image" in album.data()) {
-                        
+                    if ("Image" in album.data()) {
+
                         loadImage(album.data().Image);
                     }
                 }
             })
         } else {
-            userAlbums.forEach((album)=> {
-            
+            userAlbums.forEach((album) => {
+
                 if (album.id == uid) {
                     loadSongs(album.data().Songs);
-                    if("Image" in album.data()) {
-                        
+                    if ("Image" in album.data()) {
+
                         loadImage(album.data().Image);
-                        
+
                     }
                 }
             });
@@ -410,7 +482,7 @@ $(document).on("pageshow","#albumPage", function(e, data) {
     //alert(test);
 });
 
-$(document).on("pagehide", "#albumPage", function() {
+$(document).on("pagehide", "#albumPage", function () {
     var id = document.getElementById("tester");
     //id.remove();
     window.localStorage.removeItem("uid");
