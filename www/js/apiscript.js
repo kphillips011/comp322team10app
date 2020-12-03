@@ -43,7 +43,6 @@ function program(page) {
 
                 const photoContainer = document.createElement("div")
                 photoContainer.setAttribute("id", "result-photo")
-                photoContainer.setAttribute("style", "height:auto; width:auto;")
 
                 const photo = document.createElement("img")
                 photo.setAttribute("src", element.thumb)

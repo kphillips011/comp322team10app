@@ -1,27 +1,10 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
 * {
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
 
-
 body {
+    height: 100%;
+    width: 100%;
     background-color:#9AC7BF ;
 }
 
@@ -42,14 +25,14 @@ body {
     justify-content: space-around;
     flex-wrap: nowrap;
 }
-#searchbar {
+
+#searchBar {
     width: auto;
     height: 45px;
     border-radius: 9px;
 }
 
-
-  #nav-icon3{
+#nav-icon3{
     width: 40px;
     height: 45px;
     position: relative;
@@ -63,9 +46,9 @@ body {
     -o-transition: .5s ease-in-out;
     transition: .5s ease-in-out;
     cursor: pointer;
-  }
+}
 
-  #nav-icon1 span, #nav-icon3 span, #nav-icon4 span {
+#nav-icon1 span, #nav-icon3 span, #nav-icon4 span {
     display: block;
     position: absolute;
     height: 9px;
@@ -82,48 +65,47 @@ body {
     -moz-transition: .25s ease-in-out;
     -o-transition: .25s ease-in-out;
     transition: .25s ease-in-out;
-  }
+}
 
-
-  #nav-icon3 span:nth-child(1) {
+#nav-icon3 span:nth-child(1) {
     top: 0px;
-  }
+}
 
-  #nav-icon3 span:nth-child(2),#nav-icon3 span:nth-child(3) {
+#nav-icon3 span:nth-child(2), #nav-icon3 span:nth-child(3) {
     top: 18px;
-  }
+}
 
-  #nav-icon3 span:nth-child(4) {
+#nav-icon3 span:nth-child(4) {
     top: 36px;
-  }
+}
 
-  #nav-icon3.open span:nth-child(1) {
+#nav-icon3.open span:nth-child(1) {
     top: 18px;
     width: 0%;
     left: 50%;
-  }
+}
 
-  #nav-icon3.open span:nth-child(2) {
+#nav-icon3.open span:nth-child(2) {
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
     -o-transform: rotate(45deg);
     transform: rotate(45deg);
-  }
+}
 
-  #nav-icon3.open span:nth-child(3) {
+#nav-icon3.open span:nth-child(3) {
     -webkit-transform: rotate(-45deg);
     -moz-transform: rotate(-45deg);
     -o-transform: rotate(-45deg);
     transform: rotate(-45deg);
-  }
+}
 
-  #nav-icon3.open span:nth-child(4) {
+#nav-icon3.open span:nth-child(4) {
     top: 18px;
     width: 0%;
     left: 50%;
-  }
+}
 
-  .ui-page-theme-a a:visited, .ui-page-theme-a  .button {
+.ui-page-theme-a a:visited, .ui-page-theme-a  .button {
     display: inline-block;
     outline: none;
     background-color: #FA6800;
@@ -135,40 +117,40 @@ body {
     border-radius: .3em;
     box-shadow: 0 1px 2px rgba(0,0,0,.2);
     color: black;
-  }
+}
 
-  .playlists-container{
+.playlists-container{
     background-color: whitesmoke;
     width:48%;
     height: 350px;
     margin-right:1%;
     float: left;
-  }
+}
 
-  .home-container{
+.home-container{
     margin-right:0%;
     margin-top:10%;
     margin-bottom:10%;
-  }
+}
 
-  .albums-container{
+.albums-container{
     background-color: lightgrey;
     width:48%;
     height: 200px;
     margin-right:1%;
     float: right;
-  }
+}
 
-  .albumpopup-container{
+.albumpopup-container{
     background-color: whitesmoke;
     width:48%;
     height: 150px;
     margin-right:1%;
     margin-top:0%;
     float: right;
-    }
+}
 
-  .textbutton{
+.textbutton{
     display: inline-block;
     outline: none;
     align-self: center;
@@ -180,13 +162,11 @@ body {
     padding: .5em 2em .55em;
     text-shadow: 0 1px 1px rgba(0,0,0,.3);
     border-radius: .3em;
-    }
+}
 
-  .clearfix{
+.clearfix{
     clear:both
-  }
-
-
+}
 
 /* Mainly for theme of the app will go here so all pages have same theme */
 #login_page, #signup_login, #homePage, #scanPage, #resultsPage, #searchPage, #settingsPage, #albumPage, #songResultsPage, #artistResultsPage   {
@@ -207,26 +187,16 @@ p   {
   text-align:center;
 }
 
-/* .results    {} */
-
 .result-container {
   border: black 1px solid;
   width: 100%;
-  height: 25vw;
+  height: auto;
   display: table;
   margin-top: 5vw;
   margin-bottom: 5vw;
 }
 
-#result {
-  display: table-cell;
-  vertical-align: middle;
-}
-
 #result-photo   {
-  border: blue 1px solid;
-  width: 20vw;
-  height: 20vw;
   display: inline-block;
 }
 
@@ -239,17 +209,21 @@ p   {
 
 #result-alublm   {
   width: 100%;
-  height: 50%;
+  height: auto;
   font-weight: 700;
+  font-size: medium;
+  vertical-align: bottom;
+  text-align: center;
+  font-style: italic;
 }
 
 #result-artist  {
   width: 100%;
-  height: 50%;
+  height: auto;
   text-align: center;
   font-weight: 900;
   font-size: large;
-  vertical-align: middle;
+  vertical-align: top;
 }
 
 .imagebutton {
