@@ -43,9 +43,11 @@ function program(page) {
 
                 const photoContainer = document.createElement("div")
                 photoContainer.setAttribute("id", "result-photo")
+                photoContainer.setAttribute("style", "height:auto; width:auto;")
 
                 const photo = document.createElement("img")
                 photo.setAttribute("src", element.thumb)
+                photo.setAttribute("style", "display: block; margin-left: auto; margin-right: auto; ")
 
                 const text = document.createElement("div")
                 text.setAttribute("id", "result-text")
@@ -54,24 +56,24 @@ function program(page) {
                 if (element.type !== "artist") {
                     var splitHere = element.title.indexOf(" - ")
 
-                    const title = document.createElement("div")
-                    title.setAttribute("id", "result-title")
-                    title.textContent = element.title.slice(splitHere + 3)
+                    const alublm = document.createElement("div")
+                    alublm.setAttribute("id", "result-alublm")
+                    alublm.textContent = element.title.slice(splitHere + 3)
 
                     const artist = document.createElement("div")
-                    artist.setAttribute("id", "result-title-info")
+                    artist.setAttribute("id", "result-artist")
                     artist.textContent = element.title.slice(0, splitHere)
 
                     text.appendChild(artist)
-                    text.appendChild(title)
+                    text.appendChild(alublm)
                 }
+                // Create elements for artists
                 else {
-                    // Sets the artist tag
-                    const title = document.createElement("div")
-                    title.setAttribute("id", "result-title")
-                    title.textContent = element.title
+                    const artist = document.createElement("div")
+                    artist.setAttribute("id", "result-artist")
+                    artist.textContent = element.title
 
-                    text.appendChild(title)
+                    text.appendChild(artist)
                 }
 
                 photoContainer.appendChild(photo)

@@ -232,18 +232,24 @@ p   {
 
 #result-text    {
   float: right;
+  width: 50%;
+  height: 100%;
+  vertical-align: middle;
 }
 
-#result-title   {
-  width: 70vw;
-  height: 10vw;
-  border: red 1px solid;
+#result-alublm   {
+  width: 100%;
+  height: 50%;
+  font-weight: 700;
 }
 
-#result-title-info  {
-  width: 70vw;
-  height: 10vw;
-  border: grey 1px solid;
+#result-artist  {
+  width: 100%;
+  height: 50%;
+  text-align: center;
+  font-weight: 900;
+  font-size: large;
+  vertical-align: middle;
 }
 
 .imagebutton {
