@@ -101,6 +101,7 @@ $(document).on("pageshow", "#homePage", function () {
     //console.log(userPlaylists);
     //alert("loading home");
     //var uid = window.localStorage.getItem("userID");
+    //uploadImage();
     firebase.auth().onAuthStateChanged(function(user) {
         if (userPlaylists == undefined) {
             //var user = firebase.auth().currentUser;

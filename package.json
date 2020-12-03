@@ -35,6 +35,7 @@
     ]
   },
   "dependencies": {
-    "cordova-ios": "6.1.1"
+    "cordova-ios": "6.1.1",
+    "fs": "0.0.1-security"
   }
 }

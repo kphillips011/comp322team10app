@@ -175,8 +175,10 @@ $(document).ready(
             correctOrientation: true,
             sourceType: navigator.camera.PictureSourceType.CAMERA,
             targetWidth: 600,
-            targetHeight: 600 
+            targetHeight: 600,
+            destinationType: Camera.DestinationType.DATA_URL
         });
+        
     });
   }  
 );
@@ -213,13 +215,14 @@ $(document).ready(
 
 //Callback function when the picture has been successfully taken
 function onPhotoDataSuccess(imageData) {                
-    alert(imageData);
+    //alert(imageData);
     // Get image handle
     var scannedImage = document.getElementById('scannedImage');
 
     // Unhide image elements
     scannedImage.style.display = 'block';
-    scannedImage.src = imageData;
+    scannedImage.src = "data:image/jpg;base64, " + imageData;
+    //uploadImage(scannedImage.src);
 }
 
 //Callback function when the picture has not been successfully taken
@@ -385,7 +388,7 @@ $(document).on("pageshow","#albumPage", function(e, data) {
             }
         });
         }
-            
+        
     }
     else { //album
         $("#addtoPlaylist").hide();

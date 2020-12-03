@@ -76,7 +76,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-storage.js"></script>
     <script src="js/index.js"></script>
     <script src="js/accountFunctions.js"></script>
-    <script src="js/albumPage.js"></script>
+    <script  src="js/albumPage.js"></script>
     <script src="js/results.js"></script>
     
     
@@ -155,7 +155,7 @@
 <!-- jquery mobile page 2 -->
 <div data-role="page" id="homePage" class="page">
 
-
+    
     <div data-role="main" class="ui-content">
         <!-- Content should go in here-->
         <!-- Search(users albums in Home) -->
@@ -261,6 +261,7 @@
                 <button id="scanready" > <!-- onclick="scanDoc()"-->
                     <img src="img/scan.png">
                 </button>
+                <input type="file" onchange="uploadImage()" id='photo' class="button">
                 <a href="#homePage" class="button">Back</a>
                 <a href="#resultsPage" class="button">Next Page</a><!-- this goes to results-->
             </div>
