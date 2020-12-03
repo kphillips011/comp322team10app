@@ -233,14 +233,14 @@
 
         <!-- Below is the code for the search pages -->
         <div class="app">
+            <script src="js/apiscript.js"></script>
             <h1 class="title">Search Page</h1>
             <div class="search">
                 <div class="search-container"
                     style="margin-top: 3vw; margin-left: 3vw; margin-right: 3vw; margin-bottom: 10vw;">
-                    <input autocomplete="on" maxlength="100" minlength="3"
-                        name="searchBar"
-                        placeholder="Search For: Artist, Album, Song"
-                        type="text"
+                    <input onkeyup="search()" autocomplete="on" maxlength="100"
+                        minlength="3" name="searchBar"
+                        placeholder="Search For an Artist or Album" type="text"
                         style="width: 100%; height: 15vw; font-size: large;"></input>
                 </div>
             </div>

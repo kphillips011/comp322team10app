@@ -1,18 +1,35 @@
-function search(title) {
-    var myHeaders = new Headers();
-    myHeaders.append("User-Agent", " Comp322Project/1.0 +https://github.com/kphillips011/comp322team10app");
-    myHeaders.append("Authorization", "Discogs key=JzKHUoDrREtQgpMdkEdu, secret=gQCBQrBCupEnpDwdAmLkxlJhOGZiwidY");
+var request = new XMLHttpRequest()
 
-    var requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow'
-    };
+function program(artist, page) {
 
-    fetch("https://api.discogs.com/database/search?title=" + title + "&per_page=100", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+    request.open("GET", "https://api.discogs.com/database/search?artist=" + artist + "&page=" + page + "&per_page=100", true)
+
+    request.setRequestHeader("User-Agent", "Comp322Project/1.0 +https://github.com/kphillips011/comp322team10app");
+
+    request.setRequestHeader("Authorization", "Discogs key=JzKHUoDrREtQgpMdkEdu, secret=gQCBQrBCupEnpDwdAmLkxlJhOGZiwidY")
+
+    request.onload = function () {
+        json = JSON.parse(this.response)
+
+        // Below prints the first 100 results for a search on the artists name
+
+        console.log(json.results)
+
+        // Below recursively accesses the extra pages for a search
+        var lastPage = json.pagination.urls.last
+        var nextPage = json.pagination.urls.next
+
+        if (lastPage !== undefined) {
+            var nextPageNumber = nextPage.match("page=([0-9]+)")[1]
+            var lastPageNumber = lastPage.match("page=([0-9]+)")[1]
+            if (page <= lastPageNumber) {
+                program(artist, nextPageNumber)
+            }
+        }
+
+    }
+    request.send()
+    return null
 }
 
-search("fall out boy")
+program("fall out boy", 1)
