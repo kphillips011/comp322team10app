@@ -35,8 +35,6 @@ var dis = new Discogs({
 
 var dis = new Discogs('MyUserAgent/1.0', { userToken: 'https://api.discogs.com/oauth/request_token' });
 
-
-
 const Album = new Schema({
     title: String,
     discogId: Number,

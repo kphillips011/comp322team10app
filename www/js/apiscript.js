@@ -12,7 +12,8 @@ function program(artist, page) {
         json = JSON.parse(this.response)
 
         // Below prints the first 100 results for a search on the artists name
-        console.log(json)
+
+        console.log(json.results)
 
         // Below recursively accesses the extra pages for a search
         var lastPage = json.pagination.urls.last
@@ -21,7 +22,6 @@ function program(artist, page) {
         if (lastPage !== undefined) {
             var nextPageNumber = nextPage.match("page=([0-9]+)")[1]
             var lastPageNumber = lastPage.match("page=([0-9]+)")[1]
-            console.log(nextPageNumber)
             if (page <= lastPageNumber) {
                 program(artist, nextPageNumber)
             }
