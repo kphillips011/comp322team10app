@@ -10,15 +10,17 @@ function search(title) {
     };
 
     var res = fetch("https://api.discogs.com/database/search?title=" + title + "&per_page=100", requestOptions)
-        .then(response => response.json())
+        .then(function (response) {
+            response.json()
+        })
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
 
-        const json = res;
-        const obj = JSON.parse(json);
-        console.log(obj.title);
-        console.log(obj.cover_image);
-        console.log(obj.thumb);
+    const json = res;
+    const obj = JSON.parse(json);
+    console.log(obj.title);
+    console.log(obj.cover_image);
+    console.log(obj.thumb);
 
 }
 
