@@ -1,0 +1,11 @@
+<script src="apiscript.js"></script>
+
+<input id="searchBar" autocomplete="on" maxlength="100" minlength="3"
+    name="search" placeholder="Search For an Artist or Album" type="text"
+    style="width: 100%; height: 15vw; font-size: large;"></input>
+<input type="submit" value="Submit" onclick="program(1)">
+
+<div id="results"></div>
+
+
+<!-- "Refused to execute inline event handler because it violates the following Content Security Policy directive: "default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'". Either the 'unsafe-inline' keyword, a hash ('sha256-...'), or a nonce ('nonce-...') is required to enable inline execution. Note also that 'script-src' was not explicitly set, so 'default-src' is used as a fallback. -->
