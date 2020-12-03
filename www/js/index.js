@@ -170,7 +170,7 @@ function resOnError(error) {
 
 async function googleVision(file) {
     alert("entered GV function");
-    const vision = require('@google-cloud/vision');
+    const vision = import('@google-cloud/vision');
 
     alert('GV initalized vision');
     // Creates a client
