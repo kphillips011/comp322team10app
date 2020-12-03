@@ -9,21 +9,23 @@ function onDeviceReady() {
 
 }
 
-$(document).ready(function () {
-    $("#testSignUp").on("click", function () {
-        if ($("#pword").val().trim() === $("#confirmpassword").val().trim()) {
-            window.localStorage.setItem("key1", $("#uname").val().trim())
-            window.localStorage.setItem("key2", $("#pword").val().trim())
-            window.localStorage.setItem("key3", $("#email").val().trim())
-            alert("Sign Up sucessful.")
-        }
-    });
-});
-
-$(document).ready(function () {
-    $("#testCred").on("click", function () {
-        if ($("#Loguname").val().trim() === "testUser" && $("#Logpword").val().trim() === "testPassword") {
-            alert("You have sucessfully logged in!");
+$(document).ready(function() {
+    $("#Signup").submit(function() {
+        var email = $("#email").val().trim();
+        var password = $("#Pword").val().trim();
+        var confrimPassword = $("#confirmpassword").val().trim();
+        if (password === confrimPassword) {
+            
+                
+                firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then((user) => {
+                    alert("Sign Up sucessful.")
+                })
+                .catch((error) => {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    alert(errorMessage);
+                })
         }
         else {
             alert("Passowrds dont match");
@@ -66,24 +68,24 @@ $(document).ready(function () {
 
 });
 
-$(document).ready(function () {
-    $("#login").submit(function () {
+$(document).ready(function() {
+    $("#login").submit(function() {
         var email = $("#Logemail").val().trim();
         var password = $("#Logpword").val().trim();
-
-        firebase.auth().signInWithEmailAndPassword(email, password)
-            .then((user) => {
-                alert("signed In");
-                //location.hash ="#homePage";
-                // $(":mobile-pagecontainer").pagecontainer("change", "#homePage");
-                $.mobile.changePage($("#homePage"));
-                //$.mobile.pageContainer.pagecontainer("change", "#homePage");
-            })
-            .catch((error) => {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                alert(errorMessage);
-            })
+        
+        firebase.auth().signInWithEmailAndPassword(email,password)
+        .then((user)=> {
+            alert("signed In");
+            //location.hash ="#homePage";
+            // $(":mobile-pagecontainer").pagecontainer("change", "#homePage");
+            $.mobile.changePage($("#homePage"));
+            //$.mobile.pageContainer.pagecontainer("change", "#homePage");
+        })
+        .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            alert(errorMessage);
+        })
     })
 })
 
@@ -97,13 +99,25 @@ function populateAlbumInfo(data) {
     var data = JSON.parse(data);
 }
 $(document).ready(
-    function () {
-        $("#scanready").on("click", function () {
-
-            scan.scanDoc(successCallback, errorCallback, { sourceType: 1, fileName: "myfilename", quality: 1.0, returnBase64: false });
-        });
-    }
-);
+    function() {
+      $("#scanready").on("click", function() {
+          //scan.scanDoc(successCallback, errorCallback, {sourceType : 1, fileName : 'image', quality : 1.0, returnBase64 : false});
+          // navigator.camera.getPicture(onSuccess, onFail, { quality: 20,
+          //     destinationType: Camera.DestinationType.FILE_URL
+          navigator.camera.getPicture(onPhotoDataSuccess, onFail, { 
+              quality: 50,
+              allowEdit: false,
+              encodingType: Camera.EncodingType.JPG,
+              correctOrientation: true,
+              sourceType: navigator.camera.PictureSourceType.CAMERA,
+              targetWidth: 600,
+              targetHeight: 600,
+              destinationType: Camera.DestinationType.DATA_URL
+          });
+          
+      });
+    }  
+  );
 
 //Callback function when the picture has been successfully taken
 function onPhotoDataSuccess(imageData) {
@@ -205,4 +219,123 @@ async function googleVision(file) {
         });
     }
 }
-googleVision();
+//googleVision();
+$(window).on("navigate", function (event, data) {
+    direction = data.state.direction;
+    //event.preventDefault();
+    if (direction == "back") {
+        
+        backButton = true;
+        
+    }
+    //console.log(backButton, direction);
+});      
+
+var backButton = false;
+$(document).on("pagebeforeshow","#albumPage", function(e, data) {
+    // varaible to check if page was reached by back button
+    
+    
+    var name = window.localStorage.getItem("name");
+    
+    //console.log(backButton);
+    // if not reached by back button clear data
+    if (!backButton) {
+        var id = $(".tester")
+        if (id != undefined) {
+            id.remove();
+        }
+        var songResults = $("#SongResults");
+        songResults.empty();
+        $("#albumTitle").text(name);
+        if($('#albumImageContainer').has("img")) {
+            $('#albumImageContainer').empty();
+        }
+    }
+    //grab data being sent from previous page
+    var uid = window.localStorage.getItem("uid");
+    //window.localStorage.removeItem("uid");
+    var isPlaylist = window.localStorage.getItem("isPlaylist");
+    var isResult = window.localStorage.getItem("isresult");
+    
+    if (isPlaylist == "true") {
+        $("#addtoPlaylist").show();
+        $("#songDeleteDiv").show();
+        if (isResult == "true") {
+            playlists.forEach((playlist) => {
+                if (playlist.id == uid) {
+                    loadSongs(playlist.data().Songs);
+                    if("Image" in playlist.data()) {
+                        
+                        loadImage(playlist.data().Image);
+                    }
+                }
+            });
+        } else {
+        userPlaylists.forEach((playlist) => {
+            if (playlist.id == uid) {
+                loadSongs(playlist.data().Songs);
+                if("Image" in playlist.data()) {
+                        
+                    loadImage(playlist.data().Image);
+                }
+                // if("Image" in playlist.data()) {
+                //     console.log();
+                //     loadImage(playlist.data().Image);
+                // }
+            }
+        });
+        }
+        
+    }
+    else { //album
+        $("#addtoPlaylist").hide();
+        $("#songDeleteDiv").hide();
+        if (isResult == "true") {
+            albums.forEach((album)=> {
+                if (album.id == uid) {
+                    loadSongs(album.data().Songs);
+                    if("Image" in album.data()) {
+                        
+                        loadImage(album.data().Image);
+                    }
+                }
+            })
+        } else {
+            userAlbums.forEach((album)=> {
+            
+                if (album.id == uid) {
+                    loadSongs(album.data().Songs);
+                    if("Image" in album.data()) {
+                        
+                        loadImage(album.data().Image);
+                        
+                    }
+                }
+            });
+        }
+    }
+    //var query = $(this).data("url");
+    //console.log(test);
+    // query = query.replace("id=","");
+    //var query = $.urlParam('id');
+
+    //creating elemt with the id for testing
+    // var p = document.createElement("p");
+    // p.className = "tester";
+    // p.innerHTML = uid;
+    // document.getElementById("albumId")
+    $("#albumId").text(uid);
+    //alert(test);
+});
+
+$(document).on("pagehide", "#albumPage", function() {
+    var id = document.getElementById("tester");
+    //id.remove();
+    window.localStorage.removeItem("uid");
+    window.localStorage.removeItem("name");
+    window.localStorage.removeItem("isPlaylist");
+    backButton = false;
+    updatePlaylists();
+    //alert("removed item");
+})
