@@ -1,35 +1,8 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
 
 <head>
     <meta charset="utf-8">
-    <!--
-        Customize this policy to fit your own app's needs. For more guidance, see:
-            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-        Some notes:
-            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
     <meta http-equiv="Content-Security-Policy"
         content="default-src &apos;self&apos; data: gap: https://ssl.gstatic.com &apos;unsafe-eval&apos;; style-src &apos;self&apos; &apos;unsafe-inline&apos;; media-src *; img-src &apos;self&apos; data: content:;">
     <meta name="format-detection" content="telephone=no">
@@ -38,6 +11,10 @@
         content="initial-scale=1, width=device-width, viewport-fit=cover">
     <meta name="color-scheme" content="light dark">
 
+    <meta http-equiv="Content-Security-Policy" content="default-src *;
+                      style-src * 'self' 'unsafe-inline' 'unsafe-eval';
+                      script-src * 'self' 'unsafe-inline' 'unsafe-eval';">
+
     <link rel="stylesheet" type="text/css"
         href="js/jquery-1.5.0.mobile.min.css">
     <link rel="stylesheet" href="css/index.css">
@@ -45,14 +22,15 @@
         src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
     <script
         src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/mode-cfb-min.js"></script>
-
-    <title>Hello World</title>
-</head>
-
-<body>
+    <script src="js/apiscript.js"></script>
     <script src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery-1.11.1.min.js"
         id="cordova-jquery"></script>
+    <script type="text/javascript" src="js/apiscript.js"></script>
+
+    <script type="text/javascript" src="js/jquery-1.5.0.mobile.min.js"></script>
+    <script src="js/index.js"></script>
+
     <script type="text/javascript" id="jqm-trans-disable">
         /* For having a faster transition */
         $(document).on("mobileinit", function () {
@@ -60,523 +38,193 @@
             $.mobile.defaultDialogTransition = "none";
         });
     </script>
-    <script type="text/javascript" src="js/jquery-1.5.0.mobile.min.js"></script>
-    <script src="js/index.js"></script>
-</body>
-<!-- jquery mobile page 1 -->
-<div data-role="page" id="login_page">
+    <title>Hello World</title>
+</head>
 
-    <div role="main" class="ui-content">
-        <div class="ui-grid-b">
-            <div class="ui-block-a"></div>
-            <div class="ui-block-b">
-                <p>Log-in</p>
-            </div>
-            <div class="ui-block-c"></div>
-        </div><!-- /grid-b -->
-        <label for="Uname">User name:</label>
-        <input type="text" id="Loguname" name="username"
-            class="signup-form-field">
-        <label for="Pword">Password:</label>
-        <input type="password" id="Logpword" name="password"
-            class="signup-form-field">
-        <a href="#homePage" id="testCred" class="button">Log In</a>
-        <a href="#signup_login" class="button">No account? Sign Up</a>
+<body>
 
+    <!-- jquery mobile page 1 -->
+    <div data-role="page" id="login_page">
+
+        <div role="main" class="ui-content">
+            <div class="ui-grid-b">
+                <div class="ui-block-a"></div>
+                <div class="ui-block-b">
+                    <p>Log-in</p>
+                </div>
+                <div class="ui-block-c"></div>
+            </div><!-- /grid-b -->
+            <label for="Uname">User name:</label>
+            <input type="text" id="Loguname" name="username"
+                class="signup-form-field">
+            <label for="Pword">Password:</label>
+            <input type="password" id="Logpword" name="password"
+                class="signup-form-field">
+            <a href="#homePage" id="testCred" class="button">Log In</a>
+            <a href="#signup_login" class="button">No account? Sign Up</a>
+
+        </div>
     </div>
-</div>
-<!-- jquery log in page -->
-<div data-role="page" id="signup_login">
+    <!-- jquery log in page -->
+    <div data-role="page" id="signup_login">
 
-    <div role="main" class="ui-content">
-        <div class="ui-grid-b">
-            <div class="ui-block-a"></div>
-            <div class="ui-block-b">
-                <p>Sign-up</p>
-            </div>
-            <div class="ui-block-c"></div>
-        </div><!-- /grid-b -->
-        <label for="Uname">User name:</label>
-        <input type="text" id="uname" name="username" class="signup-form-field">
-        <label for="Email">Email:</label>
-        <input type="text" id="email" name="email" class="signup-form-field">
-        <label for="Pword">Password:</label>
-        <input type="password" id="pword" name="password"
-            class="signup-form-field">
-        <label for="ConPword">Confirm Password:</label>
-        <input type="password" id="confirmpassword" class="signup-form-field">
+        <div role="main" class="ui-content">
+            <div class="ui-grid-b">
+                <div class="ui-block-a"></div>
+                <div class="ui-block-b">
+                    <p>Sign-up</p>
+                </div>
+                <div class="ui-block-c"></div>
+            </div><!-- /grid-b -->
+            <label for="Uname">User name:</label>
+            <input type="text" id="uname" name="username"
+                class="signup-form-field">
+            <label for="Email">Email:</label>
+            <input type="text" id="email" name="email"
+                class="signup-form-field">
+            <label for="Pword">Password:</label>
+            <input type="password" id="pword" name="password"
+                class="signup-form-field">
+            <label for="ConPword">Confirm Password:</label>
+            <input type="password" id="confirmpassword"
+                class="signup-form-field">
 
-        <a href="#homePage" id="testSignUp" class="button">Sign-Up</a>
-    </div>
-    <!-- end of page 1 content -->
+            <a href="#homePage" id="testSignUp" class="button">Sign-Up</a>
+        </div>
+        <!-- end of page 1 content -->
 
-    <!-- <div data-role="footer" data-position="fixed">
+        <!-- <div data-role="footer" data-position="fixed">
         <h4>Page 1 Footer</h4>
     </div> -->
-    <!-- end page 1 footer -->
-</div>
-<!-- end page 1 -->
+        <!-- end page 1 footer -->
+    </div>
+    <!-- end page 1 -->
 
-<!-- <div data-role="footer" data-position="fixed">
+    <!-- <div data-role="footer" data-position="fixed">
 				<h4>Page 1 Footer</h4>
 			</div> -->
-<!-- end page 1 footer -->
-</div>
-<!-- end page 1 -->
-<!-- jquery mobile page 2 -->
-<div data-role="page" id="homePage" class="page">
+    <!-- end page 1 footer -->
+    </div>
+    <!-- end page 1 -->
+    <!-- jquery mobile page 2 -->
+    <div data-role="page" id="homePage" class="page">
 
 
-    <div data-role="main" class="ui-content">
-        <!-- Content should go in here-->
-        <!-- Search(users albums in Home) -->
-        <input type="text" id="uname" name="uname" placeholder="Search">
+        <div data-role="main" class="ui-content">
+            <!-- Content should go in here-->
+            <!-- Search(users albums in Home) -->
+            <!-- <input type="text" id="uname" name="uname" placeholder="Search"> -->
 
-        <div class="home-container" style="height:max-content;">
-            <!-- Playlist content -->
-            <div class="playlists-container">
-                <a class="textbutton">Playlists</a>
-                <a class="textbutton">All Content</a>
-                <a class="textbutton">+ New Playlist</a>
-            </div>
-            <div class="paragraph">
-                <p></p>
-            </div>
-
-            <!-- Album content -->
-            <div class="album-container">
-                <div class="albums-container">
-                    <a class="textbutton">Album Name</a>
-                    <a class="textbutton">Album Name</a>
+            <div class="home-container" style="height:max-content;">
+                <!-- Playlist content -->
+                <div class="playlists-container">
+                    <a class="textbutton">Playlists</a>
+                    <a class="textbutton">All Content</a>
+                    <a class="textbutton">+ New Playlist</a>
                 </div>
-                <!-- Album menu -->
-                <div class="albumpopup-container">
-                    <a class="textbutton">+ Add to Playlist</a>
-                    <a class="textbutton">- Remove</a>
-                    <a class="textbutton">View Album</a>
-                    <a class="textbutton">Play in Spotify</a>
+                <div class="paragraph">
+                    <p></p>
                 </div>
+
+                <!-- Album content -->
+                <div class="album-container">
+                    <div class="albums-container">
+                        <a class="textbutton">Album Name</a>
+                        <a class="textbutton">Album Name</a>
+                    </div>
+                    <!-- Album menu -->
+                    <div class="albumpopup-container">
+                        <a class="textbutton">+ Add to Playlist</a>
+                        <a class="textbutton">- Remove</a>
+                        <a class="textbutton">View Album</a>
+                        <a class="textbutton">Play in Spotify</a>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
             </div>
 
-            <div class="clearfix"></div>
+
+            <!-- Scan Vinyl at bottom -->
+            <a href="#scanPage" class="ui-btn ui-corner-all"
+                style="background-color: #FA6800; color: whitesmoke; font-size: large;">Scan
+                Vinyl</a>
+
+            <!-- This bellow will be in burger menu in future-->
+            <a href="#searchPage" class="button">Search</a>
+            <!-- <a href="#settingsPage" class="button">Settings</a> -->
+
+
+        </div>
+        <!-- end of page 2 content -->
+
+    </div>
+    <!-- end page 2 -->
+
+    <!--Start page 3-->
+    <div data-role="page" id="scanPage" class="page">
+
+        <div role="content" class="ui-content">
+            <!-- Content should go in here-->
+            <h4>Scan a new vinyl here to add it to your collection</h4>
+            <div class="ui-grid-b">
+                <div class="ui-block-a"></div>
+                <div class="ui-block-b">
+                    <p>Sign-up/login</p>
+                </div>
+                <div class="ui-block-c"></div>
+            </div><!-- /grid-b -->
+            <div class="ui-grid-b">
+                <div class="ui-block-a" style="height:100px"></div>
+                <div class="ui-block-b" style="height:100px">
+
+                </div>
+                <div class="ui-block-c" style="height:100px"></div>
+            </div><!-- /grid-b -->
+            <div class="ui-grid-b my-breakpoint">
+                <div class="ui-block-a"></div>
+                <div class="ui-block-b">
+                    <button id="scanready">
+                        <img src="img/scan.png">
+                    </button>
+                </div>
+                <div class="ui-block-c"></div>
+            </div><!-- /grid-b -->
+            <div id="image"></div>
+            <img id="img">
+            <a href="#homePage" class="button">Back</a>
+            <a href="#resultsPage" class="button">Next Page</a>
+            <!-- this goes to results-->
 
         </div>
 
-
-        <!-- Scan Vinyl at bottom -->
-        <a href="#scanPage" class="ui-btn ui-corner-all"
-            style="background-color: #FA6800; color: whitesmoke; font-size: large;">Scan
-            Vinyl</a>
-
-        <!-- This bellow will be in burger menu in future-->
-        <a href="#searchPage" class="button">Search</a>
-        <a href="#settingsPage" class="button">Settings</a>
-
-
     </div>
-    <!-- end of page 2 content -->
+    <!-- end page 3 -->
 
-</div>
-<!-- end page 2 -->
+    <!--Start page 4-->
+    <div data-role="page" id="searchPage" class="page">
 
-<!--Start page 3-->
-<div data-role="page" id="scanPage" class="page">
-
-    <div role="content" class="ui-content">
-        <!-- Content should go in here-->
-        <h4>Scan a new vinyl here to add it to your collection</h4>
-        <div class="ui-grid-b">
-            <div class="ui-block-a"></div>
-            <div class="ui-block-b">
-                <p>Sign-up/login</p>
-            </div>
-            <div class="ui-block-c"></div>
-        </div><!-- /grid-b -->
-        <div class="ui-grid-b">
-            <div class="ui-block-a" style="height:100px"></div>
-            <div class="ui-block-b" style="height:100px">
-
-            </div>
-            <div class="ui-block-c" style="height:100px"></div>
-        </div><!-- /grid-b -->
-        <div class="ui-grid-b my-breakpoint">
-            <div class="ui-block-a"></div>
-            <div class="ui-block-b">
-                <button id="scanready">
-                    <img src="img/scan.png">
-                </button>
-            </div>
-            <div class="ui-block-c"></div>
-        </div><!-- /grid-b -->
-        <div id="image"></div>
-        <img id="img">
-        <a href="#homePage" class="button">Back</a>
-        <a href="#resultsPage" class="button">Next Page</a>
-        <!-- this goes to results-->
-
-    </div>
-
-</div>
-<!-- end page 3 -->
-
-<!--Start page 4-->
-<div data-role="page" id="searchPage" class="page">
-
-    <div role="content" class="ui-content">
-        <!-- Content should go in here-->
-
-        <!-- Below is the code for the results pages -->
-        <!-- <div class="app"> -->
-        <!-- This part of the application essentially is what will show when the user types in an album, artist, or song into the search bar -->
-
-        <!-- </div> -->
-
-        <!-- Below is the code for the search pages -->
-        <div class="app">
-            <script src="js/apiscript.js"></script>
-            <h1 class="title">Search Page</h1>
-            <div class="search">
-                <div class="search-container"
-                    style="margin-top: 3vw; margin-left: 3vw; margin-right: 3vw; margin-bottom: 10vw;">
-                    <input onkeyup="search()" autocomplete="on" maxlength="100"
-                        minlength="3" name="searchBar"
-                        placeholder="Search For an Artist or Album" type="text"
-                        style="width: 100%; height: 15vw; font-size: large;"></input>
+        <div role="content" class="ui-content">
+            <div class="app">
+                <div class="search">
+                    <div class="search-container"
+                        style="margin-top: 3vw; margin-left: 3vw; margin-right: 3vw; margin-bottom: 10vw;">
+                        <input id="searchBar" autocomplete="on" maxlength="100"
+                            minlength="3" name="search"
+                            placeholder="Search For an Artist or Album"
+                            type="text"
+                            style="width: 100%; height: 15vw; font-size: large;"></input>
+                        <input type="submit" value="Submit"
+                            onclick="program(1)">
+                    </div>
+                </div>
+                <div id="results" style="width: 100%; height: auto;">
                 </div>
             </div>
-
-            <h3 class="subtitle">Recent Searches</h3>
-            <div class="recent-searches" style="width: 100%; height: auto;">
-                <table class="recent-searches-container"
-                    style="border: black 1px solid; width: 100%; border-collapse:separate; border-spacing: 10vw 5vw;">
-                    <tr>
-                        <td>
-                            <div
-                                style="width: 100%; height: 100px; background-color: red; border-radius: 1em;">
-                                <p>Hello World</p>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr style="width: 100%; height: 28%;">
-                        <td>
-                            <div
-                                style="width: 100%; height: 100px; background-color: green; border-radius: 1em;">
-                                <p>Hello World</p>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr style="width: 100%; height: 28%;">
-                        <td>
-                            <div
-                                style="width: 100%; height: 100px; background-color: purple; border-radius: 1em;">
-                                <p>Hello World</p>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
         </div>
-
-
-        <a href="#resultsPage" class="button">Tap to got to Results temp</a>
-        <!-- this goes to results-->
-        <a href="#homePage" class="button">Go back home</a>
     </div>
-
-</div>
+</body>
 <!-- end page 4 -->
-
-<!--Start page 5-->
-<div data-role="page" id="resultsPage" class="page">
-
-    <div role="content" class="ui-content">
-        <h1 class="title">Search Results Page</h1>
-        <div class="results">
-            <div class="result-container">
-                <div id="result">
-                    <div id="result-photo">
-                        <p>Photo</p>
-                    </div>
-                    <div id="result-text">
-                        <div id="result-title">
-                            <p>artist, album, or song title</p>
-                        </div>
-                        <div id="result-title-info">
-                            <p>Type 💠 Artist</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="result-container">
-                <div id="result">
-                    <div id="result-photo">
-                        <p>Photo</p>
-                    </div>
-                    <div id="result-text">
-                        <div id="result-title">
-                            <p>artist, album, or song title</p>
-                        </div>
-                        <div id="result-title-info">
-                            <p>Type 💠 Artist</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="result-container">
-                <div id="result">
-                    <div id="result-photo">
-                        <p>Photo</p>
-                    </div>
-                    <div id="result-text">
-                        <div id="result-title">
-                            <p>artist, album, or song title</p>
-                        </div>
-                        <div id="result-title-info">
-                            <p>Type 💠 Artist</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-
-
-        <p>Temporary buttons to move around</p>
-        <a href="#albumPage" class="button">Tap on album</a>
-        <a href="#songResultsPage" class="button">Tap on song</a>
-        <a href="#artistResultsPage" class="button">Tap on artist</a>
-        <a href="#homePage" class="button">Go home</a>
-        <a href="#searchPage" class="button">Go to search</a>
-    </div>
-
-</div>
-<!-- end page 5 -->
-
-<!--Start page 6-->
-<div data-role="page" id="settingsPage" class="page">
-
-    <div role="content" class="ui-content">
-        <!-- Content should go in here-->
-        <h4>Settings page content goes here</h4>
-        <a href="#homePage" class="button">Go back</a>
-    </div>
-
-</div>
-<!-- end page 6 -->
-
-<!--Start page 7-->
-<div data-role="page" id="albumPage" class="page">
-
-    <div role="content" class="ui-content">
-        <!-- This part of the application essentially is what will show when the user selects an album -->
-        <h1 class="title">album Results Page</h1>
-        <div class="album-photo"
-            style="height: 50vw; width: 50vw; border: black 1px solid; margin: auto;">
-            <p>Photo</p>
-        </div>
-        <div class="results">
-            <div class="result-container">
-                <div id="result">
-                    <div id="result-photo">
-                        <p>Photo</p>
-                    </div>
-                    <div id="result-text">
-                        <div id="result-title">
-                            <p>song title</p>
-                        </div>
-                        <div id="result-title-info">
-                            <p>album 💠 Artist</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="result-container">
-                <div id="result">
-                    <div id="result-photo">
-                        <p>Photo</p>
-                    </div>
-                    <div id="result-text">
-                        <div id="result-title">
-                            <p>song title</p>
-                        </div>
-                        <div id="result-title-info">
-                            <p>album 💠 Artist</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="result-container">
-                <div id="result">
-                    <div id="result-photo">
-                        <p>Photo</p>
-                    </div>
-                    <div id="result-text">
-                        <div id="result-title">
-                            <p>song title</p>
-                        </div>
-                        <div id="result-title-info">
-                            <p>album 💠 Artist</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a href="#homePage" class="button">Go back home</a>
-        <a href="#resultsPage" class="button">Go back to results</a>
-    </div>
-
-</div>
-<!-- end page 7 -->
-
-<!--Start page 8-->
-<div data-role="page" id="songResultsPage" class="page">
-
-    <div role="content" class="ui-content">
-        <!-- This part of the application essentially is what will show when the user selects a song -->
-        <h1 class="title">Song Results Page</h1>
-        <div class="album-photo"
-            style="height: 50vw; width: 50vw; border: black 1px solid; margin: auto;">
-            <p>Photo</p>
-        </div>
-        <div class="results">
-            <div class="result-container">
-                <div id="result">
-                    <div id="result-photo">
-                        <p>Photo</p>
-                    </div>
-                    <div id="result-text">
-                        <div id="result-title">
-                            <p>song title</p>
-                        </div>
-                        <div id="result-title-info">
-                            <p>album 💠 Artist</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a href="#homePage" class="button">Go back home</a>
-        <a href="#resultsPage" class="button">Go back to results</a>
-    </div>
-
-</div>
-<!-- end page 8-->
-<!--Start page 9-->
-<div data-role="page" id="artistResultsPage" class="page">
-
-    <div role="content" class="ui-content">
-        <!-- This part of the application essentially is what will show when the user selects an artist from a search -->
-        <h1 class="title">Artist Results Page</h1>
-        <div class="artist-photo"
-            style="height: 50vw; width: 50vw; border: black 1px solid; margin: auto;">
-            <p>Photo</p>
-        </div>
-        <h3 class="subtitle">albums</h3>
-        <div class="results">
-            <div class="result-container">
-                <div id="result">
-                    <div id="result-photo">
-                        <p>Photo</p>
-                    </div>
-                    <div id="result-text">
-                        <div id="result-title">
-                            <p>album title</p>
-                        </div>
-                        <div id="result-title-info">
-                            <p>Number of Songs 💠 Artist</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="result-container">
-                <div id="result">
-                    <div id="result-photo">
-                        <p>Photo</p>
-                    </div>
-                    <div id="result-text">
-                        <div id="result-title">
-                            <p>album title</p>
-                        </div>
-                        <div id="result-title-info">
-                            <p>Number of Songs 💠 Artist</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="result-container">
-                <div id="result">
-                    <div id="result-photo">
-                        <p>Photo</p>
-                    </div>
-                    <div id="result-text">
-                        <div id="result-title">
-                            <p>album title</p>
-                        </div>
-                        <div id="result-title-info">
-                            <p>Number of Songs 💠 Artist</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <h3 class="subtitle">Songs</h3>
-        <div class="results">
-            <div class="result-container">
-                <div id="result">
-                    <div id="result-photo">
-                        <p>Photo</p>
-                    </div>
-                    <div id="result-text">
-                        <div id="result-title">
-                            <p>Song title</p>
-                        </div>
-                        <div id="result-title-info">
-                            <p>album 💠 Artist</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="result-container">
-                <div id="result">
-                    <div id="result-photo">
-                        <p>Photo</p>
-                    </div>
-                    <div id="result-text">
-                        <div id="result-title">
-                            <p>Song title</p>
-                        </div>
-                        <div id="result-title-info">
-                            <p>album 💠 Artist</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="result-container">
-                <div id="result">
-                    <div id="result-photo">
-                        <p>Photo</p>
-                    </div>
-                    <div id="result-text">
-                        <div id="result-title">
-                            <p>Song title</p>
-                        </div>
-                        <div id="result-title-info">
-                            <p>album 💠 Artist</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a href="#homePage" class="button">Go back home</a>
-        <a href="#resultsPage" class="button">Go back to results</a>
-    </div>
-
-</div>
-<!-- end page 9 -->
-
-
 
 </html>

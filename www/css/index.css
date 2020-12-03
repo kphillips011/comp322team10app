@@ -27,7 +27,7 @@ body {
 
 .ui-header .ui-title {
     overflow: visible !important;
-    
+
 }
 /* For fixing the absolute position issue for the default cordova gen page*/
 #cjp-accordion1 .app {
@@ -48,7 +48,7 @@ body {
     border-radius: 9px;
 }
 
- 
+
   #nav-icon3{
     width: 40px;
     height: 45px;
@@ -64,7 +64,7 @@ body {
     transition: .5s ease-in-out;
     cursor: pointer;
   }
-  
+
   #nav-icon1 span, #nav-icon3 span, #nav-icon4 span {
     display: block;
     position: absolute;
@@ -83,46 +83,46 @@ body {
     -o-transition: .25s ease-in-out;
     transition: .25s ease-in-out;
   }
-  
-  
+
+
   #nav-icon3 span:nth-child(1) {
     top: 0px;
   }
-  
+
   #nav-icon3 span:nth-child(2),#nav-icon3 span:nth-child(3) {
     top: 18px;
   }
-  
+
   #nav-icon3 span:nth-child(4) {
     top: 36px;
   }
-  
+
   #nav-icon3.open span:nth-child(1) {
     top: 18px;
     width: 0%;
     left: 50%;
   }
-  
+
   #nav-icon3.open span:nth-child(2) {
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
     -o-transform: rotate(45deg);
     transform: rotate(45deg);
   }
-  
+
   #nav-icon3.open span:nth-child(3) {
     -webkit-transform: rotate(-45deg);
     -moz-transform: rotate(-45deg);
     -o-transform: rotate(-45deg);
     transform: rotate(-45deg);
   }
-  
+
   #nav-icon3.open span:nth-child(4) {
     top: 18px;
     width: 0%;
     left: 50%;
   }
-  
+
   .ui-page-theme-a a:visited, .ui-page-theme-a  .button {
     display: inline-block;
     outline: none;
@@ -186,13 +186,13 @@ body {
     clear:both
   }
 
- 
-  
+
+
 /* Mainly for theme of the app will go here so all pages have same theme */
 #login_page, #signup_login, #homePage, #scanPage, #resultsPage, #searchPage, #settingsPage, #albumPage, #songResultsPage, #artistResultsPage   {
   background-color: #9AC7BF;
 }
-/* I will setup the same grid on each page. 
+/* I will setup the same grid on each page.
 There is a drawing of the grid lines in our draw.io.
 If you want to customize it take your page out of this and create a seperate one for it */
 
@@ -266,7 +266,7 @@ p   {
   padding-top: 100px;
   padding-right: 50px;
   padding-bottom: 100px;
-  padding-left: 50px; 
+  padding-left: 50px;
 }
 
 #scanready {
@@ -286,14 +286,14 @@ p   {
   width: 250px;
   height: 250px;
   border: none;
-  overflow: hidden; 
+  overflow: hidden;
   box-shadow: none;
 }
 #scanready:focus {outline-width: 0px; }
 
 .middle {
   position:absolute;
-  
+
   max-width: 100%;
   max-height: 100%;
 }
@@ -362,7 +362,6 @@ p   {
 }
 
 
-.my-breakpoint .ui-block-a {width: 10%;} 
+.my-breakpoint .ui-block-a {width: 10%;}
 .my-breakpoint .ui-block-b {width: 80%;}
 .my-breakpoint .ui-block-c {width: 10%;}
-
