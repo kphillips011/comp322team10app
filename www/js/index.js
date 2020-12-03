@@ -92,7 +92,7 @@ $(document).ready(function () {
                 })
         }
         else {
-            alert("Passowrds dont match");
+            alert("Passwords don't match");
         }
     })
 });
@@ -167,12 +167,13 @@ $(document).ready(
         $("#scanready").on("click", function () {
             console.log('taking picture');
             navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
-                quality: 100,
+                quality: 75,
                 targetWidth: 600,
                 targetHeight: 600,
                 allowEdit: false,
                 sourceType: navigator.camera.PictureSourceType.CAMERA,
                 encodingType: Camera.EncodingType.JPG,
+                destinationType: Camera.DestinationType.DATA_URL,
                 correctOrientation: true
             });
         });
@@ -182,35 +183,51 @@ $(document).ready(
 //Callback function when the picture has been successfully taken
 function onPhotoDataSuccess(imageData) {
     alert(imageData);
+    //var scannedImage = document.getElementById('scannedImage');
+    // Unhide image elements
+    //scannedImage.style.display = 'block';
+    //scannedImage.src = imageData;
+   //alert('scanned image info: ' + scannedImage);
+
+    scannedImage64 = document.getElementById('scannedImage64');
+    scannedImage64.src = "data:image/jpg;base64, " + imageData;
+    alert('scanned image data, 64 bit: ' + scannedImage64.src);
+    
     //encodedImage = encode(imageData);
     //alert('image succcessfully encoded');
-    uploadToDB(imageData);
-    alert('uploaded to database');
+    var uploadedImage = uploadToDB(scannedImage64.src);
+    alert('uploaded to database ' + uploadedImage);
 
-    googleVision(imageData);
+    downloadedImage = downloadFromDB(uploadedImage);
+
+    alert('downloaded image: ' + downloadedImage);
+
+    googleVision(scannedImage64.src);
 
     // Get image handle
-    var scannedImage = document.getElementById('scannedImage');
 
-    // Unhide image elements
-    scannedImage.style.display = 'block';
-    scannedImage.src = imageData;
     //movePic(imageData);
 }
 
-function uploadToDB(image) {
+function uploadToDB(scanned) {
+    alert('entering uploading to database function');
+    //var scanned = document.getElementById('scannedImage');
+    //scanned.src = "data:image/jpg;base64," + scanned;
+
     var storage = firebase.storage();
     var storageRef = storage.ref();
     var scannedImages = storageRef.child('scannedImages');
+    var scannedRef = scannedImages.child(scanned);
+
+    var scannedPic = document.createElement("scannedPic");
 
     var metadata = {
         contentType: 'image/jpg'
     }
 
     // Upload file and metadata to the object 'images/mountains.jpg'
-    alert('entering uploading to database function');
-    var uploadTask = scannedImages.child('picture').put(image, metadata);
-    alert('put image');
+    var uploadTask = scannedImages.child('picture').put(scanned, metadata);
+    alert('put image ' + scanned);
 
     // Listen for state changes, errors, and completion of the upload.
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
@@ -247,8 +264,31 @@ function uploadToDB(image) {
                     break;
             }
         })
+    alert('end of uploading function');
+    return scanned;
 }
 
+function downloadFromDB(image) {
+    alert('entered download function');
+    var storage = firebase.storage();
+    var storageRef = storage.ref();
+    var scannedRef = storageRef.child('scannedImages');
+    var picRef = scannedRef.child('picture');
+    alert('image reference for download: ' + imageRef);
+    picRef.getDownloadURL().then(function (url) {
+        alert('download url: ' + url);
+        image.src = url;
+        alert('downlaod image src: ' + image.src);
+        return image.src;
+
+    }).catch(function (error) {
+        alert(error);
+    });
+
+    alert('downlaoded from database officially ' + image.src);
+}
+
+/*
 function encode(imagePath) {
     alert('entered encoding');
     //var selectedFile = imagePath.files();
@@ -262,6 +302,7 @@ function encode(imagePath) {
     fileReader.readAsDataURL(imageFile);
     alert('fildreader read wooo');
 }
+*/
 
 //Callback function when the picture has not been successfully taken
 function onFail(message) {
@@ -313,43 +354,50 @@ function resOnError(error) {
     alert("failed");
 }
 
-async function googleVision(file) {
-    alert('entered GV function');
-    const vision = import('@google-cloud/vision');
+function googleVision(file) {
+    alert('entered GV function with ' + file);
+    const {ImageAnnotatorClient} = import('@google-cloud/vision');
 
     alert('GV initalized vision');
 
-    // Creates a client
-    const client = new vision.ImageAnnotatorClient();
+    // Instantiates a client
+    const projectID = "comp-322-vinylbase-v2";
+    alert('project id: ' + projectID);
+    const keyFilename = 'cloud-vision.json';
+    alert('keyFilename: ' + keyFilename);
+    const client = new ImageAnnotatorClient({projectID, keyFilename});
 
     alert('GV created client');
 
-    //const fileName = 'example5.jpg';
-    const fileName = file;
+    /*
+    async function runRecog() {
+        //const fileName = 'example5.jpg';
+        const fileName = file;
 
-    alert('GV saved file name');
+        alert('GV saved file name');
 
-    // Detect similar images on the web to a local file
-    const [result] = await client.webDetection(fileName);
-    const webDetection = result.webDetection;
+        // Detect similar images on the web to a local file
+        const [result] = await client.webDetection(fileName);
+        const webDetection = result.webDetection;
 
-    alert('GV detected web entities');
+        alert('GV detected web entities');
 
-    if (webDetection.webEntities.length) {
-        alert(`Web entities found: ${webDetection.webEntities.length}`);
-        webDetection.webEntities.forEach(webEntity => {
-            alert(`Description: ${webEntity.description}`);
-        });
-    }
+        if (webDetection.webEntities.length) {
+            alert(`Web entities found: ${webDetection.webEntities.length}`);
+            webDetection.webEntities.forEach(webEntity => {
+                alert(`Description: ${webEntity.description}`);
+            });
+        }
 
-    if (webDetection.bestGuessLabels.length) {
-        alert(
-            `Best guess labels found: ${webDetection.bestGuessLabels.length}`
-        );
-        webDetection.bestGuessLabels.forEach(label => {
-            alert(`  Label: ${label.label}`);
-        });
-    }
+        if (webDetection.bestGuessLabels.length) {
+            alert(
+                `Best guess labels found: ${webDetection.bestGuessLabels.length}`
+            );
+            webDetection.bestGuessLabels.forEach(label => {
+                alert(`  Label: ${label.label}`);
+            });
+        }
+    } */
 }
 
 
