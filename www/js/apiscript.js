@@ -63,7 +63,7 @@ function generalSearch(page) {
                     alublm.setAttribute("id", "result-alublm")
                     alublm.textContent = element.title.slice(splitHere + 3)
 
-                    var linkArgs = "albulmParse('" + element.master_url + "', '" + element.thumb + "', '" + element.title.slice(0, splitHere) + "', '" + element.title.slice(splitHere + 3) + "')"
+                    var linkArgs = 'albulmParse("' + element.master_url + '", "' + element.thumb + '", "' + element.title.slice(0, splitHere) + '", "' + element.title.slice(splitHere + 3) + '")'
 
                     if (element.master_url == null) {
                         link.setAttribute("style", "color: black;")
@@ -114,6 +114,8 @@ function generalSearch(page) {
 }
 
 function albulmParse(url, imageURL, artist, albulm) {
+    console.log(url)
+
     request.open("GET", url, true)
     request.setRequestHeader("User-Agent", "VinylBase");
     request.setRequestHeader("Authorization", "Discogs key=JzKHUoDrREtQgpMdkEdu, secret=gQCBQrBCupEnpDwdAmLkxlJhOGZiwidY")
