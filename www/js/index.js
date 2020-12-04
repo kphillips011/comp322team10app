@@ -1,23 +1,35 @@
+// Adds an event listener to see when the device is ready to go
 document.addEventListener('deviceready', onDeviceReady, false);
 
+// Wait for the device to be ready and then adds that the device is ready
 function onDeviceReady() {
-    // Cordova is now initialized. Have fun!
-
-    console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
     document.getElementById('deviceready').classList.add('ready');
-
-
 }
 
-$(document).ready(function() {
-    $("#Signup").submit(function() {
+// Starts up FireBase connection
+$(document).ready(function () {
+    var firebaseConfig = {
+        apiKey: "AIzaSyAn4mnjUdV95nmOJ_7C6HnORmMhUFw27xM",
+        authDomain: "vinylbase-7fe10.firebaseapp.com",
+        databaseURL: "https://vinylbase-7fe10.firebaseio.com",
+        projectId: "vinylbase-7fe10",
+        storageBucket: "vinylbase-7fe10.appspot.com",
+        messagingSenderId: "928999002977",
+        appId: "1:928999002977:web:477940107bc0169196eb20",
+        measurementId: "G-NZBN9PVLQX"
+    }
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+});
+
+// Code for creating an account
+$(document).ready(function () {
+    $("#Signup").submit(function () {
         var email = $("#email").val().trim();
         var password = $("#Pword").val().trim();
         var confrimPassword = $("#confirmpassword").val().trim();
         if (password === confrimPassword) {
-            
-                
-                firebase.auth().createUserWithEmailAndPassword(email, password)
+            firebase.auth().createUserWithEmailAndPassword(email, password)
                 .then((user) => {
                     alert("Sign Up sucessful.")
                 })
@@ -28,64 +40,30 @@ $(document).ready(function() {
                 })
         }
         else {
-            alert("Passowrds dont match");
+            alert("Passwords dont match");
         }
     })
 });
 
-
-// $(document).ready(function(){
-//     $("#testCred").on("click", function(){
-//         if ($("#Loguname").val().trim() === "testUser" && $("#Logpword").val().trim() === "testPassword") {
-//             alert("You have sucessfully logged in!");
-//         }
-//         else {
-//             alert("Log in failed, try again.");
-//             location.reload;
-//         }
-//     });
-// });
-
+// Code for signing into an account
 $(document).ready(function () {
-
-    var firebaseConfig = {
-        apiKey: "AIzaSyAn4mnjUdV95nmOJ_7C6HnORmMhUFw27xM",
-        authDomain: "vinylbase-7fe10.firebaseapp.com",
-        databaseURL: "https://vinylbase-7fe10.firebaseio.com",
-        projectId: "vinylbase-7fe10",
-        storageBucket: "vinylbase-7fe10.appspot.com",
-        messagingSenderId: "928999002977",
-        appId: "1:928999002977:web:477940107bc0169196eb20",
-        measurementId: "G-NZBN9PVLQX"
-    };
-    // Initialize Firebase
-    if (firebase) {
-        firebase.initializeApp(firebaseConfig);
-        firebase.analytics();
-        //alert("Firebase loaded");
-    }
-
-
-});
-
-$(document).ready(function() {
-    $("#login").submit(function() {
+    $("#login").submit(function () {
         var email = $("#Logemail").val().trim();
         var password = $("#Logpword").val().trim();
-        
-        firebase.auth().signInWithEmailAndPassword(email,password)
-        .then((user)=> {
-            alert("signed In");
-            //location.hash ="#homePage";
-            // $(":mobile-pagecontainer").pagecontainer("change", "#homePage");
-            $.mobile.changePage($("#homePage"));
-            //$.mobile.pageContainer.pagecontainer("change", "#homePage");
-        })
-        .catch((error) => {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            alert(errorMessage);
-        })
+
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then((user) => {
+                alert("signed In");
+                //location.hash ="#homePage";
+                // $(":mobile-pagecontainer").pagecontainer("change", "#homePage");
+                window.location.replace("homePage.html")
+                //$.mobile.pageContainer.pagecontainer("change", "#homePage");
+            })
+            .catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                alert(errorMessage);
+            })
     })
 })
 
@@ -99,25 +77,25 @@ function populateAlbumInfo(data) {
     var data = JSON.parse(data);
 }
 $(document).ready(
-    function() {
-      $("#scanready").on("click", function() {
-          //scan.scanDoc(successCallback, errorCallback, {sourceType : 1, fileName : 'image', quality : 1.0, returnBase64 : false});
-          // navigator.camera.getPicture(onSuccess, onFail, { quality: 20,
-          //     destinationType: Camera.DestinationType.FILE_URL
-          navigator.camera.getPicture(onPhotoDataSuccess, onFail, { 
-              quality: 50,
-              allowEdit: false,
-              encodingType: Camera.EncodingType.JPG,
-              correctOrientation: true,
-              sourceType: navigator.camera.PictureSourceType.CAMERA,
-              targetWidth: 600,
-              targetHeight: 600,
-              destinationType: Camera.DestinationType.DATA_URL
-          });
-          
-      });
-    }  
-  );
+    function () {
+        $("#scanready").on("click", function () {
+            //scan.scanDoc(successCallback, errorCallback, {sourceType : 1, fileName : 'image', quality : 1.0, returnBase64 : false});
+            // navigator.camera.getPicture(onSuccess, onFail, { quality: 20,
+            //     destinationType: Camera.DestinationType.FILE_URL
+            navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
+                quality: 50,
+                allowEdit: false,
+                encodingType: Camera.EncodingType.JPG,
+                correctOrientation: true,
+                sourceType: navigator.camera.PictureSourceType.CAMERA,
+                targetWidth: 600,
+                targetHeight: 600,
+                destinationType: Camera.DestinationType.DATA_URL
+            });
+
+        });
+    }
+);
 
 //Callback function when the picture has been successfully taken
 function onPhotoDataSuccess(imageData) {
@@ -184,7 +162,7 @@ function resOnError(error) {
 
 async function googleVision(file) {
     //alert("entered GV function");
-    
+
 
     alert('GV initalized vision');
     // Creates a client
@@ -224,20 +202,20 @@ $(window).on("navigate", function (event, data) {
     direction = data.state.direction;
     //event.preventDefault();
     if (direction == "back") {
-        
+
         backButton = true;
-        
+
     }
     //console.log(backButton, direction);
-});      
+});
 
 var backButton = false;
-$(document).on("pagebeforeshow","#albumPage", function(e, data) {
+$(document).on("pagebeforeshow", "#albumPage", function (e, data) {
     // varaible to check if page was reached by back button
-    
-    
+
+
     var name = window.localStorage.getItem("name");
-    
+
     //console.log(backButton);
     // if not reached by back button clear data
     if (!backButton) {
@@ -248,7 +226,7 @@ $(document).on("pagebeforeshow","#albumPage", function(e, data) {
         var songResults = $("#SongResults");
         songResults.empty();
         $("#albumTitle").text(name);
-        if($('#albumImageContainer').has("img")) {
+        if ($('#albumImageContainer').has("img")) {
             $('#albumImageContainer').empty();
         }
     }
@@ -257,7 +235,7 @@ $(document).on("pagebeforeshow","#albumPage", function(e, data) {
     //window.localStorage.removeItem("uid");
     var isPlaylist = window.localStorage.getItem("isPlaylist");
     var isResult = window.localStorage.getItem("isresult");
-    
+
     if (isPlaylist == "true") {
         $("#addtoPlaylist").show();
         $("#songDeleteDiv").show();
@@ -265,51 +243,51 @@ $(document).on("pagebeforeshow","#albumPage", function(e, data) {
             playlists.forEach((playlist) => {
                 if (playlist.id == uid) {
                     loadSongs(playlist.data().Songs);
-                    if("Image" in playlist.data()) {
-                        
+                    if ("Image" in playlist.data()) {
+
                         loadImage(playlist.data().Image);
                     }
                 }
             });
         } else {
-        userPlaylists.forEach((playlist) => {
-            if (playlist.id == uid) {
-                loadSongs(playlist.data().Songs);
-                if("Image" in playlist.data()) {
-                        
-                    loadImage(playlist.data().Image);
+            userPlaylists.forEach((playlist) => {
+                if (playlist.id == uid) {
+                    loadSongs(playlist.data().Songs);
+                    if ("Image" in playlist.data()) {
+
+                        loadImage(playlist.data().Image);
+                    }
+                    // if("Image" in playlist.data()) {
+                    //     console.log();
+                    //     loadImage(playlist.data().Image);
+                    // }
                 }
-                // if("Image" in playlist.data()) {
-                //     console.log();
-                //     loadImage(playlist.data().Image);
-                // }
-            }
-        });
+            });
         }
-        
+
     }
     else { //album
         $("#addtoPlaylist").hide();
         $("#songDeleteDiv").hide();
         if (isResult == "true") {
-            albums.forEach((album)=> {
+            albums.forEach((album) => {
                 if (album.id == uid) {
                     loadSongs(album.data().Songs);
-                    if("Image" in album.data()) {
-                        
+                    if ("Image" in album.data()) {
+
                         loadImage(album.data().Image);
                     }
                 }
             })
         } else {
-            userAlbums.forEach((album)=> {
-            
+            userAlbums.forEach((album) => {
+
                 if (album.id == uid) {
                     loadSongs(album.data().Songs);
-                    if("Image" in album.data()) {
-                        
+                    if ("Image" in album.data()) {
+
                         loadImage(album.data().Image);
-                        
+
                     }
                 }
             });
@@ -329,7 +307,7 @@ $(document).on("pagebeforeshow","#albumPage", function(e, data) {
     //alert(test);
 });
 
-$(document).on("pagehide", "#albumPage", function() {
+$(document).on("pagehide", "#albumPage", function () {
     var id = document.getElementById("tester");
     //id.remove();
     window.localStorage.removeItem("uid");

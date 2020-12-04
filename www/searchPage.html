@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="unsafe-inline">
+
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport"
+        content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+
+    <link rel="stylesheet" href="css/index.css">
+
+    <script
+        src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+    <script
+        src="https://www.gstatic.com/firebasejs/8.1.1/firebase-storage.js"></script>
+
+    <script src="js/index.js"></script>
+    <script src="js/apiscript.js"></script>
+    <script src="cordova.js"></script>
+
+    <title>VinylBase Search Page</title>
+</head>
+
+<body>
+    <div data-role="page" id="searchPage" class="page">
+        <div role="content" class="ui-content">
+            <div class="app">
+                <div class="search">
+                    <div class="search-container"
+                        style="margin-top: 3vw; margin-left: 3vw; margin-right: 3vw; margin-bottom: 10vw;">
+                        <input id="searchBar" onkeyup="generalSearch(1)"
+                            autocomplete="on" maxlength="100" minlength="3"
+                            name="search"
+                            placeholder="Search For an Artist or Album"
+                            type="text"
+                            style="width: 100%; height: 15vw; font-size: large;"></input>
+                    </div>
+                </div>
+                <div id="results" style="width: 100%; height: auto;">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

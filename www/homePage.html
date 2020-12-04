@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="unsafe-inline">
+
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport"
+        content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+
+    <link rel="stylesheet" type="text/css"
+        href="js/jquery-1.5.0.mobile.min.css">
+    <link rel="stylesheet" href="css/index.css">
+
+    <script
+        src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+    <script
+        src="https://www.gstatic.com/firebasejs/8.1.1/firebase-storage.js"></script>
+
+    <script src="js/index.js"></script>
+    <script src="js/apiscript.js"></script>
+    <script src="cordova.js"></script>
+
+    <title>VinylBase Search Page</title>
+</head>
+
+<body>
+    <div data-role="page" id="homePage" class="page">
+
+        <div data-role="main" class="ui-content">
+            <!-- Content should go in here-->
+            <!-- Search(users albums in Home) -->
+            <a href="searchPage.html">
+                <input id="temp" maxlength="100" minlength="3" name="search"
+                    placeholder="Search For an Artist or Album" type="text"
+                    style="width: 100%; height: 15vw; font-size: large;">
+            </a>
+
+            <div class="home-container" style="height:max-content;">
+                <!-- Playlist content -->
+                <div class="playlists-container" id="Playlists">
+                    <a class="textbutton playlistButton">Playlists</a>
+                    <a class="textbutton">All Content</a>
+                    <!-- <a class="textbutton">+ New Playlist</a> -->
+                    <a href="#createPlaylistPopup" class="textbutton"
+                        data-rel="popup" data-position-to="window">+ New
+                        Playlist</a>
+                </div>
+                <div class="paragraph">
+                    <p></p>
+                </div>
+
+                <!-- Album content -->
+                <div class="album-container">
+                    <div class="albums-container" id="Albums">
+                        <a class="textbutton">Album Name</a>
+                        <a class="textbutton">Album Name</a>
+
+                    </div>
+                    <!-- Album menu -->
+                    <!-- <div class="albumpopup-container">
+                            <a class="textbutton">+ Add to Playlist</a>
+                            <a class="textbutton">- Remove</a>
+                            <a class="textbutton">View Album</a>
+                            <a class="textbutton">Play in Spotify</a>
+                        </div> -->
+                </div>
+                <div id="PopContainer" class="ui-popup-container">
+                    <div data-role="popup" id="optionsPopup" data-theme="a"
+                        class="ui-corner-all ui-popup ui-overlay-shadow ui-body-a">
+                        <div style="padding: 10px 20px;">
+                            <h3 id="optionsTitle"></h3>
+                            <div class="ui-grid-solo">
+                                <button type="button" data-theme="a"
+                                    id="deleteItem">Delete</button>
+                            </div>
+                            <div class="ui-grid-solo">
+                                <button type="button" data-theme="a"
+                                    id="viewItem">View</button>
+                            </div>
+                            <div class="ui-grid-solo">
+                                <button type="button" data-theme="a"
+                                    id="playSpotify">Play In Spotify</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="PopContainer" class="ui-popup-container">
+                    <div data-role="popup" id="createPlaylistPopup"
+                        data-theme="a"
+                        class="ui-corner-all ui-popup ui-overlay-shadow ui-body-a">
+                        <form id="createPlaylist">
+                            <div style="padding: 10px 20px;">
+                                <div class="ui-textinput ui-corner-all ui-shadow-inset ui-textinput-text ui-body-a"
+                                    style="border: 0px;">
+                                    <input type="text" name="playlistName"
+                                        id="playlistName"
+                                        placeholder="Playlist Name"
+                                        data-theme="a" required>
+                                </div>
+                                <div class="ui-textinput ui-corner-all ui-shadow-inset ui-textinput-text ui-body-a"
+                                    style="border: 0px;">
+                                    <input type="text" name="playlistAuthor"
+                                        id="playlistAuthor"
+                                        placeholder="Playlist Author"
+                                        data-theme="a" required>
+                                </div>
+                                <button type="submit" data-theme="b"
+                                    class="ui-button ui-shadow ui-corner-all">Create
+                                    Playlist</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+
+            </div>
+
+
+            <!-- Scan Vinyl at bottom -->
+            <a href="#scanPage" class="ui-btn ui-corner-all"
+                style="background-color: #FA6800; color: whitesmoke; font-size: large;">Scan
+                Vinyl</a>
+
+            <!-- This bellow will be in burger menu in future-->
+            <!-- <a href="#searchPage" class="button">Search</a> -->
+            <!-- <a href="#settingsPage" class="button">Settings</a> -->
+
+            <!--Start page 3-->
+            <div data-role="page" id="scanPage" class="page">
+
+                <div role="content" class="ui-content">
+                    <!-- Content should go in here-->
+                    <h4>Scan a new vinyl here to add it to your collection</h4>
+                    <div class="ui-grid-b">
+                        <div class="ui-block-a">
+                            <img style="display:none;width:auto;height:auto;"
+                                class="imageCenter" id="scannedImage" src="" />
+                        </div>
+                        <!-- <div class="ui-block-b">
+                        <p>Sign-up/login</p>
+                    </div> -->
+                        <div class="ui-block-c"></div>
+                    </div><!-- /grid-b -->
+                    <div class="ui-grid-b">
+                        <div class="ui-block-a" style="height:270px"></div>
+                        <div class="ui-block-c" style="height:200px"></div>
+                    </div><!-- /grid-b -->
+                    <div class="ui-grid-b my-breakpoint">
+                        <div class="ui-block-a"></div>
+                        <div class="ui-block-b">
+                            <button id="scanready">
+                                <!-- onclick="scanDoc()"-->
+                                <img src="img/scan.png">
+                            </button>
+                            <input type="file" onchange="uploadImage()"
+                                id='photo' class="button">
+                            <a href="#homePage" class="button">Back</a>
+                            <a href="#resultsPage" class="button">Next Page</a>
+                            <!-- this goes to results-->
+                        </div>
+                        <div class="ui-block-c"></div>
+                    </div><!-- /grid-b -->
+                </div>
+            </div>
+            <!-- end page 3 -->
+        </div>
+    </div>
+</body>
+<!-- end page 4 -->
+<!--Start page 5-->
+<!-- <div data-role="page" id="resultsPage" class="page">
+
+    <div role="content" class="ui-content">
+        <h1 class="title">Search Results Page</h1>
+        <div class="results" id="resultsList">
+            <div class="result-container" onclick="resultsPopup();" resulttitle='Album' uid="xaqews31Ags" isplaylist="false">
+                <div id="result">
+                    <div id="result-photo">
+                        <p>Photo</p>
+                    </div>
+                    <div id="result-text">
+                        <div id="result-title">
+                            <p>album</p>
+                        </div>
+                        <div id="result-title-info">
+                            <p>Type 💠 Artist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="result-container">
+                <div id="result">
+                    <div id="result-photo">
+                        <p>Photo</p>
+                    </div>
+                    <div id="result-text">
+                        <div id="result-title">
+                            <p>artist, album, or song title</p>
+                        </div>
+                        <div id="result-title-info">
+                            <p>Type 💠 Artist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="result-container">
+                <div id="result">
+                    <div id="result-photo">
+                        <p>Photo</p>
+                    </div>
+                    <div id="result-text">
+                        <div id="result-title">
+                            <p>artist, album, or song title</p>
+                        </div>
+                        <div id="result-title-info">
+                            <p>Type 💠 Artist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+
+
+
+
+<!-- <p>Temporary buttons to move around</p> -->
+<!-- <a href="#albumPage" class="button">Tap on album</a>
+        <a href="#songResultsPage" class="button">Tap on song</a>
+        <a href="#artistResultsPage" class="button">Tap on artist</a> -->
+<!-- <a href="#homePage" class="button">Go home</a>
+<a href="#searchPage" class="button">Go to search</a>
+
+<div id="resultpopupContainer" class="ui-popup-container">
+    <div data-role="popup" id="resultOptionsPopup" data-theme="a"
+        class="ui-corner-all ui-popup ui-overlay-shadow ui-body-a">
+        <div style="padding: 10px 20px;">
+            <h3 id="resultsOptionsTitle"></h3>
+            <div class="ui-grid-solo">
+                <button type="button" data-theme="a"
+                    id="viewResults">View</button>
+            </div>
+            <div class="ui-grid-solo">
+                <button type="button" data-theme="a"
+                    id="playResultInSpotify">Play In Spotify</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+</div> -->
+<!-- end page 5 -->
+
+<!--Start page 6-->
+<div data-role="page" id="settingsPage" class="page">
+
+    <div role="content" class="ui-content">
+        <!-- Content should go in here-->
+        <h4>Settings page content goes here</h4>
+        <div class="ui-grid-solo">
+            <div class="ui-block-a">
+                <p style="text-align: left;" id="emailLine"></p>
+            </div>
+        </div>
+        <div class="ui-grid-b">
+            <div class="ui-block-a">
+                <a href="#homePage" class="button">Go back</a>
+            </div>
+            <div class="ui-block-b">
+                <a href="#" class="button" id="logout"
+                    onclick="logout()">logout</a>
+            </div>
+            <div class="ui-block-c">
+                <a href="#deletePopup" class="button" data-rel="popup"
+                    data-position-to="window">Delete Account</a>
+            </div>
+        </div>
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <a href="#popupPassword" class="button" data-rel="popup"
+                    data-position-to="window">Set New Password</a>
+            </div>
+            <div class="ui-block-b">
+                <a href="#deleteAccountDataPopup" class="button"
+                    data-rel="popup" data-position-to="window">Delete Account
+                    Data</a>
+            </div>
+            <div class="ui-block-c">
+                <a href="#newEmailPopup" class="button" data-rel="popup"
+                    data-position-to="window">Set new Email</a>
+            </div>
+        </div>
+        <div id="passwordPopup" class="ui-popup-container">
+            <div data-role="popup" id="popupPassword" data-theme="a"
+                class="ui-corner-all ui-popup ui-overlay-shadow ui-body-a">
+                <form id="resetPassword">
+                    <div style="padding: 10px 20px;">
+                        <h3>New Password</h3>
+                        <label for="newPass" class="ui-hidden-accessible">New
+                            Password:</label>
+                        <div class="ui-textinput ui-corner-all ui-shadow-inset ui-textinput-text ui-body-a"
+                            style="border: 0px;">
+                            <input type="text" name="newPass" id="newPass"
+                                placeholder="New Password" data-theme="a">
+                        </div>
+                        <label for="conPass"
+                            class="ui-hidden-accessible">Confrim
+                            Password:</label>
+                        <div class="ui-textinput ui-corner-all ui-shadow-insert ui-textinput-text ui-body-a"
+                            style="border: 0px;">
+                            <input type="text" name="conPass" id="conPass"
+                                placeholder="Confirm Password" data-theme="a">
+                        </div>
+                        <button type="submit" data-theme="b"
+                            class="ui-button ui-shadow ui-corner-all">Set New
+                            Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="authPopup" class="ui-popup-container">
+            <div data-role="popup" id="reAuthPopup" data-theme="a"
+                class="ui-corner-all ui-popup ui-overlay-shadow ui-body-a">
+                <form id="reLogin">
+                    <div style="padding: 10px 20px;">
+                        <h3>ReLogin</h3>
+                        <label for="reun"
+                            class="ui-hidden-accessible">Email:</label>
+                        <div class="ui-textinput ui-corner-all ui-shadow-inset ui-textinput-text ui-body-a"
+                            style="border: 0px;">
+                            <input type="text" name="un" id="reun"
+                                placeholder="new Password" data-theme="a">
+                        </div>
+                        <label for="repw"
+                            class="ui-hidden-accessible">Password:</label>
+                        <div class="ui-textinput ui-corner-all ui-shadow-insert ui-textinput-text ui-body-a"
+                            style="border: 0px;">
+                            <input type="text" name="pw" id="repw"
+                                placeholder="confirm Password" data-theme="a">
+                        </div>
+                        <button type="submit" data-theme="b"
+                            class="ui-button ui-shadow ui-corner-all">Set New
+                            Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="emailPopup" class="ui-popup-container">
+            <div data-role="popup" id="newEmailPopup" data-theme="a"
+                class="ui-corner-all ui-popup ui-overlay-shadow ui-body-a">
+                <form id="setNewEmail">
+                    <div style="padding: 10px 20px;">
+                        <h3>Set New Email</h3>
+                        <label for="newEmail"
+                            class="ui-hidden-accessible">Email:</label>
+                        <div class="ui-textinput ui-corner-all ui-shadow-inset ui-textinput-text ui-body-a"
+                            style="border: 0px;">
+                            <input type="text" name="newEmail" id="newEmail"
+                                placeholder="New Email" data-theme="a">
+                        </div>
+                        <label for="confirmEmail"
+                            class="ui-hidden-accessible">Confrim Email:</label>
+                        <div class="ui-textinput ui-corner-all ui-shadow-insert ui-textinput-text ui-body-a"
+                            style="border: 0px;">
+                            <input type="text" name="confrimEmail"
+                                id="confirmEmail" placeholder="Confirm Email"
+                                data-theme="a">
+                        </div>
+                        <button type="submit" data-theme="b"
+                            class="ui-button ui-shadow ui-corner-all">Set New
+                            Email</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="deletePopContainer" class="ui-popup-container">
+            <div data-role="popup" id="deletePopup" data-theme="a"
+                class="ui-corner-all ui-popup ui-overlay-shadow ui-body-a">
+                <div style="padding: 10px 20px;">
+                    <h3>Are you Sure?</h3>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <button type="button" data-theme="a"
+                                onclick="deleteUser()">Yes</button>
+                        </div>
+                        <div class="ui-block-b">
+                            <button type="button" data-theme="a"
+                                onclick="cancleDelete()">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- end page 6 -->
+
+<!--Start page 7-->
+<!-- <div data-role="page" id="albumPage" class="page">
+
+    <div role="content" class="ui-content"> -->
+<!-- This part of the application essentially is what will show when the user selects an album -->
+<!-- <h1 class="title" id="albumTitle">album Results Page</h1>
+        <H2 class="title" id="albumId"></H2>
+        <div class="album-photo" id="albumImageContainer"
+            style="height: 50vw; width: 50vw; border: black 1px solid; margin: auto;">
+            <!-- <p>Photo</p> -->
+<!-- </div>
+        <div class="results" id="SongResults">
+            <div class="result-container">
+                <div id="result">
+                    <div id="result-photo">
+                        <p>Photo</p>
+                    </div>
+                    <div id="result-text">
+                        <div id="result-title">
+                            <p>song title</p>
+                        </div>
+                        <div id="result-title-info">
+                            <p>album 💠 Artist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="result-container">
+                <div id="result">
+                    <div id="result-photo">
+                        <p>Photo</p>
+                    </div>
+                    <div id="result-text">
+                        <div id="result-title">
+                            <p>song title</p>
+                        </div>
+                        <div id="result-title-info">
+                            <p>album 💠 Artist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="result-container">
+                <div id="result">
+                    <div id="result-photo">
+                        <p>Photo</p>
+                    </div>
+                    <div id="result-text">
+                        <div id="result-title">
+                            <p>song title</p>
+                        </div>
+                        <div id="result-title-info">
+                            <p>album 💠 Artist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#homePage" class="button">Go back home</a>
+        <a href="#resultsPage" class="button">Go back to results</a>
+        <a href="#addSongPopup" id="addtoPlaylist" class="button"
+            data-rel="popup" data-position-to="window">Add Song</a>
+        <div id="addSongPopContainer" class="ui-popup-container">
+            <div data-role="popup" id="addSongPopup" data-theme="a"
+                class="ui-corner-all ui-popup ui-overlay-shadow ui-body-a">
+                <form id="addSong">
+                    <div style="padding: 10px 20px;">
+                        <div class="ui-textinput ui-corner-all ui-shadow-inset ui-textinput-text ui-body-a"
+                            style="border: 0px;">
+                            <input type="text" name="songTitle" id="songTitle"
+                                placeholder="Song Title" data-theme="a"
+                                required>
+                        </div>
+                        <div class="ui-textinput ui-corner-all ui-shadow-inset ui-textinput-text ui-body-a"
+                            style="border: 0px;">
+                            <input type="text" name="ArtistName" id="artistName"
+                                placeholder="Artist Name" data-theme="a"
+                                required>
+                        </div>
+                        <button type="submit" data-theme="b"
+                            class="ui-button ui-shadow ui-corner-all">Add
+                            Song</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="songPopContainer" class="ui-popup-container">
+            <div data-role="popup" id="songOptionsPopup" data-theme="a"
+                class="ui-corner-all ui-popup ui-overlay-shadow ui-body-a">
+                <div style="padding: 10px 20px;">
+                    <h3 id="songOptionsTitle"></h3>
+                    <div class="ui-grid-solo" id="songDeleteDiv">
+                        <button type="button" data-theme="a"
+                            id="deleteSong">Delete</button>
+                    </div>
+                    <div class="ui-grid-solo">
+                        <button type="button" data-theme="a"
+                            id="viewSong">View</button>
+                    </div>
+                    <div class="ui-grid-solo">
+                        <button type="button" data-theme="a"
+                            id="playSongInSpotify">Play In Spotify</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div> -->
+<!-- end page 7 -->
+
+<!--Start page 8-->
+<!-- <div data-role="page" id="songResultsPage" class="page">
+
+    <div role="content" class="ui-content"> -->
+<!-- This part of the application essentially is what will show when the user selects a song -->
+<!-- <h1 class="title">Song Results Page</h1>
+        <div class="album-photo"
+            style="height: 50vw; width: 50vw; border: black 1px solid; margin: auto;">
+            <p>Photo</p>
+        </div>
+        <div class="results">
+            <div class="result-container">
+                <div id="result">
+                    <div id="result-photo">
+                        <p>Photo</p>
+                    </div>
+                    <div id="result-text">
+                        <div id="result-title">
+                            <p>song title</p>
+                        </div>
+                        <div id="result-title-info">
+                            <p>album 💠 Artist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#homePage" class="button">Go back home</a>
+        <a href="#resultsPage" class="button">Go back to results</a>
+    </div>
+
+</div> -->
+<!-- end page 8-->
+<!--Start page 9-->
+<!-- <div data-role="page" id="artistResultsPage" class="page">
+
+    <div role="content" class="ui-content"> -->
+<!-- This part of the application essentially is what will show when the user selects an artist from a search -->
+<!-- <h1 class="title">Artist Results Page</h1>
+        <div class="artist-photo"
+            style="height: 50vw; width: 50vw; border: black 1px solid; margin: auto;">
+            <p>Photo</p>
+        </div>
+        <h3 class="subtitle">albums</h3>
+        <div class="results">
+            <div class="result-container">
+                <div id="result">
+                    <div id="result-photo">
+                        <p>Photo</p>
+                    </div>
+                    <div id="result-text">
+                        <div id="result-title">
+                            <p>album title</p>
+                        </div>
+                        <div id="result-title-info">
+                            <p>Number of Songs 💠 Artist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="result-container">
+                <div id="result">
+                    <div id="result-photo">
+                        <p>Photo</p>
+                    </div>
+                    <div id="result-text">
+                        <div id="result-title">
+                            <p>album title</p>
+                        </div>
+                        <div id="result-title-info">
+                            <p>Number of Songs 💠 Artist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="result-container">
+                <div id="result">
+                    <div id="result-photo">
+                        <p>Photo</p>
+                    </div>
+                    <div id="result-text">
+                        <div id="result-title">
+                            <p>album title</p>
+                        </div>
+                        <div id="result-title-info">
+                            <p>Number of Songs 💠 Artist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3 class="subtitle">Songs</h3>
+        <div class="results">
+            <div class="result-container">
+                <div id="result">
+                    <div id="result-photo">
+                        <p>Photo</p>
+                    </div>
+                    <div id="result-text">
+                        <div id="result-title">
+                            <p>Song title</p>
+                        </div>
+                        <div id="result-title-info">
+                            <p>album 💠 Artist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="result-container">
+                <div id="result">
+                    <div id="result-photo">
+                        <p>Photo</p>
+                    </div>
+                    <div id="result-text">
+                        <div id="result-title">
+                            <p>Song title</p>
+                        </div>
+                        <div id="result-title-info">
+                            <p>album 💠 Artist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="result-container">
+                <div id="result">
+                    <div id="result-photo">
+                        <p>Photo</p>
+                    </div>
+                    <div id="result-text">
+                        <div id="result-title">
+                            <p>Song title</p>
+                        </div>
+                        <div id="result-title-info">
+                            <p>album 💠 Artist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#homePage" class="button">Go back home</a>
+        <a href="#resultsPage" class="button">Go back to results</a>
+    </div>
+</div> -->
