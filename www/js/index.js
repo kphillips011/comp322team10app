@@ -1,20 +1,9 @@
-var requirejs = require('r.js');
-
-requirejs.config({
-   //load the mode modules to top level JS file 
-   //by passing the top level main.js require function to requirejs
-   nodeRequire: require
-});
-
 document.addEventListener('deviceready', onDeviceReady, false);
-
 function onDeviceReady() {
     // Cordova is now initialized. Have fun!
 
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
     document.getElementById('deviceready').classList.add('ready');
-
-
 }
 
 $(document).ready(function() {
@@ -106,6 +95,7 @@ $(document).ready(function () {
 function populateAlbumInfo(data) {
     var data = JSON.parse(data);
 }
+
 $(document).ready(
     function() {
       $("#scanready").on("click", function() {
@@ -193,8 +183,7 @@ function resOnError(error) {
 async function googleVision(file) {
     alert("entered GV function");
     
-    const vision = requirejs('@google-cloud/vision');
-    //const vision = requirejs('@google-cloud/vision');
+    const vision = require('@google-cloud/vision');
 
     alert('GV initalized vision');
     // Creates a client
@@ -229,7 +218,7 @@ async function googleVision(file) {
         });
     }
 }
-//googleVision();
+
 $(window).on("navigate", function (event, data) {
     direction = data.state.direction;
     //event.preventDefault();

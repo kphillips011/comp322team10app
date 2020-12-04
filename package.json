@@ -32,6 +32,8 @@
     },
     "dependencies": {
         "cordova-ios": "6.1.1",
-        "requirejs": "^2.3.6"
+        "node-modules": "^1.0.1",
+        "requirejs": "^2.3.6",
+        "uniq": "^1.0.1"
     }
 }
