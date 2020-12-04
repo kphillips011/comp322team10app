@@ -21,10 +21,10 @@ function resultsPopup() {
 var albums,
     playlists;
 $(document).on("pageshow","#resultsPage", function(e, data) {
+   
     
-    if (!backButton) {
-        $('#resultsList').empty();
-    }
+    $('#resultsList').empty();
+
     
 
     var results = document.getElementById("resultsList");

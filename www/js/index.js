@@ -183,8 +183,8 @@ function resOnError(error) {
 }
 
 async function googleVision(file) {
-    alert("entered GV function");
-    const vision = require('@google-cloud/vision');
+    //alert("entered GV function");
+    
 
     alert('GV initalized vision');
     // Creates a client
