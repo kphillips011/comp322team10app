@@ -1,3 +1,11 @@
+var requirejs = require('r.js');
+
+requirejs.config({
+   //load the mode modules to top level JS file 
+   //by passing the top level main.js require function to requirejs
+   nodeRequire: require
+});
+
 document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady() {
@@ -184,7 +192,9 @@ function resOnError(error) {
 
 async function googleVision(file) {
     alert("entered GV function");
-    const vision = import('@google-cloud/vision');
+    
+    const vision = requirejs('@google-cloud/vision');
+    //const vision = requirejs('@google-cloud/vision');
 
     alert('GV initalized vision');
     // Creates a client

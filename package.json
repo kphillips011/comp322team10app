@@ -31,6 +31,7 @@
         ]
     },
     "dependencies": {
-        "cordova-ios": "6.1.1"
+        "cordova-ios": "6.1.1",
+        "requirejs": "^2.3.6"
     }
 }
