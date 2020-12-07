@@ -298,7 +298,7 @@ $(document).ready(function() {
 
 function deleteItem(id, isPlaylist) {
     var db = firebase.firestore();
-    if(isPlaylist) {
+    if(isPlaylist == "true") {
         db.collection("Playlist").doc(id).delete()
         .then(function() {
             alert("Playlist deleted");
@@ -326,7 +326,7 @@ function deletePlaylist(id) {
     })
 }
 
-function addPlaylist(name) {
+function addPlaylist(name, author) {
     var user = firebase.auth().currentUser;
 
     var db = firebase.firestore();
@@ -334,6 +334,7 @@ function addPlaylist(name) {
     db.collection("Playlist").add({
         Name: name,
         UserID: user.uid,
+        Artist: author,
         Songs:[]
     }).then(function(doc) {
         alert("Created "+ name);
@@ -352,7 +353,8 @@ $(document).ready(function() {
     $("#createPlaylist").submit(function(e) {
         e.preventDefault();
         let name = $("#playlistName").val().trim();
-        addPlaylist(name);
+        let author = $("#playlistAuthor").val().trim();
+        addPlaylist(name, author);
         $("#playlistName").val("");
         $("#createPlaylistPopup").popup("close");
     });
