@@ -4,20 +4,70 @@ function resultsPopup() {
     let title = this.getAttribute("resulttitle");
     let id = this.getAttribute("uid");
     let isPlaylist = this.getAttribute("isplaylist");
-    
+    let artist = this.getAttribute("artist");
     // var isPlaylist = window.localStorage.getItem("isPlaylist");
-    $("#resultOptionsTitle").text(title + " Options");
+    $("#searchoptionsTitle").text(title + " Options");
     //todo view
-    $("#viewResults").attr("uid",id);
-    $("#viewResults").attr("isplaylist",isPlaylist);
-    $("#viewResults").attr("name",title);
-    $("#viewResults").attr("isresult", "true");
-    document.getElementById("viewResults").onclick = openAlbumPageFromResults;
+    $("#viewsearchItem").attr("uid",id);
+    $("#viewsearchItem").attr("isplaylist",isPlaylist);
+    $("#viewsearchItem").attr("name",title);
+    $("#viewsearchItem").attr("isresult", "true");
+    document.getElementById("viewsearchItem").onclick = openAlbumPageFromResults;
     
+    $("#addItem").attr("uid",id);
+    $("#addItem").attr("isplaylist",isPlaylist);
+    $("#addItem").attr("name",title);
+    $("#addItem").attr("artist",artist);
+    $("#addItem").attr("isresult", "true");
+    document.getElementById("addItem").onclick = addAlbum;
 
-    $("#resultOptionsPopup").popup( "option", "positionTo", "window" );
-    $("#resultOptionsPopup").popup("open");
+    $("#searchoptionsPopup").popup( "option", "positionTo", "window" );
+    $("#searchoptionsPopup").popup("open");
 }
+
+function addAlbum() {
+    let id = this.getAttribute("uid");
+    let isPlaylist = this.getAttribute("isplaylist");
+    let name = this.getAttribute("name");
+    let artist = this.getAttribute("artist");
+    let isResult = this.getAttribute("isresult");
+    var db = firebase.firestore();
+    var albumRef = db.collection("Album");
+    var user = firebase.auth().currentUser;
+    // albumRef.where("Artist", "==", artist).where("Name", "==", name).get().then(function(querySnapshot) {
+    //     querySnapshot.forEach(function(document) {
+    //         db.collection('users').doc(user.uid).update({
+    //             Albums:firebase.firestore.FieldValue.arrayUnion(document.id)
+    //         })
+    //     })
+        
+    // }).catch(function(error) {
+    //     console.log(error)
+    //     albumRef.add({
+    //         Artist: artist,
+    //         Name: name,
+    //         Songs: [{Artist:artist, Title: name}]
+    //     }).then(function(docRef) {
+    //     console.log("Document written with ID: ", docRef.id);
+    //     db.collection('users').where("UserID", "==", user.uid).update({
+    //         Albums:firebase.firestore.FieldValue.arrayUnion(docRef.id)
+    //     })
+    //     })
+    //     .catch(function(error) {
+    //     console.error("Error adding document: ", error);
+    //     });
+    // })
+    albumRef.add({
+        Artist: artist,
+        Name: name,
+        Songs: [{Artist:artist, Title: name}],
+        UserID: user.uid
+    })
+    $("#searchoptionsPopup").popup("close");
+    //$.mobile.changePage($("#albumPage"));
+}
+
+
 var albums,
     playlists;
 $(document).on("pageshow","#resultsPage", function(e, data) {
@@ -63,6 +113,9 @@ $(document).on("pageshow","#resultsPage", function(e, data) {
     // let item = createResultHtml(result);
     // results.appendChild(item);
 });
+
+
+
 
 function createResultHtml(result, isPlaylist) {
     //create elements
@@ -150,8 +203,12 @@ function loadResultsImage(img, id) {
                 for(var div of items) {
                     for (var photodiv of div.childNodes) {
                         if (photodiv.id == "result-photo") {
+                            if (photodiv.childNodes.length == 0) {
+                                photodiv.appendChild(image);
+                            }
+
                             //console.log(photodiv);
-                            photodiv.appendChild(image);
+                            
                         }
                     }
                     
