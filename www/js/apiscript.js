@@ -9,7 +9,7 @@ function generalSearch(page) {
     request.open("GET", "https://api.discogs.com/database/search?title=" + input + "&page=" + page + "&per_page=100", true)
     request.setRequestHeader("User-Agent", "VinylBase");
     request.setRequestHeader("Authorization", "Discogs key=JzKHUoDrREtQgpMdkEdu, secret=gQCBQrBCupEnpDwdAmLkxlJhOGZiwidY")
-
+    runOnce = true;
     // Once there is a response from the server...
     request.onload = function () {
 
@@ -20,21 +20,33 @@ function generalSearch(page) {
         results = json.results
         var lastPage = json.pagination.urls.last
         var nextPage = json.pagination.urls.next
+        
+
 
         // Root HTML
         const app = document.getElementById("results")
 
         // Clear all child HTML
         app.innerHTML = ""
-
+        queryDBAll(input)
         // Creates  content from the response
         results.forEach(element => {
+            
             // Create HTML if the data type is not a label
             if (element.type !== "label") {
                 // Build the elements
+                console.log(element);
                 const container = document.createElement("div")
-                container.setAttribute("class", "result-container")
-
+                var splitHere = element.title.indexOf(" - ")
+                
+                    container.setAttribute("class", "result-container")
+                    container.setAttribute("resulttitle", element.title.slice(splitHere + 3));
+                    container.setAttribute("artist",element.title.slice(0, splitHere))
+                    container.setAttribute("uid", element.id);
+                    container.setAttribute("isplaylist", false);
+                    container.onclick = resultsPopup;
+                
+                
                 const link = document.createElement("a")
 
                 const result = document.createElement("div")
@@ -52,7 +64,7 @@ function generalSearch(page) {
 
                 // Create elements for masters and releases
                 if (element.type !== "artist") {
-                    var splitHere = element.title.indexOf(" - ")
+                    splitHere = element.title.indexOf(" - ")
 
                     const artist = document.createElement("div")
                     artist.setAttribute("id", "result-artist")
@@ -97,7 +109,7 @@ function generalSearch(page) {
                 app.appendChild(container)
             }
         });
-
+        
         // Below recursively accesses the next pages
         if (lastPage !== undefined) {
             var nextPageNumber = nextPage.match("page=([0-9]+)")[1]
@@ -107,10 +119,90 @@ function generalSearch(page) {
             }
         }
     }
+    
+    
+    
     // Send out the request
     request.send()
     return null
 }
+var runOnce = true;
+function queryDBAll(input) {
+    var results = document.getElementById("results");
+    var db = firebase.firestore();
+    var albumRef = db.collection("Album");
+    if (runOnce) {
+        albumRef.get().then(function(querySnapshot) {
+            albums = querySnapshot;
+            albums.forEach(function(album) {
+                console.log(album.data().Name, input);
+                if (input == album.data().Name.toLowerCase() || input == album.data().Artist.toLowerCase()) {
+                    let item = createResultHtml(album, false);
+                    results.appendChild(item);
+                    if("Image" in album.data()) {
+                        loadResultsImage(album.data().Image,album.id );
+                    }
+                }
+                
+            })
+        });
+        var playlistRef = db.collection("Playlist");
+        playlistRef.get().then(function(querySnapshot) {
+            playlists = querySnapshot;
+            playlists.forEach(function(playlist) {
+                if (input == playlist.data().Name.toLowerCase() || input == playlist.data().Artist.toLowerCase()) {
+                    let item = createResultHtml(playlist, true);
+                    results.appendChild(item);
+                    if("Image" in playlist.data()) {
+                        loadResultsImage(playlist.data().Image,playlist.id );
+                    }
+                }
+                
+            })
+        })
+        runOnce = false;
+    }
+    
+
+
+}
+function loadsearchImage(img, id) {
+    var storage = firebase.storage();
+    var storageRef = storage.ref();
+    var albumArtRef = storageRef.child('albumArt');
+    var imageRef = albumArtRef.child(img);
+
+    var image = document.createElement("img");
+    image.style = "width:150px;height:150px;"
+
+    imageRef.getDownloadURL().then(function(url) {
+        //console.log(url)
+        image.src = url;
+        $(".result-container").each(function() {
+            if(this.getAttribute("uid") == id) {
+                var items = this.childNodes;
+                for(var div of items) {
+                    for (var photodiv of div.childNodes) {
+                        if (photodiv.id == "result-photo") {
+
+                            //console.log(photodiv);
+                            photodiv.appendChild(image);
+                        }
+                    }
+                    
+                }
+                // item.append(image);
+                //console.log(item);
+            }
+        })
+       
+       
+    }).catch(function(error) {
+        console.log(error);
+    });
+
+}
+
 
 function albulmParse(url, imageURL, artist, albulm) {
     console.log(url)

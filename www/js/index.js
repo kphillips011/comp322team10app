@@ -16,7 +16,14 @@ $(document).ready(function() {
                 
                 firebase.auth().createUserWithEmailAndPassword(email, password)
                 .then((user) => {
-                    alert("Sign Up sucessful.")
+                    alert("Sign Up sucessful.");
+                    user = firebase.auth().currentUser;
+                    var db = firebase.firestore();
+                    var userRef = db.collection("users");
+                    userRef.doc(user.uid).set({
+                        Albums: [],
+                        Playlists: []
+                    })   
                 })
                 .catch((error) => {
                     var errorCode = error.code;

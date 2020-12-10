@@ -233,16 +233,17 @@
                 <div class="clearfix"></div>
 
             </div>
-
-
+        
             <!-- Scan Vinyl at bottom -->
             <a href="#scanPage" class="ui-btn ui-corner-all"
                 style="background-color: #FA6800; color: whitesmoke; font-size: large;">Scan
                 Vinyl</a>
-
+            <a href="#settingsPage" class="button">Settings</a>
+            </div>
+        </div>
             <!-- This bellow will be in burger menu in future-->
             <!-- <a href="#searchPage" class="button">Search</a> -->
-            <!-- <a href="#settingsPage" class="button">Settings</a> -->
+            
 
             <!--Start page 3-->
             <div data-role="page" id="scanPage" class="page">
@@ -260,6 +261,7 @@
                     <!-- <div class="ui-block-b">
                         <p>Sign-up/login</p>
                     </div> -->
+<<<<<<< HEAD
                     <div class="ui-block-c"></div>
                 </div><!-- /grid-b -->
                 <div class="ui-grid-b">
@@ -280,6 +282,32 @@
                     <div class="ui-block-c" ></div>
                 </div><!-- /grid-b -->
             </div> 
+=======
+                        <div class="ui-block-c"></div>
+                    </div><!-- /grid-b -->
+                    <div class="ui-grid-b">
+                        <div class="ui-block-a" style="height:270px"></div>
+                        <div class="ui-block-c" style="height:200px"></div>
+                    </div><!-- /grid-b -->
+                    <div class="ui-grid-b my-breakpoint">
+                        <div class="ui-block-a"></div>
+                        <div class="ui-block-b">
+                            <button id="scanready">
+                                <!-- onclick="scanDoc()"-->
+                                <img src="img/scan.png">
+                            </button>
+                            <input type="file" onchange="uploadImage()"
+                                id='photo' class="button">
+                            <a href="#homePage" class="button">Back</a>
+                            <!-- <a href="#resultsPage" class="button">Next Page</a> -->
+                            <!-- this goes to results-->
+                        </div>
+                        <div class="ui-block-c"></div>
+                    </div><!-- /grid-b -->
+                </div>
+            </div>
+            <!-- end page 3 -->
+>>>>>>> 1eee9b6b68268dd83c27732110a10059516c0261
         </div>
     </div>
     <!--Start page 4-->
@@ -301,13 +329,33 @@
                 </div>
                 <div id="results" style="width: 100%; height: auto;">
                 </div>
+                <div id="PopContainer" class="ui-popup-container">
+                    <div data-role="popup" id="searchoptionsPopup" data-theme="a"
+                        class="ui-corner-all ui-popup ui-overlay-shadow ui-body-a">
+                        <div style="padding: 10px 20px;">
+                            <h3 id="searchoptionsTitle"></h3>
+                            <div class="ui-grid-solo">
+                                <button type="button" data-theme="a"
+                                    id="addItem">AddToAlbums</button>
+                            </div>
+                            <div class="ui-grid-solo">
+                                <button type="button" data-theme="a"
+                                    id="viewsearchItem">View</button>
+                            </div>
+                            <div class="ui-grid-solo">
+                                <button type="button" data-theme="a"
+                                    id="playSpotify">Play In Spotify</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </body>
 <!-- end page 4 -->
 <!--Start page 5-->
-<!-- <div data-role="page" id="resultsPage" class="page">
+<div data-role="page" id="resultsPage" class="page">
 
     <div role="content" class="ui-content">
         <h1 class="title">Search Results Page</h1>
@@ -357,7 +405,7 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
 
 
 
@@ -367,8 +415,8 @@
 <!-- <a href="#albumPage" class="button">Tap on album</a>
         <a href="#songResultsPage" class="button">Tap on song</a>
         <a href="#artistResultsPage" class="button">Tap on artist</a> -->
-<!-- <a href="#homePage" class="button">Go home</a>
-<a href="#searchPage" class="button">Go to search</a>
+<a href="#homePage" class="button">Go home</a>
+<!-- <a href="#searchPage" class="button">Go to search</a> -->
 
 <div id="resultpopupContainer" class="ui-popup-container">
     <div data-role="popup" id="resultOptionsPopup" data-theme="a"
@@ -388,7 +436,7 @@
 </div>
 </div>
 
-</div> -->
+</div>
 <!-- end page 5 -->
 
 <!--Start page 6-->
@@ -406,10 +454,14 @@
             <div class="ui-block-a">
                 <a href="#homePage" class="button">Go back</a>
             </div>
+        </div>
+        <div class="ui-grid-b">
             <div class="ui-block-b">
                 <a href="#" class="button" id="logout"
                     onclick="logout()">logout</a>
             </div>
+        </div>
+        <div class="ui-grid-b">
             <div class="ui-block-c">
                 <a href="#deletePopup" class="button" data-rel="popup"
                     data-position-to="window">Delete Account</a>
@@ -420,15 +472,20 @@
                 <a href="#popupPassword" class="button" data-rel="popup"
                     data-position-to="window">Set New Password</a>
             </div>
+        </div>
+        <div class="ui-grid-b">
             <div class="ui-block-b">
                 <a href="#deleteAccountDataPopup" class="button"
                     data-rel="popup" data-position-to="window">Delete Account
                     Data</a>
             </div>
+        </div>
+        <div class="ui-grid-b">
             <div class="ui-block-c">
                 <a href="#newEmailPopup" class="button" data-rel="popup"
                     data-position-to="window">Set new Email</a>
             </div>
+        </div>
         </div>
         <div id="passwordPopup" class="ui-popup-container">
             <div data-role="popup" id="popupPassword" data-theme="a"
@@ -537,16 +594,19 @@
 <!-- end page 6 -->
 
 <!--Start page 7-->
-<!-- <div data-role="page" id="albumPage" class="page">
+<div data-role="page" id="albumPage" class="page">
 
-    <div role="content" class="ui-content"> -->
+    <div role="content" class="ui-content">
 <!-- This part of the application essentially is what will show when the user selects an album -->
-<!-- <h1 class="title" id="albumTitle">album Results Page</h1>
+<h1 class="title" id="albumTitle">album Results Page</h1>
         <H2 class="title" id="albumId"></H2>
-        <div class="album-photo" id="albumImageContainer"
+        <div id="albumphoto" >
+            <div class="album-photo" id="albumImageContainer"
             style="height: 50vw; width: 50vw; border: black 1px solid; margin: auto;">
             <!-- <p>Photo</p> -->
-<!-- </div>
+            </div>
+        </div>
+        
         <div class="results" id="SongResults">
             <div class="result-container">
                 <div id="result">
@@ -644,7 +704,7 @@
         </div>
     </div>
 
-</div> -->
+</div>
 <!-- end page 7 -->
 
 <!--Start page 8-->
@@ -681,11 +741,11 @@
 </div> -->
 <!-- end page 8-->
 <!--Start page 9-->
-<!-- <div data-role="page" id="artistResultsPage" class="page">
+<div data-role="page" id="artistResultsPage" class="page">
 
-    <div role="content" class="ui-content"> -->
+    <div role="content" class="ui-content">
 <!-- This part of the application essentially is what will show when the user selects an artist from a search -->
-<!-- <h1 class="title">Artist Results Page</h1>
+<h1 class="title">Artist Results Page</h1>
         <div class="artist-photo"
             style="height: 50vw; width: 50vw; border: black 1px solid; margin: auto;">
             <p>Photo</p>
@@ -789,6 +849,6 @@
         <a href="#homePage" class="button">Go back home</a>
         <a href="#resultsPage" class="button">Go back to results</a>
     </div>
-</div> -->
+</div>
 
 </html>

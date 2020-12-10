@@ -34,6 +34,15 @@ function userPlaylistsQuery(UserID) {
     //alert("loaded user" + uid);
     var platlistsRef = db.collection("Playlist");
     var userPlaylistsQuery = platlistsRef.where("UserID", "==", UserID);
+    // db.collection('users').doc(user.uid).get().then(function(user) {
+    //     playlists = user.data().Playlists;
+    //     for (var id of playlists) {
+    //         console.log(id);
+    //         userPlaylistsQuery.push(playlistsRef.doc(id).get())
+    //     }
+    //     console.log(userPlaylistsQuery);
+    //     return userPlaylistsQuery;
+    // })
     return userPlaylistsQuery;
 }
 
@@ -65,11 +74,13 @@ function populateAlbums(UserID) {
     })
 }
 
+
+
 function createAlbumLink(album) {
     var link = document.createElement("a");
     
     link.innerHTML = album.data().Name;
-    link.className = "textbutton";
+    link.className = "textbutton albumButton";
     link.setAttribute("uid", album.id);
     link.setAttribute("isplaylist", false);
     link.onclick = generateOptionsPopup;
@@ -127,9 +138,9 @@ $(document).on("pageshow", "#homePage", function () {
             //might need code here if a playlist is added via add button/scan album
         }
     
-        if (userAlbums == undefined) {
+            $("#Albums").empty()
             populateAlbums(user.uid);
-        }
+        
     })
     backButton = false;
 });
@@ -311,6 +322,7 @@ function deleteItem(id, isPlaylist) {
         db.collection("Album").doc(id).delete()
         .then(function() {
             alert("Album deleted");
+            deleteAlbum(id)
 
         }).catch(function(error) {
             alert(error);
@@ -320,6 +332,13 @@ function deleteItem(id, isPlaylist) {
 
 function deletePlaylist(id) {
     $(".playlistButton").each(function() {
+        if(this.getAttribute("uid")==id) {
+            this.remove();
+        }
+    })
+}
+function deleteAlbum(id) {
+    $(".albumButton").each(function() {
         if(this.getAttribute("uid")==id) {
             this.remove();
         }
